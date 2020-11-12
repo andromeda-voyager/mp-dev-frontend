@@ -1,0 +1,96 @@
+#top-nav .active-link {
+  border-bottom: solid;
+}
+
+#top-nav .active-link:hover {
+  transform: none;
+}
+
+#side-nav {
+  padding:10px;
+  box-shadow: 1px 1px rgb(219, 219, 219);
+  height:100vh;
+  position:fixed;
+  left: 0;
+  top: 0;
+  z-index:100;
+  display:flex;
+  flex-direction: column;
+  background-color:rgb(255, 255, 255);
+}
+
+#side-nav a {
+  color:rgb(21, 27, 32);
+  margin-bottom:3vh;
+  padding: 1vh;
+  text-align: center;
+  text-decoration: none;
+  font-size:1.3em;
+}
+
+#side-nav a:hover {
+  color:rgb(26, 110, 219);
+} 
+
+#router-wrapper {
+  padding-top:75px;
+}
+
+#top-nav .menu-icon {
+  display: none;
+  color:white;
+  cursor: pointer;
+} 
+
+#top-nav {
+  z-index: 99;
+  position:fixed;
+  top:0;
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 75px;
+  background-color:rgb(24, 32, 37);
+}
+
+@media screen and (max-width: 600px) {
+  #top-nav a:not(:first-child) {display: none;}
+  #top-nav { 
+    justify-content: space-between;  
+  }
+  #top-nav .menu-icon {
+    display:block;
+    margin-right: 1vw;
+  }
+  #side-nav {
+    display:flex;
+  }
+}
+
+#top-nav a {
+  text-decoration: none;
+  font-size:1.3em;
+  margin:20px;
+  padding-bottom:8px;
+  color:white;
+}
+
+#top-nav a:hover {
+    transform: scale(1.1);
+}
+
+button {
+  background-color:transparent;
+  border: none;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+svg {
+  width:30px;
+  height:30px;
+  fill:white;
+} 

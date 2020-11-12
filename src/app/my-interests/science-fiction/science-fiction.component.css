@@ -1,0 +1,68 @@
+#science-fiction {
+    width:100%;
+    display:flex;
+    flex-direction: column;   
+    background-color: rgb(21, 27, 32);
+    color:white; 
+}
+
+#books-container {
+    margin-top:5vh;
+    margin-bottom:5vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.book {
+    height:100%;
+    width:100%;
+    
+}
+
+.book-wrapper {
+    height: auto;
+    width: 10vw;
+    min-width: 125px;
+    margin: 1vw 2vw 1vw 2vw;
+    position:relative;
+}
+
+a {
+    position:absolute;
+    z-index: 100;
+    top:45%;
+    width:80%;
+    font-size: max(1vw, 1em);
+    line-height:1.2;
+    left:8%;
+    padding:2%;
+    color:black;
+    text-align: center;
+    background-color:white;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 
+    3px 3px 2px 1px rgba(0, 0, 0, .1),
+    1px 1px 1px 1px rgba(0, 0, 0, .1),
+    1px 1px 1px 1px rgba(0, 0, 0, .1); 
+    visibility: hidden;
+}
+
+.book-wrapper:hover a{
+    visibility: visible;
+}
+
+a:hover {
+    transform: scale(1.1);
+}
+
+h1 {
+    text-align: center;
+    font-size:2.5vw;
+    font-size: max(2.5vw, 35px);
+    font-family: Roboto, Arial, sans-serif;
+    padding-top:2.2vh;
+    color:white;
+}

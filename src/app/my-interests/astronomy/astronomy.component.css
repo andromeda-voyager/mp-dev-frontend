@@ -1,0 +1,63 @@
+#astronomy {
+  width:100%;
+  position: relative;
+}
+
+#pictures-container {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: white;
+  width:100%;
+  padding-bottom:5px;
+}
+
+#four-square-container {
+  box-sizing: border-box;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-right:5px;
+}
+
+.square-image {
+  box-sizing: border-box;
+  height:50%;
+  width:50%;
+  padding-left:5px;
+  padding-top:5px;
+  object-fit: cover;
+}
+
+h1 {
+  z-index: 80;
+  position: absolute;
+  width:99%;
+  font-size:2.5vw;
+  font-size: max(2.5vw, 35px);
+  font-family: Roboto, Arial, sans-serif;
+  margin-top:2.2vh;
+  text-align: right;
+  color:white;
+}
+
+#carousel {
+  height:50vw;
+  width:100%;
+  box-sizing: border-box;
+  padding-top:5px;
+  padding-left:5px;
+  padding-right:5px;
+}
+
+@media screen and (min-width: 800px) {
+  #four-square-container {
+    width: 35%;
+    padding-right:0px;
+  }
+  #carousel {
+    height:auto;
+    width:65%;
+  }
+}

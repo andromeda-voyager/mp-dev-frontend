@@ -1,0 +1,33 @@
+
+#game-parameters {
+  display: flex;
+  flex-direction: column;
+  width:fit-content;
+  margin-left: auto;
+  margin-right:auto;
+}
+
+#component {
+  margin-top:50px;
+  margin-bottom:10px;
+}
+
+mat-hint {
+  color:red;
+}
+
+mat-radio-group {
+  margin-bottom: 25px;
+}
+mat-radio-button {
+  margin-top:15px;
+  margin-right:10px;
+}
+  
+mat-form-field , mat-checkbox  {
+  margin-bottom:5px;
+}
+
+#create-game-button:hover {
+  opacity: .85;
+}

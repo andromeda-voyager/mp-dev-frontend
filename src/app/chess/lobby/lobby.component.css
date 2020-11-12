@@ -1,0 +1,83 @@
+#lobby-card {
+   margin-left:auto;
+   margin-right:auto;
+   width:fit-content;
+   min-width: 320px;
+   width:50%;
+   margin-top:50px;
+   max-width:450px;
+   margin-bottom:25px;
+   height:auto;
+}
+
+#page {
+    min-height:50vh;
+}
+
+#empty-notification-div {
+    text-align:center;
+}
+
+mat-hint {
+    color:red;
+}
+
+.game-information{
+    display:flex;
+    flex-wrap: nowrap;
+    height:fit-content;
+}
+
+.join-game{
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.chess-game{
+    width: 95%;
+    margin: auto;
+    padding: 8px 8px 8px 8px;
+    display:flex;
+    flex-direction: column;
+}
+
+.chess-game:hover:not(.selected-game){
+    background-color: rgb(219, 219, 219);
+}
+
+.selected-game{
+    background-color: rgb(185, 185, 185);
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.description, .pawn, .lock{
+    margin-top:auto;
+    margin-bottom: auto;
+}
+
+.password-field{
+    margin-right:10px;
+}
+
+.join-game-button{
+    height:35px;
+}
+
+.description {
+    margin-right:25px;
+    font-size:1.3em;
+}
+
+.pawn {
+   height:75%;
+   width:auto;
+   object-fit: contain;
+   margin-right:20px;
+}
+
+.lock {
+    margin-left:auto;
+}

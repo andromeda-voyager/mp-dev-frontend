@@ -1,0 +1,50 @@
+#promotion {
+    margin:auto;
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+ span {
+    color: rgb(24, 32, 37);
+    font-size: large;
+    font-size: max(1.2vw, 14px);
+    margin-bottom: 4px;
+ }
+
+ .hidden {
+    visibility: hidden;
+ }
+
+#buttonsContainer{
+    min-width:120px;
+    min-height:30px;
+    height:10vw;
+    width:40vw;
+    max-height: 6vh;
+    max-width: 24vh;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+button {
+    cursor: pointer;
+    background-size: cover;
+    background-color: rgb(255, 255, 255);
+    height:100%;
+    width:25%;
+    border-style: none;
+}    
+
+img {
+    object-fit: contain;
+    height:100%;
+    width: 100%;
+}
+  
+
+button:hover {
+    background-color: rgb(60, 118, 167);
+}
+

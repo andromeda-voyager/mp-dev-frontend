@@ -1,0 +1,29 @@
+<div *ngIf="arrowsOn" class="carousel">
+    
+    <button class="control prev" (click)="onPreviousClick()">
+        <span class="arrow left"></span>
+    </button>
+       
+
+    <ng-container *ngFor="let carouselItem of carouselItems; let i = index">
+        <img *ngIf="i === currentCarouselItem" [src]="carouselItem" class="carousel-item" />
+    </ng-container>
+
+
+
+    <button class="control next" (click)="onNextClick()">
+        <span class="arrow right"></span>
+    </button>
+</div>
+
+<div *ngIf="buttonsOn" class="carousel">
+    <ng-container *ngFor="let carouselItem of carouselItems; let i = index">
+        <img *ngIf="i === currentCarouselItem" [src]="carouselItem" class="large-image" />
+    </ng-container>
+    <div id="image-buttons-container">
+        <ng-container *ngFor="let carouselItem of carouselItems; let i = index">
+            <button [ngClass]="(currentCarouselItem==i)?'blue-button':'white-button'" class="image-button"
+                (click)="changeImage(i)"></button>
+        </ng-container>
+    </div>
+</div>

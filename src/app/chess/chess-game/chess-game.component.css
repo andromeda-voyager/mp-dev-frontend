@@ -1,0 +1,20 @@
+#resign-button {
+    font-size:1.2em;
+    min-width: fit-content;
+}
+
+#button-message-container {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width:200px;
+    width: 80vw;
+    max-width: calc(70vh - 75px);
+    margin:auto;
+    padding-top:15px;
+}
+
+#button-message-container span {
+    margin-left:20px;
+    font-size: 1.2em;
+}

@@ -1,0 +1,23 @@
+<div id="video-games">
+    <div id="content-container">
+        <h1>Video Games</h1>
+        <div id="favorites-container">
+            <div id="buttons-container">
+                <button (click)="onDetailsBtnClick(0)" mat-button
+                    [ngClass]="(currentDetails==0)?'raised':'flat'">Favorite Games</button>
+                <button (click)="onDetailsBtnClick(1)" mat-button
+                    [ngClass]="(currentDetails==1)?'raised':'flat'">Platforms</button>
+                <button (click)="onDetailsBtnClick(2)" mat-button
+                    [ngClass]="(currentDetails==2)?'raised':'flat'">Favorite Genres</button>
+            </div>
+            <ng-container *ngFor="let details of videoGameDetails; let i = index">
+                <div [@stagger] *ngIf="i === currentDetails" id="details-container">
+                    <div class="detail" *ngFor="let detail of details">{{detail}}</div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div id="carousel-wrapper">
+        <app-carousel id="carousel" [arrowsOn]="true" [carouselItems]="videoGameImages"></app-carousel>
+    </div>
+</div>

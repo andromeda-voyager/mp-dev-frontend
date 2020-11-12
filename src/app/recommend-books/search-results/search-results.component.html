@@ -1,0 +1,14 @@
+<div id="books-container-wrapper">
+    <div id="books-container">
+        <div *ngFor="let book of books" class="book" [ngClass]="{'selected': book.Recommended}"
+            (click)="onSelect(book)">
+            <div class="recommended-tag"> Book Recommended</div>
+            <!-- <a routerLink="/detail/{{book.Title}}"> -->
+            <img src={{book.imageURL}} width="50" height="50">
+            <div class="book-info-container">
+                <span class="title">{{book.title}}</span>
+                <span class="author">by {{book.author}}</span>
+            </div>
+        </div>
+    </div>
+</div>

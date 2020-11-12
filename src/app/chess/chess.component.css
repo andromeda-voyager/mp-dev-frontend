@@ -1,0 +1,43 @@
+#resign-button {
+  font-size:1.2em;
+  width:5em;
+}
+
+#button-message-container {
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width:200px;
+  width: 80vw;
+  max-width: calc(70vh - 75px);
+  margin:auto;
+ padding-top:15px;
+}
+
+#button-message-container span {
+  margin-left:20px;
+  font-size: 1.2em;
+}
+
+#waiting-screen {
+  margin-top:50px;
+  display:flex;
+  flex-direction: column;
+}
+
+#exit-button:hover {
+  opacity: .75;
+}
+
+#exit-button {
+  margin: auto;
+  margin-top: 30px;
+  background-color: rgb(255, 0, 0);
+  padding:5px;
+  font-size: large;
+}
+
+#waiting-message{
+  font-size:x-large;
+  margin:auto;
+}

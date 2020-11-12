@@ -1,0 +1,18 @@
+<div id="component">
+    <div *ngIf="!showChessboard">
+        <mat-tab-group *ngIf="!waitingForOpponent" mat-align-tabs="center">
+            <mat-tab label="Create Game">
+                <app-create-game (waitForOpponent)="onWaitForOpponent()"></app-create-game>
+            </mat-tab>
+            <mat-tab label="Join Game">
+                <app-lobby></app-lobby>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <div id="waiting-screen" *ngIf="waitingForOpponent">
+        <span id="waiting-message">Waiting for opponent to join.</span>
+        <button mat-raised-button id="exit-button" (click)="exitOnClick()">Exit</button>
+    </div>
+    <app-chess-game *ngIf="showChessboard" (leaveChessboard)="onLeaveChessboard()"></app-chess-game>
+</div>

@@ -1,0 +1,9 @@
+<div id="science-fiction">
+    <h1>Science Fiction</h1>
+    <div id="books-container">
+        <div class="book-wrapper" *ngFor="let book of books" >
+            <a target="_blank" rel="noopener noreferrer" [href]="book.link">Visit Publisher's Store Page</a>
+            <img [@fadeIn]='book.state'  class="book" src={{book.imageURL}}>
+        </div>
+    </div>
+</div>

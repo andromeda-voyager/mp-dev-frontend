@@ -1,0 +1,111 @@
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
+.carousel {
+  position: relative;
+  display: flex;
+  width:100%;
+  height:100%;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.carousel-item {
+  width:100%;
+  z-index: 2;
+}
+
+.control {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  outline: 0; 
+  height: 100%;
+  width:15%;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  opacity: 75%;
+  z-index: 3;
+  transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+}
+.control:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.control.next{
+  right:0;
+}
+.control.prev{
+  left:0;
+}
+  
+.arrow {
+  display:  inline-block;
+  border-left: 0.1em solid white;
+  border-bottom: 0.1em solid white;
+  width: 2.5vw;
+  height: 2.5vw;
+}
+
+.arrow.left {
+  transform: rotate(45deg);
+}
+
+.arrow.right {
+    transform: rotate(225deg);
+}
+
+.large-image{ 
+  object-fit: cover;
+  width:100%;
+  height:100%;
+}
+
+
+#image-buttons-container {
+  display:flex;
+  flex-direction: row;
+  position: absolute;
+  bottom:10%;
+  left:50%;
+  transform: translate(-50%, -50%);
+
+}
+.image-button{
+  height:20px;
+  width:20px;
+  border-radius: 50%;
+  background-color: white;
+  margin-right:20px;
+  border-color:transparent;
+  cursor: pointer;
+  
+}
+
+.blue-button{
+  background-color: rgb(36, 62, 82);
+}
+.white-button{
+  background-color: white;
+}
+.image-button:hover{
+  transform: scale(1.2);
+}
+
+#right-image{
+  object-fit: cover;
+  width:30vw;
+  min-width:320px;
+
+
+}
+
+#right-container{
+  width:30vw;
+  min-width:320px;
+}

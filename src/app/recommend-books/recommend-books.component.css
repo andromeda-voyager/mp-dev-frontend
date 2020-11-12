@@ -1,0 +1,45 @@
+#component { 
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  margin-bottom:5px;
+  height:auto;
+}
+
+mat-card{
+  margin-top:50px;
+  width: fit-content;
+  margin-left:auto;
+  margin-right:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+#apps-container {
+  width:100%;  
+}
+
+.app {   
+  min-width: 320px;
+}
+
+#recommended {
+  width:30%;
+  align-self: flex-start;
+}
+
+#search{
+  width:100%;
+}
+
+#submit-name-button {
+  font-size: 1.2em;
+  height: 3em;
+  margin-top:2vh;
+}
+
+#submit-name-button:hover {
+  opacity: .85;
+}

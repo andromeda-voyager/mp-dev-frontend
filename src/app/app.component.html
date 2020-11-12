@@ -1,0 +1,23 @@
+<div id="component">
+  <div id="side-nav" *ngIf="showSideNav">
+    <a matRipple routerLink="/about">About</a>
+    <a matRipple routerLink="/interests">My Interests</a>
+    <a matRipple routerLink="/chess">Chess</a>
+    <a matRipple routerLink="/recommend-books">Recommed Books</a>
+  </div>
+  <nav id="top-nav">
+    <a id="resume"  routerLink="/about" routerLinkActive="active-link">About</a>
+    <a routerLink="/interests" routerLinkActive="active-link">My Interests</a>
+    <a routerLink="/chess" routerLinkActive="active-link">Chess</a>
+    <a routerLink="/recommend-books" routerLinkActive="active-link">Recommed Books</a>
+    <button class="menu-icon" (click)="toggleSideNavOnClick()">
+      <svg viewBox="0 0 100 80" >
+        <rect width="100" height="14"></rect>
+        <rect y="35" width="100" height="14"></rect>
+        <rect y="70" width="100" height="14"></rect>
+      </svg></button>
+  </nav>
+  <div id="router-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</div>

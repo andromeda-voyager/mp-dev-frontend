@@ -1,0 +1,110 @@
+#video-games {
+    background-color: rgb(255, 255, 255);
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+
+#favorites-container {
+    width:85%;
+    display:flex;
+    margin:auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content-container {
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+} 
+
+#carousel-wrapper {
+    box-sizing: border-box;
+    padding:.5vh;
+    height: 56.25vw;
+}
+
+#carousel {
+    width: 100%;
+}
+
+#buttons-container button {
+    font-size:1.5vw;
+    font-size: max(1.5vw, 1.2em);
+    padding:.6em;  
+}
+
+.detail {
+    font-size:.5vw;
+    font-size: max(1vw, 1.1em);
+    text-align: center; 
+    white-space: nowrap;
+}
+
+#details-container {
+    margin-top:15px;
+    align-items: center;
+    justify-items: center;
+    display:grid;
+    grid-template-columns: auto auto;
+    row-gap: 2em;
+    column-gap: 5vw; 
+    font-size: 1vw;
+    font-size: max(1.2vw, 1em);
+    margin-bottom: calc(10px + 1vh);
+}
+
+.detail:hover {
+    color:rgb(0, 153, 255);
+}
+
+@media screen and (min-width: 900px) {
+   #video-games {
+       height:33.75vw;
+   }
+    #content-container{
+       width: 40%;
+       box-sizing: border-box;
+    }
+    #carousel-wrapper {
+        width:60%;
+        height:auto;
+    }
+    #buttons-container button {
+        font-size: max(1.5vw, .8em);
+    }
+    #details-container {
+        margin-bottom: 0px;
+    }
+}
+   
+h1 {
+    font-size:2.5vw;
+    font-size: max(2.5vw, 35px);
+    font-family: Roboto, Arial, sans-serif;
+    padding-top:2.2vh;
+    white-space: nowrap;
+    padding-left:1vw;
+    color:  rgb(21, 27, 32);
+}
+
+#buttons-container {
+    width:100%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 1vh;
+}
+
+#buttons-container button:hover {
+    color:rgb(0, 153, 255);
+}
+
+.raised {
+    box-shadow: 0px 3px 3px -3px rgba(0, 0, 0, 0.096), 
+    0px 2px 2px 0px rgba(0, 0, 0, 0.096), 
+    0px 2px 5px 0px rgba(0, 0, 0, 0.26);
+}

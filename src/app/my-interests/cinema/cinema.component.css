@@ -1,0 +1,121 @@
+#movies {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width:100%;
+    background-color: rgb(21, 27, 32);
+    color:white;
+    padding-bottom:5vh;
+}
+
+h1 {
+    font-size:2.5vw;
+    font-size: max(2.5vw, 35px);
+    font-family: Roboto, Arial, sans-serif;
+    text-align: center;
+    margin-top:2.2vh;
+}
+
+#selected-movie {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+} 
+
+.youtube-video {
+    width:22.2vw;
+    height:12.5vw;
+    min-width: 355.5px;
+    min-height:200px;
+}
+
+#menu {
+    margin: 2vh auto 1vh auto;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#menu button:hover {
+    transform: scale(1.2);
+}
+
+.menu-button {
+    background-color:rgb(26, 77, 107);
+    font-size:2vw;
+    height:fit-content;
+    color:white;
+    margin: 2vh 3vw 2vh 3vw;
+    padding:.8em;
+}
+
+.selected-category-button {
+    transform: scale(1.2);
+}
+
+.large-menu button {
+    padding: 1.2em;
+    width:13em;
+    font-size:2.3vw;
+    margin:2vh 3vw 2vh 3vw;
+}
+
+.movies-container {
+    margin:1vh 5vw 1vh 5vw;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.movie {
+    display:flex;
+    flex-direction: column;
+    margin: .5em 1em .5em 1em;
+    border-radius: 8px;
+    text-align: center;
+    font-size:1.6vw;
+    font-size: max(1.6vw, 10px);
+    line-height:1;
+    height:9em;
+    width:7em;
+    background-color: white;    
+    color:black;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 44, 44);
+    position: relative;
+}
+
+.movie:hover{
+    transform: scale(1.1);
+}
+
+.movie-title {
+    position: absolute;
+    width:80%;
+}
+
+.selected-movie .movie-title {
+    position:static;
+}
+
+button:hover {
+    transform: scale(1.1);    
+}
+.movie-detail {
+    visibility: hidden;
+}
+
+.selected-movie .movie-detail {
+    visibility: visible;
+}
+
+.movie-detail {
+    width:90%;
+    margin-top:1em;
+    font-size:1vw;
+    font-size: max(1vw, 7px);
+}

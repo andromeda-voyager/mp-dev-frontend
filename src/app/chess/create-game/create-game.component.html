@@ -1,0 +1,32 @@
+<div id="component">
+  <mat-card id="game-parameters">
+    <label id="select-opponent-label">Select your opponent</label>
+    <mat-radio-group [(ngModel)]="gameSettings.isPVP" aria-label="Select opponent">
+      <mat-radio-button class="radio-button" [value]="true">Another Player</mat-radio-button>
+      <mat-radio-button class="radio-button" [value]="false">Computer</mat-radio-button>
+    </mat-radio-group>
+
+    <label id="select-color-label">Select your color</label>
+    <mat-radio-group [(ngModel)]="gameSettings.playerColor" aria-label="Select your color">
+      <mat-radio-button class="radio-button" value="RANDOM">Random</mat-radio-button>
+      <mat-radio-button class="radio-button" value="WHITE">White</mat-radio-button>
+      <mat-radio-button class="radio-button" value="BLACK">Black</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field *ngIf="gameSettings.isPVP" appearance="standard">
+      <mat-label>Game Description</mat-label>
+      <input matInput [(ngModel)]="gameSettings.description">
+      <mat-hint *ngIf="showRequired && gameSettings.description.length == 0">Description Required</mat-hint>
+    </mat-form-field>
+
+    <mat-checkbox *ngIf="gameSettings.isPVP" id="checkbox" [(ngModel)]="gameSettings.isPasswordLocked">Require Password
+    </mat-checkbox>
+    <mat-form-field *ngIf="gameSettings.isPVP && gameSettings.isPasswordLocked" appearance="standard">
+      <mat-label>Password</mat-label>
+      <input matInput [(ngModel)]="gameSettings.password">
+      <mat-hint *ngIf="showRequired && gameSettings.password.length == 0">Password Required</mat-hint>
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" id="create-game-button" (click)="createGameOnClick()">Create Game</button>
+  </mat-card>
+</div>
