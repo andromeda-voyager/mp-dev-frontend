@@ -1,12 +1,15 @@
 <div class="chessboard" cdkDropListGroup>
     <div class="row" *ngFor="let rows of chessboardSpine; let row = index">
-        <div *ngFor="let chessPiece of rows; let column = index" class="square" [ngClass]="{'white': (row % 2 == column % 2), 
-            'selected': selectedPiece === chessPiece,
-            'valid-move-hover': validMoveHoverIndex === chessPiece}" cdkDropList
-            (cdkDropListDropped)="drop($event, chessPiece)" (cdkDropListEntered)="hover($event, chessPiece)">
-            <div *ngIf="moveToIndex === chessPiece || moveFromIndex === chessPiece" class="move-highlight"></div>
-            <div class="chess-piece" cdkDrag [cdkDragDisabled]="chessboard[chessPiece].color != playerColor" (cdkDragStarted)="pieceDragStarted($event, chessPiece)">
-                <img draggable="false" *ngIf="chessboard[chessPiece].imageUrl" src={{chessboard[chessPiece].imageUrl}} class="piece-image" />
+        <div *ngFor="let chessPiece of rows; let column = index" class="square"
+            [ngClass]="{'white': (row % 2 == column % 2)}" cdkDropList (cdkDropListDropped)="drop($event, chessPiece)"
+            (cdkDropListEntered)="hover($event, chessPiece)">
+            <div *ngIf="isHighlighted(chessPiece)"
+                class="highlighted"></div>
+            <div class="chess-piece" [ngClass]="{'players-piece':chessboard[chessPiece].color === playerColor }" cdkDrag
+                [cdkDragDisabled]="chessboard[chessPiece].color != playerColor"
+                (cdkDragStarted)="pieceDragStarted($event, chessPiece)">
+                <img *ngIf="chessboard[chessPiece].imageUrl" src={{chessboard[chessPiece].imageUrl}}
+                    class="piece-image" />
                 <div *cdkDragPlaceholder></div>
             </div>
             <div class="check" *ngIf="chessPiece == inCheckLocation"></div>

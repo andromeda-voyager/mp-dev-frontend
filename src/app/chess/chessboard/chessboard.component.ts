@@ -31,6 +31,13 @@ export class ChessboardComponent implements OnInit {
     this.moveToIndex = chessMove.to;
   }
 
+  isHighlighted(index: number): boolean {
+    return (this.moveToIndex === index ||
+      this.moveFromIndex === index ||
+      this.selectedPiece === index ||
+      this.validMoveHoverIndex === index)
+  }
+
   constructor(private chessboardService: ChessboardService) {
     for (var i = 0; i < 8; i++) {
       this.chessboardSpine[i] = [];
