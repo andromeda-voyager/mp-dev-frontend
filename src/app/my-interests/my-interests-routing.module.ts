@@ -8,7 +8,7 @@ const interestsoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(interestsoutes)],
+  imports: [RouterModule.forRoot(interestsoutes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 
