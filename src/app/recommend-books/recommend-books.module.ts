@@ -8,14 +8,14 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatRippleModule } from '@angular/material/core';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { SearchResultsComponent } from './search-results/search-results.component'
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
-    RecommendBooksComponent, 
-    BookComponent, 
+    RecommendBooksComponent,
+    BookComponent,
     RecommendedComponent, BookSearchComponent, SearchResultsComponent],
   imports: [
     CommonModule,

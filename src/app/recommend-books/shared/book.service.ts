@@ -26,11 +26,14 @@ export class BookService {
 
   recommendBook(book: Book) {
     this.bookRecommendedSource.next(book);
-    this.postRecommendedBook(new BookRecommendation(book,this.recommender)).subscribe();
+    this.postRecommendedBook({book: book, recommendedBy: this.recommender}).subscribe();
   }
 
   setRecommender(recommender: string){
+    console.log(recommender);
     this.recommender = recommender;
+    console.log(recommender);
+
   }
   unrecommendBook(book: Book) {
     this.bookUnrecommendedSource.next(book);

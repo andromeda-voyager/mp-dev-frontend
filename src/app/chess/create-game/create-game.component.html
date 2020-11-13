@@ -1,4 +1,4 @@
-<div id="component">
+<div *ngIf="!waitingForOpponent" id="component">
   <mat-card id="game-parameters">
     <label id="select-opponent-label">Select your opponent</label>
     <mat-radio-group [(ngModel)]="gameSettings.isPVP" aria-label="Select opponent">
@@ -29,4 +29,9 @@
 
     <button mat-raised-button color="accent" id="create-game-button" (click)="createGameOnClick()">Create Game</button>
   </mat-card>
+</div>
+
+<div id="waiting-screen" *ngIf="waitingForOpponent">
+  <span id="waiting-message">Waiting for opponent to join.</span>
+  <button mat-raised-button id="exit-button" (click)="exitOnClick()">Exit</button>
 </div>

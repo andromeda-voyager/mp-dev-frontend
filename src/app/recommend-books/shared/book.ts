@@ -1,4 +1,4 @@
-export class Book {
+export interface Book {
     bookID: number;
     title: string;
     author: string;
@@ -7,12 +7,8 @@ export class Book {
     imageURL: string;
 }
 
-export class BookRecommendation {
-    constructor(book: Book, recommender: string) {
-            this.book = book;
-            this.recommender = recommender;
-    }
+export interface BookRecommendation {
     book: Book;
-    recommender: string;
+    recommendedBy: string;
 }
 

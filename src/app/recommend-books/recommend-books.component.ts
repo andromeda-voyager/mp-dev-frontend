@@ -21,6 +21,7 @@ export class RecommendBooksComponent implements OnInit {
 
   submitName(): void {
     this.isNameSubmitted = true;
+    console.log(this.recommender);
     this.bookService.setRecommender(this.recommender);
   }
   

@@ -10,7 +10,6 @@ import { ChessboardService } from './shared/chessboard.service';
 export class ChessComponent implements OnInit {
 
   showChessboard: boolean = false;
-  waitingForOpponent: boolean = false;
   tabLinks = [
     { path: 'create-game', label: 'Create Game' },
     { path: 'join-game', label: 'Join Game' },
@@ -22,22 +21,16 @@ export class ChessComponent implements OnInit {
 
   ngOnInit(): void {
     this.chessboardService.gameStarted$.subscribe(() => {
-      this.waitingForOpponent = false;
       this.showChessboard = true;
     });
   }
 
   ngOnDestroy() {
-    this.chessService.disconnectFromOnlineGame();
+    this.disconnect();
   }
 
-  exitOnClick() {
-    this.waitingForOpponent = false;
+  disconnect() {
     this.chessService.disconnectFromOnlineGame();
-  }
-
-  onWaitForOpponent() {
-    this.waitingForOpponent = true;
   }
 
   onLeaveChessboard() {

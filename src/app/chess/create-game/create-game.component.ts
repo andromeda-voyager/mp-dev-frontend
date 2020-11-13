@@ -15,7 +15,7 @@ export class CreateGameComponent implements OnInit {
   // @Input() chessGame: ChessGame;
   @Input() gameSettings: GameSettings = {isPVP: false, isPasswordLocked:false, playerColor: Color.RANDOM, password:"", description:""};
   showRequired: boolean = false;
-  @Output() waitForOpponent = new EventEmitter();
+  waitingForOpponent = false;
   constructor(private chessService: ChessService, private router: Router, private chessboardService: ChessboardService) {
   }
 
@@ -24,12 +24,19 @@ export class CreateGameComponent implements OnInit {
   createGameOnClick() {
     if (this.hasValidFields()) {
       this.chessService.createChessGame(this.gameSettings);
-      if (this.gameSettings.isPVP) this.waitForOpponent.emit();
+      if (this.gameSettings.isPVP) {
+        console.log("wait emit");
+        this.waitingForOpponent = true;}
     } else this.highlightRequiredFields();
   }
 
   highlightRequiredFields() {
     this.showRequired = true;
+  }
+  
+  exitOnClick() {
+    this.waitingForOpponent = false;
+    this.chessService.disconnectFromOnlineGame();
   }
 
   hasValidFields() {
