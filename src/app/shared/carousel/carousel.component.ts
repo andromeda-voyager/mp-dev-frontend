@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { animate, state, stagger, query, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css'],
 })
+
 export class CarouselComponent implements OnInit {
   @Input() carouselItems: string[];
   currentCarouselItem = 0;
@@ -62,7 +62,4 @@ export class CarouselComponent implements OnInit {
     this.currentCarouselItem = imageIndex;
   }
 
-
 }
-
-

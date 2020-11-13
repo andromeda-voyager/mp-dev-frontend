@@ -7,11 +7,9 @@ import { RecommendBooksComponent } from './recommend-books/recommend-books.compo
 import { CreateGameComponent } from './chess/create-game/create-game.component';
 import { ChessComponent } from './chess/chess.component';
 
-
 const routes: Routes = [
-  { path: 'interests', component: MyInterestsComponent },
+  { path: 'hobbies-and-interests', component: MyInterestsComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'chess', component: ChessComponent },
   { path: 'recommend-books', component: RecommendBooksComponent },
   { path: '', redirectTo: '/about', pathMatch:'full'}
 ];

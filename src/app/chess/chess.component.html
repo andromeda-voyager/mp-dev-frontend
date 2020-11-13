@@ -1,13 +1,10 @@
 <div id="component">
     <div *ngIf="!showChessboard">
-        <mat-tab-group *ngIf="!waitingForOpponent" mat-align-tabs="center">
-            <mat-tab label="Create Game">
-                <app-create-game (waitForOpponent)="onWaitForOpponent()"></app-create-game>
-            </mat-tab>
-            <mat-tab label="Join Game">
-                <app-lobby></app-lobby>
-            </mat-tab>
-        </mat-tab-group>
+        <nav mat-tab-nav-bar *ngIf="!waitingForOpponent" mat-align-tabs="center">
+            <a mat-tab-link *ngFor="let link of tabLinks" [routerLink]="link.path"  
+            routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{link.label}}</a>            
+        </nav>
+        <router-outlet></router-outlet>
     </div>
 
     <div id="waiting-screen" *ngIf="waitingForOpponent">

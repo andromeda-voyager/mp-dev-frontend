@@ -7,7 +7,7 @@
     padding-left:10vw;
     padding-right:10vw;
     margin:5vh auto 10vh auto;
-    max-width: 700px;
+    max-width: 780px;
     line-height: 1.3;
     text-align: center;
 }
@@ -23,7 +23,17 @@ h1{
 }
 
 p {
-    font-size:x-large;  
+    font-size:1.5em;  
+    margin-bottom: 4vh;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(12, 80, 136);
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 #social-media-buttons {

@@ -11,8 +11,14 @@ export class ChessComponent implements OnInit {
 
   showChessboard: boolean = false;
   waitingForOpponent: boolean = false;
+  tabLinks = [
+    { path: 'create-game', label: 'Create Game' },
+    { path: 'join-game', label: 'Join Game' },
+  ];
 
-  constructor(private chessService: ChessService, private chessboardService: ChessboardService) { }
+  constructor(private chessService: ChessService, private chessboardService: ChessboardService) {
+
+  }
 
   ngOnInit(): void {
     this.chessboardService.gameStarted$.subscribe(() => {

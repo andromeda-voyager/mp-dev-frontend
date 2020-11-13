@@ -8,7 +8,7 @@ var transmutationTable = new Map();
 addEventListener('message', ({ data }) => {
   const response = `worker response to ${data}`;
   let chessboard = new Chessboard(data);
-  let move = getComputersMove(4, chessboard);
+  let move = getComputersMove(3, chessboard);
   postMessage(move);
 });
 
@@ -57,13 +57,13 @@ function alphaBetaMax(depth, chessboard, alpha, beta) {
     let value: number;
     chessboard.applyMove(chessMove);
     let hash = chessboard.getBoardString();
-    if (transmutationTable.has(hash)) {
-      value = transmutationTable.get(hash);
-    }
-    else {
+    // if (transmutationTable.has(hash)) {
+    //   value = transmutationTable.get(hash);
+    // }
+  //  else {
       value = alphaBetaMin(depth - 1, chessboard, alpha, beta);
       transmutationTable.set(hash, value);
-    }
+   // }
     chessboard.undoMove(chessMove);
 
     if (value >= beta) return beta;
@@ -82,13 +82,13 @@ function alphaBetaMin(depth, chessboard, alpha, beta) {
     let value: number;
     chessboard.applyMove(chessMove);
     let hash = chessboard.getBoardString();
-    if (transmutationTable.has(hash)) {
-      value = transmutationTable.get(hash);
-    }
-    else {
+    // if (transmutationTable.has(hash)) {
+    //   value = transmutationTable.get(hash);
+    // }
+    // else {
       value = alphaBetaMax(depth - 1, chessboard, alpha, beta);
       transmutationTable.set(hash, value);
-    }
+   // }
     chessboard.undoMove(chessMove);
 
     if (value <= alpha) return alpha;
