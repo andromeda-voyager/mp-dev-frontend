@@ -15,13 +15,15 @@ addEventListener('message', ({ data }) => {
 function getComputersMove(depth: number, chessboard: Chessboard) {
   transmutationTable = new Map();
   moveCount = 0;
-  let moves = chessboard.getAllMoves();
-  for (let chessMove of moves) {
+  console.log("transmutation Table starting size: " + transmutationTable.size);
+
+  let chessMoves = chessboard.getAllMoves();
+  for (let chessMove of chessMoves) {
     chessboard.applyMove(chessMove);
     chessMove.value = alphaBetaMin(depth, chessboard, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
     chessboard.undoMove(chessMove);
   }
-  moves.sort(function (a, b) {
+  chessMoves.sort(function (a, b) {
 
     if (a.value < b.value) {
       return 1;
@@ -31,8 +33,11 @@ function getComputersMove(depth: number, chessboard: Chessboard) {
     }
     return 0;
   });
-
-  return getBestMove(moves);
+  for (let chessMove of chessMoves) {
+    console.log(chessMove);
+  }
+  console.log("board positions evaluated: " + transmutationTable.size);
+  return getBestMove(chessMoves);
 }
 
 function getBestMove(chessMoves: ChessMove[]) {
@@ -47,29 +52,29 @@ function getBestMove(chessMoves: ChessMove[]) {
   else return null; // array has no moves (stalemate or checkmate)
 }
 
-function alphaBetaMax(depth, chessboard, alpha, beta) {
+function alphaBetaMax(depth: number, chessboard, alpha: number, beta: number) {
   if (depth == 0) {
     return chessboard.evaluate();
   }
   let moves = chessboard.getAllMoves();
+  let value = Number.MIN_SAFE_INTEGER;
   for (let chessMove of moves) {
     moveCount++;
-    let value: number;
     chessboard.applyMove(chessMove);
-    let hash = chessboard.getBoardString();
-    // if (transmutationTable.has(hash)) {
-    //   value = transmutationTable.get(hash);
-    // }
-  //  else {
-      value = alphaBetaMin(depth - 1, chessboard, alpha, beta);
-      transmutationTable.set(hash, value);
-   // }
+    let fen = chessboard.getBoardString();
+    if (transmutationTable.has(fen)) {
+      value = Math.max(transmutationTable.get(fen));
+    }
+    else {
+      value = Math.max(value, alphaBetaMin(depth - 1, chessboard, alpha, beta));
+      transmutationTable.set(fen, value);
+    }
     chessboard.undoMove(chessMove);
+    alpha = Math.max(alpha, value);
+    if (alpha >= beta) break;
 
-    if (value >= beta) return beta;
-    if (value > alpha) alpha = value;
   }
-  return alpha;
+  return value
 }
 
 function alphaBetaMin(depth, chessboard, alpha, beta) {
@@ -77,22 +82,21 @@ function alphaBetaMin(depth, chessboard, alpha, beta) {
     return -chessboard.evaluate();
   }
   let moves = chessboard.getAllMoves();
+  let value = Number.MAX_SAFE_INTEGER;
 
   for (let chessMove of moves) {
-    let value: number;
     chessboard.applyMove(chessMove);
-    let hash = chessboard.getBoardString();
-    // if (transmutationTable.has(hash)) {
-    //   value = transmutationTable.get(hash);
-    // }
-    // else {
-      value = alphaBetaMax(depth - 1, chessboard, alpha, beta);
-      transmutationTable.set(hash, value);
-   // }
+    let fen = chessboard.getBoardString();
+    if (transmutationTable.has(fen)) {
+      value = Math.min(value,transmutationTable.get(fen));
+    }
+    else {
+      value = Math.min(value, alphaBetaMax(depth - 1, chessboard, alpha, beta));
+      transmutationTable.set(fen, value);
+    }
     chessboard.undoMove(chessMove);
-
-    if (value <= alpha) return alpha;
-    if (value < beta) beta = value;
+    beta = Math.min(beta, value);
+    if (beta <= alpha) break;
   }
-  return beta;
+  return value;
 }

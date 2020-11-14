@@ -563,7 +563,6 @@ export class Chessboard {
         if (this.isInCheck(king.color)) { // can't be in check when castling
             return false;
         }
-        console.log("here in valid");
 
         while (locationInPath != to) { // king can't be in check along path to rook when castling (does not check final postion as that is checked before this is called)
             locationInPath += direction;

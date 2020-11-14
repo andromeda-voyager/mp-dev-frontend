@@ -52,9 +52,7 @@ export class ScienceFictionComponent implements OnInit {
   }
   
   async vanish() {
-    console.log("vanish");
     var index = Math.floor(Math.random() * (this.books.length - 1));
-
     this.books[index].state = true;
     await this.delay(6000);
     this.books[index].state = false;

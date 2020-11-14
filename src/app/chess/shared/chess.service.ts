@@ -26,7 +26,7 @@ export class ChessService {
   private gameID: string;
   private playerID: string;
   private isOnlineGame: boolean;
-  private subscriptions: Subscription = new Subscription();
+  //private subscriptions: Subscription = new Subscription();
   private updateInterval: any;
 
   private serverMessageSource = new Subject<ServerMessage>(); // sends out player color when the game starts

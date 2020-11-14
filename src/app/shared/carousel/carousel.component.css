@@ -1,6 +1,6 @@
 
-:focus {outline:none;}
-::-moz-focus-inner {border:0;}
+/* :focus {outline:none;}
+::-moz-focus-inner {border:0;} */
 
 .carousel {
   position: relative;
@@ -10,7 +10,6 @@
   justify-content: center;
   align-items: center;
 }
-
 
 .carousel-item {
   width:100%;
@@ -28,24 +27,25 @@
   color: white;
   font-weight: bold;
   font-size: 3em;
-  opacity: 75%;
-  z-index: 3;
-  transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+  opacity: .6;
+  z-index: 50;
 }
+
 .control:hover {
   opacity: 1;
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .control.next{
   right:0;
 }
+
 .control.prev{
   left:0;
 }
   
 .arrow {
-  display:  inline-block;
+  display: inline-block;
   border-left: 0.1em solid white;
   border-bottom: 0.1em solid white;
   width: 2.5vw;
@@ -66,7 +66,6 @@
   height:100%;
 }
 
-
 #image-buttons-container {
   display:flex;
   flex-direction: row;
@@ -74,8 +73,8 @@
   bottom:10%;
   left:50%;
   transform: translate(-50%, -50%);
-
 }
+
 .image-button{
   height:20px;
   width:20px;
@@ -83,16 +82,17 @@
   background-color: white;
   margin-right:20px;
   border-color:transparent;
-  cursor: pointer;
-  
+  cursor: pointer; 
 }
 
 .blue-button{
   background-color: rgb(36, 62, 82);
 }
+
 .white-button{
   background-color: white;
 }
+
 .image-button:hover{
   transform: scale(1.2);
 }
@@ -101,8 +101,6 @@
   object-fit: cover;
   width:30vw;
   min-width:320px;
-
-
 }
 
 #right-container{
