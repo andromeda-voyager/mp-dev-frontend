@@ -26,6 +26,7 @@ export class ChessService {
   private gameID: string;
   private playerID: string;
   private isOnlineGame: boolean;
+  private connected: boolean = false;
   //private subscriptions: Subscription = new Subscription();
   private updateInterval: any;
 
@@ -46,8 +47,11 @@ export class ChessService {
   }
 
   disconnectFromOnlineGame() {
-    clearInterval(this.updateInterval);
-    this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.DISCONNECTED).subscribe();
+    if (this.connected) {
+      this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.DISCONNECTED).subscribe();
+      clearInterval(this.updateInterval);
+      this.connected = false;
+    }
   }
 
   resign() {
@@ -125,7 +129,7 @@ export class ChessService {
       })
     };
     return this.http.post<GameUpdate>(baseUrl + listGamePath, gameUpdate, httpOptions);
-     
+
   }
 
   joinChessGame(gameSettings: GameSettings) {
@@ -135,12 +139,13 @@ export class ChessService {
         // 'Authorization': 'my-auth-token'
       })
     };
-   return this.http.post<GameUpdate>(baseUrl + joinChessGamePath, gameSettings, httpOptions);
+    return this.http.post<GameUpdate>(baseUrl + joinChessGamePath, gameSettings, httpOptions);
   }
 
   startServerUpdateInterval(gameUpdate: GameUpdate) {
     this.gameID = gameUpdate.gameID;
     this.playerID = gameUpdate.playerID;
+    this.connected = true;
     this.updateInterval = setInterval(() => {
       this.postPlayerUpdate(GameStatus.ACTIVE, PlayerStatus.ACTIVE).subscribe(gameUpdate => {
         this.checkGameStatus(gameUpdate);

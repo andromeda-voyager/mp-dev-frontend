@@ -7,9 +7,8 @@ import { MyInterestsModule } from 'src/app/my-interests/my-interests.module';
 import { MatButtonModule } from '@angular/material/button'
 import { MatRippleModule } from '@angular/material/core'
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
 import { HttpClientModule } from '@angular/common/http';
-import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
 import { ChessModule } from 'src/app/chess/chess.module';
 import { RecommendBooksModule } from 'src/app/recommend-books/recommend-books.module';
 import { MatMenuModule } from '@angular/material/menu';
@@ -17,7 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
