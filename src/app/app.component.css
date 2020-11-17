@@ -1,3 +1,7 @@
+:host {
+  --nav-height: 75px;
+}
+
 #top-nav .active-link {
   border-bottom: solid;
 }
@@ -33,7 +37,9 @@
 } 
 
 #router-wrapper {
-  padding-top:75px;
+  overflow: auto;
+  margin-top: var(--nav-height);
+  max-height: calc(100vh - var(--nav-height));
 }
 
 #top-nav .menu-icon {
@@ -50,7 +56,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 75px;
+  height: var(--nav-height);
   background-color:rgb(24, 32, 37);
 }
 

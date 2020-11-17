@@ -30,10 +30,7 @@ export class BookService {
   }
 
   setRecommender(recommender: string){
-    console.log(recommender);
     this.recommender = recommender;
-    console.log(recommender);
-
   }
   unrecommendBook(book: Book) {
     this.bookUnrecommendedSource.next(book);
@@ -47,7 +44,6 @@ export class BookService {
 
 
   postRecommendedBook(bookRecommendation: BookRecommendation): Observable<BookRecommendation> {
-    console.log("inside recommend");
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -63,7 +59,7 @@ export class BookService {
   searchBooks(searchQuery: string): Observable<Book[]> {
     return this.http.get<Book[]>(baseUrl + bookSearchPath + searchQuery)
       .pipe(
-        tap(_ => console.log('searchBooks')),
+        tap(_ => console.log('search sent to the server')),
         catchError(this.handleError<Book[]>('searchBooks', []))
       );
   }

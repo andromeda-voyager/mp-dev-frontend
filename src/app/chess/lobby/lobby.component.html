@@ -1,23 +1,28 @@
-<div id="page"> <mat-card  id="lobby-card">
-    <mat-card-header>
-        <mat-card-title>Lobby</mat-card-title>
-    </mat-card-header>
-   <div id="empty-notification-div" *ngIf="lobby.size == 0">Lobby is empty.</div>
-    <div class="chess-game" [ngClass]="{'selected-game': chessGame.value == selectedGame}"
-        *ngFor="let chessGame of lobby | keyvalue" (click)="onChessGameClick(chessGame.value)">
-        <div class="game-information"><img class="pawn" [src]="getPawnImage(chessGame.value)">
-            <span class="description">{{chessGame.value.description}} </span>
-            <span class="lock" *ngIf="chessGame.value.isPasswordLocked" class="material-icons lock">lock</span>
-        </div>
-        <div *ngIf="chessGame.value == selectedGame" class="join-game">
-            <mat-form-field class="password-field" *ngIf="chessGame.value.isPasswordLocked" appearance="standard">
-                <mat-label>Password</mat-label>
-                <input matInput [(ngModel)]="password">
-                <mat-hint *ngIf="!isPasswordCorrect">Password Incorrect</mat-hint>
-            </mat-form-field>
-            <button mat-raised-button color="accent" class="join-game-button"  (click)="joinGameOnClick(chessGame.value)">Join Game</button>
-        </div>
+<div id="page">
+    <div id="message-wrapper">
+        <span id="message">{{message}}</span>
     </div>
-</mat-card>
+    <mat-card id="lobby-card">
+        <mat-card-header>
+            <mat-card-title>Lobby</mat-card-title>
+        </mat-card-header>
+        <div id="empty-notification-div" *ngIf="lobby.size == 0">Lobby is empty.</div>
+        <div class="chess-game" [ngClass]="{'selected-game': chessGame.value == selectedGame}"
+            *ngFor="let chessGame of lobby | keyvalue" (click)="onChessGameClick(chessGame.value)">
+            <div class="game-information">
+                <img class="pawn" [src]="getPawnImage(chessGame.value)">
+                <span class="description">{{chessGame.value.description}} </span>
+                <span class="lock" *ngIf="chessGame.value.isPasswordLocked" class="material-icons lock">lock</span>
+            </div>
+            <div *ngIf="chessGame.value == selectedGame" class="join-game">
+                <mat-form-field class="password-field" *ngIf="chessGame.value.isPasswordLocked" appearance="standard">
+                    <mat-label>Password</mat-label>
+                    <input matInput [(ngModel)]="password">
+                    <mat-hint *ngIf="!isPasswordCorrect">Password Incorrect</mat-hint>
+                </mat-form-field>
+                <button mat-raised-button color="accent" class="join-game-button"
+                    (click)="joinGameOnClick(chessGame.value)">Join Game</button>
+            </div>
+        </div>
+    </mat-card>
 </div>
-

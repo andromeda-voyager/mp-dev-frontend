@@ -9,9 +9,9 @@ import { ChessComponent } from './chess/chess.component';
 
 const routes: Routes = [
   { path: 'hobbies-and-interests', component: MyInterestsComponent },
-  { path: 'about', component: AboutComponent },
+  { path: 'home', component: AboutComponent },
   { path: 'recommend-books', component: RecommendBooksComponent },
-  { path: '', redirectTo: '/about', pathMatch:'full'}
+  { path: '', redirectTo: '/home', pathMatch:'full'}
 ];
 
 @NgModule({

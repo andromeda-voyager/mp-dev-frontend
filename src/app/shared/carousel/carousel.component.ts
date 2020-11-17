@@ -12,13 +12,13 @@ export class CarouselComponent implements OnInit {
   interval: any;
   @Input() arrowsOn: boolean = false;
   @Input() buttonsOn: boolean = false;
-
+  @Input() slideShowSpeed:number = 7000;
   constructor() { }
 
   setCarouselInterval() {
     this.interval = setInterval(() => {
       this.moveCarousel();
-    }, 5000);
+    }, this.slideShowSpeed);
   }
 
   moveCarousel() {
@@ -59,6 +59,7 @@ export class CarouselComponent implements OnInit {
   }
 
   changeImage(imageIndex: number) {
+    this.resetCarouselTimer();
     this.currentCarouselItem = imageIndex;
   }
 

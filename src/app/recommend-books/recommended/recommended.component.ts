@@ -20,32 +20,15 @@ export class RecommendedComponent implements OnInit {
       book => {
         this.recommendedBooks.push(book);
       });
-
-    bookService.bookUnrecommended$.subscribe(
-      book => {
-        this.bookUnrecommended(book);
-        // this.history.push(`${astronaut} confirmed the mission`);
-      });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  unrecommendBook(book: Book) {
-    this.bookService.unrecommendBook(book);
-  }
+  // bookUnrecommended(book: Book) { 
+  //   const index = this.recommendedBooks.indexOf(book, 0);
+  //   if (index > -1) {
+  //     this.recommendedBooks.splice(index, 1);
+  //   }
+  // }
 
-  bookUnrecommended(book: Book) { 
-    const index = this.recommendedBooks.indexOf(book, 0);
-    if (index > -1) {
-      this.recommendedBooks.splice(index, 1);
-    }
-  }
-
-  submitRecommendations() {
-    // this.bookService.recommendBooks(new BookRecommendations(this.recommendedBooks, this.recommender))
-    //   .subscribe(recommendationResponse => recommendationResponse = recommendationResponse);
-    // this.recommendedBooks = [];
-    // console.log("Sent to book service");
-  }
 }

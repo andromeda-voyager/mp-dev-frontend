@@ -29,10 +29,6 @@ export class ChessService {
   //private subscriptions: Subscription = new Subscription();
   private updateInterval: any;
 
-  private serverMessageSource = new Subject<ServerMessage>(); // sends out player color when the game starts
-
-  serverMessage$ = this.serverMessageSource.asObservable();
-
   constructor(private http: HttpClient, private chessboardService: ChessboardService) {
     this.chessboardService.gameEnded$.subscribe(() => {
       this.disconnectFromOnlineGame();
@@ -51,22 +47,13 @@ export class ChessService {
 
   disconnectFromOnlineGame() {
     clearInterval(this.updateInterval);
+    this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.DISCONNECTED).subscribe();
   }
 
   resign() {
     if (this.isOnlineGame) { // is null if game against computer
       this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.RESIGNED).subscribe();
       this.disconnectFromOnlineGame();
-    }
-  }
-
-  createChessGame(gameSettings: GameSettings) {
-    if (gameSettings.isPVP) {
-      this.postCreateChessGame(gameSettings).subscribe(gameUpdate => {
-        this.listGameOnLobby(gameUpdate);
-      });
-    } else {
-      this.startComputerGame(gameSettings.playerColor);
     }
   }
 
@@ -137,11 +124,8 @@ export class ChessService {
         // 'Authorization': 'my-auth-token'
       })
     };
-    this.http.post<GameUpdate>(baseUrl + listGamePath, gameUpdate, httpOptions).subscribe(gameUpdate => {
-      if (gameUpdate.gameStatus == GameStatus.ACTIVE) {
-        this.startOnlineGame(gameUpdate);
-      }
-    });
+    return this.http.post<GameUpdate>(baseUrl + listGamePath, gameUpdate, httpOptions);
+     
   }
 
   joinChessGame(gameSettings: GameSettings) {
@@ -151,14 +135,7 @@ export class ChessService {
         // 'Authorization': 'my-auth-token'
       })
     };
-    this.http.post<GameUpdate>(baseUrl + joinChessGamePath, gameSettings, httpOptions).subscribe(gameUpdate => {
-      if (gameUpdate.serverMessage) {
-        this.serverMessageSource.next(gameUpdate.serverMessage);
-      } else {
-        this.startServerUpdateInterval(gameUpdate);
-        this.startOnlineGame(gameUpdate);
-      }
-    });
+   return this.http.post<GameUpdate>(baseUrl + joinChessGamePath, gameSettings, httpOptions);
   }
 
   startServerUpdateInterval(gameUpdate: GameUpdate) {
@@ -193,20 +170,6 @@ export class ChessService {
     }
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
   applyComputersMove() {
     if (typeof Worker !== 'undefined') {
       const worker = new Worker('./chess.worker', { type: 'module' });
@@ -221,7 +184,7 @@ export class ChessService {
 
   processGameUpdate(gameUpdate: GameUpdate) {
     if (gameUpdate.serverMessage) {
-      this.serverMessageSource.next(gameUpdate.serverMessage);
+      console.log("Server returned message: " + gameUpdate.serverMessage);
     }
     else {
       this.chessboardService.validateOpponentsMove(gameUpdate.chessMove);

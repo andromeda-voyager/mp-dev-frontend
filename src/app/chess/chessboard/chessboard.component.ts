@@ -50,11 +50,6 @@ export class ChessboardComponent implements OnInit {
 
   }
 
-  canMovePiece() {
-    console.log((!this.chessboardService.isPlayersTurn()));
-    return (!this.chessboardService.isPlayersTurn());
-  }
-
   drop(event: CdkDragDrop<ChessPiece>, boardLocation: number) {
     this.validMoves.clear();
     this.selectedPiece = null;

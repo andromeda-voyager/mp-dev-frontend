@@ -15,7 +15,7 @@ addEventListener('message', ({ data }) => {
 function getComputersMove(depth: number, chessboard: Chessboard) {
   transmutationTable = new Map();
   moveCount = 0;
-  console.log("transmutation Table starting size: " + transmutationTable.size);
+  //console.log("transmutation Table starting size: " + transmutationTable.size);
 
   let chessMoves = chessboard.getAllMoves();
   for (let chessMove of chessMoves) {
@@ -33,10 +33,10 @@ function getComputersMove(depth: number, chessboard: Chessboard) {
     }
     return 0;
   });
-  for (let chessMove of chessMoves) {
-    console.log(chessMove);
-  }
-  console.log("board positions evaluated: " + transmutationTable.size);
+  // for (let chessMove of chessMoves) {
+  //   console.log(chessMove);
+  // }
+ // console.log("board positions evaluated: " + transmutationTable.size);
   return getBestMove(chessMoves);
 }
 

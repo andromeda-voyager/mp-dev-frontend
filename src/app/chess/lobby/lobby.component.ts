@@ -3,7 +3,7 @@ import { GameSettings } from '../shared/models/game-settings.model';
 import { Color } from '../shared/models/color';
 import { ChessService } from '../shared/chess.service';
 import { Router } from '@angular/router';
-import { ServerMessage } from '../shared/models/game-update.model';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-lobby',
@@ -11,32 +11,29 @@ import { ServerMessage } from '../shared/models/game-update.model';
   styleUrls: ['./lobby.component.css']
 })
 
+
 export class LobbyComponent implements OnInit {
 
   lobby: Map<string, GameSettings> = new Map();
   selectedGame: GameSettings;
   @Input() password: string = "";
   isPasswordCorrect: boolean = true;
-  interval: any;
+  readonly updateInterval = interval(10000);
+  retryUpdate = true;
+  subscription: Subscription;
+  message: string;
+  messageInterval: any;
 
 
   constructor(private chessService: ChessService, private router: Router) { }
 
   ngOnInit(): void {
     this.updateLobby();
-    this.interval = setInterval(() => {
-      this.updateLobby();
-    }, 10000);
-
-    this.chessService.serverMessage$.subscribe(message => {
-      if (message == ServerMessage.WRONG_PASSWORD) {
-        this.isPasswordCorrect = false;
-      }
-    });
+    this.subscription = this.updateInterval.subscribe(() => this.updateLobby());
   }
 
   ngOnDestroy() {
-    clearInterval(this.interval);
+    this.subscription.unsubscribe();
   }
 
   updateLobby() {
@@ -48,7 +45,20 @@ export class LobbyComponent implements OnInit {
       for (const game of refrehedLobby) {
         if (!this.lobby.has(game.gameID)) this.lobby.set(game.gameID, game);
       }
+    }, () => {
+      this.showUpdateErrorMessage(9)
     });
+  }
+
+  showUpdateErrorMessage(timeLeft: number) {
+    if (timeLeft > 0) {
+      this.messageInterval = setTimeout(() => {
+        this.message = `Failed to load games from the server. Retrying in ${--timeLeft} second(s).`;
+        this.showUpdateErrorMessage(timeLeft)
+      }, 1000);
+    } else {
+      this.message = "";
+    }
   }
 
   getPawnImage(chessGame: GameSettings) {
@@ -62,10 +72,20 @@ export class LobbyComponent implements OnInit {
   onChessGameClick(chessGame: GameSettings) {
     this.isPasswordCorrect = true;
     this.selectedGame = chessGame;
+    this.message = null;
   }
 
   joinGameOnClick(gameSettings: GameSettings) {
     gameSettings.password = this.password;
-    this.chessService.joinChessGame(gameSettings);
+    this.chessService.joinChessGame(gameSettings).subscribe(gameUpdate => {
+      this.chessService.startServerUpdateInterval(gameUpdate);
+      this.chessService.startOnlineGame(gameUpdate);
+    }, error => {
+      if (error.status == 401) {
+        this.isPasswordCorrect = false;
+      } else if(error.status == 404) {
+        this.message = "Failed to join game. Game no longer exists."
+      }
+    });
   }
 }

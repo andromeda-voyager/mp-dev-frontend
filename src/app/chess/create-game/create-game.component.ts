@@ -3,7 +3,7 @@ import { ChessService } from '../shared/chess.service';
 import { GameSettings } from '../shared/models/game-settings.model';
 import { Color } from '../shared/models/color';
 import { Router } from '@angular/router';
-import { ChessboardService } from '../shared/chessboard.service';
+import { GameUpdate } from '../shared/models/game-update.model';
 
 @Component({
   selector: 'app-create-game',
@@ -12,28 +12,48 @@ import { ChessboardService } from '../shared/chessboard.service';
 })
 
 export class CreateGameComponent implements OnInit {
-  // @Input() chessGame: ChessGame;
-  @Input() gameSettings: GameSettings = {isPVP: false, isPasswordLocked:false, playerColor: Color.RANDOM, password:"", description:""};
+  @Input() gameSettings: GameSettings = {
+    isPVP: false,
+    isPasswordLocked: false,
+    playerColor: Color.RANDOM,
+    password: "",
+    description: ""
+  };
   showRequired: boolean = false;
   waitingForOpponent = false;
-  constructor(private chessService: ChessService, private router: Router, private chessboardService: ChessboardService) {
-  }
+  message: string;
+
+  constructor(private chessService: ChessService, private router: Router) { }
 
   ngOnInit(): void { }
 
   createGameOnClick() {
     if (this.hasValidFields()) {
-      this.chessService.createChessGame(this.gameSettings);
       if (this.gameSettings.isPVP) {
-        console.log("wait emit");
-        this.waitingForOpponent = true;}
+        this.chessService.postCreateChessGame(this.gameSettings).subscribe(gameUpdate => {
+          this.listGameOnLobby(gameUpdate);
+        }, () => this.message = "Failed to create online game. Unable to connect to the server.");
+      } else {
+        this.chessService.startComputerGame(this.gameSettings.playerColor);
+      }
     } else this.highlightRequiredFields();
+  }
+
+  listGameOnLobby(gameUpdate: GameUpdate) {
+    this.waitingForOpponent = true;
+    this.chessService.listGameOnLobby(gameUpdate).subscribe(gameUpdate => {
+      this.chessService.startOnlineGame(gameUpdate);
+    }, () => {
+      this.waitingForOpponent = false;
+      this.message = "Failed to list game in the lobby. Please create another game."
+      this.chessService.disconnectFromOnlineGame();
+    });
   }
 
   highlightRequiredFields() {
     this.showRequired = true;
   }
-  
+
   exitOnClick() {
     this.waitingForOpponent = false;
     this.chessService.disconnectFromOnlineGame();

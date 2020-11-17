@@ -16,6 +16,28 @@ export class Chessboard {
     private whiteKingLocation: number;
     private moves: ChessMove[] = [];
 
+    constructor(chessboard?: Chessboard) {
+
+        if (chessboard) {
+            this.chessSquareHistory = chessboard.chessSquareHistory;
+            this.removedPieces = chessboard.removedPieces;
+            this.turn = chessboard.turn;
+            this.chessboard = chessboard.chessboard;
+            this.blackKingLocation = chessboard.blackKingLocation;
+            this.whiteKingLocation = chessboard.whiteKingLocation;;
+            this.moves = chessboard.moves;
+        }
+        else {
+            this.chessboard = JSON.parse(JSON.stringify(CHESSBOARD));
+            this.chessboard.forEach((chessPiece, index) => {
+                if(chessPiece.pieceType == PieceType.KING) {
+                    if(chessPiece.color == Color.WHITE) this.whiteKingLocation = index;
+                    else this.blackKingLocation = index;
+                }
+            });
+        }
+    }
+
     getBoardString() {
         let boardStr: string = "";
         let emptyCount = 0;
@@ -34,23 +56,6 @@ export class Chessboard {
         if (emptyCount > 0) boardStr += emptyCount;
 
         return boardStr;
-    }
-    constructor(chessboard?: Chessboard) {
-
-        if (chessboard) {
-            this.chessSquareHistory = chessboard.chessSquareHistory;
-            this.removedPieces = chessboard.removedPieces;
-            this.turn = chessboard.turn;
-            this.chessboard = chessboard.chessboard;
-            this.blackKingLocation = chessboard.blackKingLocation;
-            this.whiteKingLocation = chessboard.whiteKingLocation;;
-            this.moves = chessboard.moves;
-        }
-        else {
-            this.chessboard = JSON.parse(JSON.stringify(CHESSBOARD));
-            this.blackKingLocation = 4;
-            this.whiteKingLocation = 60;
-        }
     }
 
     isValidLocation(index: number): boolean {
