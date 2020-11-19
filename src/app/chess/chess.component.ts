@@ -15,9 +15,7 @@ export class ChessComponent implements OnInit {
     { path: 'join-game', label: 'Join Game' },
   ];
 
-  constructor(private chessService: ChessService, private chessboardService: ChessboardService) {
-
-  }
+  constructor(private chessService: ChessService, private chessboardService: ChessboardService) { }
 
   ngOnInit(): void {
     this.chessboardService.gameStarted$.subscribe(() => {
@@ -26,7 +24,7 @@ export class ChessComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.disconnect();
+    this.chessService.disconnectFromOnlineGame();
   }
 
   disconnect() {

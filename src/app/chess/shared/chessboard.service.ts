@@ -79,7 +79,7 @@ export class ChessboardService {
         this.playerMovedPieceSource.next(this.chessboard.getLastMove());
     }
 
-    validateOpponentsMove(chessMove: ChessMove) {
+    applyOpponentsMove(chessMove: ChessMove) {
         if (this.chessboard.isLegalMove(chessMove)) {
             this.chessboard.applyMove(chessMove);
             this.checkGameStatus();
@@ -120,15 +120,13 @@ export class ChessboardService {
     endGame(message: string) {
         this.gameMessageSource.next(message);
         this.gameEndedSource.next();
+        this.playerColor = null;
     }
 
     opponentQuit(opponentStatus: PlayerStatus) {
         if (opponentStatus == PlayerStatus.RESIGNED) this.endGame("Opponent Resigned. You win!");
         else this.endGame("Opponent disconnected. You win by default.");
     }
-
-
-
 }
 
 

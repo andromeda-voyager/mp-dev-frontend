@@ -2,9 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { CHESSBOARD_TESTING } from 'src/app/chess/shared/models/starting-chessboard';
+
 export const environment = {
   production: false,
-  BASE_API_URL: "http://localhost:3000"
+  BASE_API_URL: "http://localhost:3000",
+  STARTING_CHESSBOARD: CHESSBOARD_TESTING
 };
 
 /*

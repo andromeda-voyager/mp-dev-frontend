@@ -45,19 +45,26 @@ export class LobbyComponent implements OnInit {
       for (const game of refrehedLobby) {
         if (!this.lobby.has(game.gameID)) this.lobby.set(game.gameID, game);
       }
-    }, () => {
-      this.showUpdateErrorMessage(9)
+    }, error => {
+      this.handleError(error);
     });
   }
 
-  showUpdateErrorMessage(timeLeft: number) {
-    if (timeLeft > 0) {
-      this.messageInterval = setTimeout(() => {
-        this.message = `Failed to load games from the server. Retrying in ${--timeLeft} second(s).`;
-        this.showUpdateErrorMessage(timeLeft)
-      }, 1000);
-    } else {
-      this.message = "";
+  showRetryMessage(timeLeft: number) {
+    if (this.retryUpdate) {
+      if (timeLeft > 0) {
+        this.messageInterval = setTimeout(() => {
+          this.message = `Failed to connect to the server. Retrying in ${--timeLeft} second(s).`;
+          this.showRetryMessage(timeLeft)
+        }, 1000);
+      } else {
+        this.retryUpdate = false;
+        this.message = "";
+      }
+    }
+    else {
+      this.message = "Failed to connect to the server.";
+      this.subscription.unsubscribe();
     }
   }
 
@@ -81,11 +88,19 @@ export class LobbyComponent implements OnInit {
       this.chessService.startServerUpdateInterval(gameUpdate);
       this.chessService.startOnlineGame(gameUpdate);
     }, error => {
-      if (error.status == 401) {
-        this.isPasswordCorrect = false;
-      } else if(error.status == 404) {
-        this.message = "Failed to join game. Game no longer exists."
-      }
+      this.handleError(error);
     });
+  }
+
+  handleError(error: any) {
+    if (error.status == 401) {
+      this.isPasswordCorrect = false;
+    } else if (error.status == 404) {
+      this.message = "Failed to join game. Game no longer exists."
+    } else if (error.status == 400) {
+      this.message = "The server did not process request. Please try reloading this page."
+    } else {
+      this.showRetryMessage(9);
+    }
   }
 }

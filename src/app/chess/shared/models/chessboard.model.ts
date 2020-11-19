@@ -1,8 +1,10 @@
 import { ChessPiece, PieceType } from './chess-piece.model';
 import { Color } from './color';
 import { ChessMove } from './chess-move.model';
-import { CHESSBOARD } from './starting-chessboard';
 import { EMPTY_SQUARE, BLACK_PAWN, WHITE_PAWN, WHITE_QUEEN, BLACK_QUEEN } from './chess-pieces';
+import { environment } from 'src/environments/environment';
+
+const startingChessboard = environment.STARTING_CHESSBOARD;
 
 export class Chessboard {
 
@@ -28,7 +30,7 @@ export class Chessboard {
             this.moves = chessboard.moves;
         }
         else {
-            this.chessboard = JSON.parse(JSON.stringify(CHESSBOARD));
+            this.chessboard = JSON.parse(JSON.stringify(startingChessboard));
             this.chessboard.forEach((chessPiece, index) => {
                 if(chessPiece.pieceType == PieceType.KING) {
                     if(chessPiece.color == Color.WHITE) this.whiteKingLocation = index;
@@ -226,6 +228,7 @@ export class Chessboard {
     }
 
     incrementSquareHistory(boardLocation: number) {
+        if(!this.chessSquareHistory.has(boardLocation)) this.chessSquareHistory.set(boardLocation, 0);
         this.chessSquareHistory.set(boardLocation, this.chessSquareHistory.get(boardLocation) + 1);
     }
 
@@ -559,7 +562,6 @@ export class Chessboard {
         let king = this.chessboard[from];
         let rook = this.chessboard[to];
 
-
         if (rook.pieceType != PieceType.ROOK || !this.isPathClear(from, to) || king.pieceType != PieceType.KING || this.hasPieceAtMoved(from) || this.hasPieceAtMoved(to) || rook.color != king.color) return false;
 
         let direction = to > from ? 1 : -1; // determine if king is castling to the right or left
@@ -601,7 +603,6 @@ export class Chessboard {
 
 
     isValidPawnDiagonalMove(from: number, to: number): boolean {
-
         if (this.isAttackingEnemy(from, to)) {
             if (this.isOneColumnAway(from, to)) {
                 if (this.isWhitePieceAt(from)) {
@@ -641,7 +642,6 @@ export class Chessboard {
             return (this.isPathClear(from, to) && (this.isBlackPieceAt(from) && rowDifference == -2) ||
                 (this.isWhitePieceAt(from) && rowDifference == 2));
         } else return false;
-
     }
 
     isMoveWithinSameColumn(from: number, to: number): boolean {
@@ -680,7 +680,6 @@ export class Chessboard {
             || (this.isKnightAt(kingLocation + 10) && this.isValidKnightMove(kingLocation + 10, kingLocation))
             || (this.isKnightAt(kingLocation - 6) && this.isValidKnightMove(kingLocation - 6, kingLocation))
             || (this.isKnightAt(kingLocation - 10) && this.isValidKnightMove(kingLocation - 10, kingLocation));
-
     }
 
     isKnightAt(boardLocation: number): boolean {

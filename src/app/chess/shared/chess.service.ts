@@ -18,6 +18,12 @@ const joinChessGamePath = '/join-chess-game';
 
 const UPDATE_INTERVAL = 8000;
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,8 +32,6 @@ export class ChessService {
   private gameID: string;
   private playerID: string;
   private isOnlineGame: boolean;
-  private connected: boolean = false;
-  //private subscriptions: Subscription = new Subscription();
   private updateInterval: any;
 
   constructor(private http: HttpClient, private chessboardService: ChessboardService) {
@@ -37,28 +41,13 @@ export class ChessService {
     this.chessboardService.playerMovedPiece$.subscribe(chessMove => {
       if (this.isOnlineGame) {
         this.postChessMove(chessMove).subscribe(gameUpdate => {
-          this.processGameUpdate(gameUpdate)
+          this.chessboardService.applyOpponentsMove(gameUpdate.chessMove);
         });
       }
       else {
         this.applyComputersMove();
       }
-    });
-  }
-
-  disconnectFromOnlineGame() {
-    if (this.connected) {
-      this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.DISCONNECTED).subscribe();
-      clearInterval(this.updateInterval);
-      this.connected = false;
-    }
-  }
-
-  resign() {
-    if (this.isOnlineGame) { // is null if game against computer
-      this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.RESIGNED).subscribe();
-      this.disconnectFromOnlineGame();
-    }
+    }, error => this.handleError(error));
   }
 
   postPlayerUpdate(gameStatus: GameStatus, playerStatus: PlayerStatus): Observable<GameUpdate> {
@@ -67,12 +56,6 @@ export class ChessService {
       playerID: this.playerID,
       gameStatus: gameStatus,
       playerStatus: playerStatus
-    };
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // 'Authorization': 'my-auth-token'
-      })
     };
     return this.http.post<GameUpdate>(baseUrl + playerStatusPath, gameUpdate, httpOptions);
   }
@@ -85,22 +68,10 @@ export class ChessService {
       playerStatus: PlayerStatus.ACTIVE,
       chessMove: chessMove
     };
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // 'Authorization': 'my-auth-token'
-      })
-    };
     return this.http.post<GameUpdate>(baseUrl + chessMovePath, gameUpdate, httpOptions);
   }
 
   postCreateChessGame(gameSettings: GameSettings) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // 'Authorization': 'my-auth-token'
-      })
-    };
     return this.http.post<GameUpdate>(baseUrl + createGamePath, gameSettings, httpOptions);
   }
 
@@ -111,55 +82,40 @@ export class ChessService {
   }
 
   getLobbyGames() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // 'Authorization': 'my-auth-token'
-      })
-    };
     return this.http.get<GameSettings[]>(baseUrl + lobbyGamesPath, httpOptions);
   }
 
   listGameOnLobby(gameUpdate: GameUpdate) {
     this.startServerUpdateInterval(gameUpdate);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // 'Authorization': 'my-auth-token'
-      })
-    };
     return this.http.post<GameUpdate>(baseUrl + listGamePath, gameUpdate, httpOptions);
-
   }
 
   joinChessGame(gameSettings: GameSettings) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // 'Authorization': 'my-auth-token'
-      })
-    };
     return this.http.post<GameUpdate>(baseUrl + joinChessGamePath, gameSettings, httpOptions);
   }
 
   startServerUpdateInterval(gameUpdate: GameUpdate) {
     this.gameID = gameUpdate.gameID;
     this.playerID = gameUpdate.playerID;
-    this.connected = true;
     this.updateInterval = setInterval(() => {
       this.postPlayerUpdate(GameStatus.ACTIVE, PlayerStatus.ACTIVE).subscribe(gameUpdate => {
         this.checkGameStatus(gameUpdate);
-      });
+      }, error => this.handleError(error));
     }, UPDATE_INTERVAL);
+  }
+
+  handleError(error: any) {
+    clearInterval(this.updateInterval);
+    this.chessboardService.endGame("Failed to connect to server. Game ended.");
   }
 
   startOnlineGame(gameUpdate: GameUpdate) {
     this.isOnlineGame = true;
     this.chessboardService.startGame(gameUpdate.playerColor);
     if (gameUpdate.playerColor == Color.BLACK) {
-      this.postChessMove(null).subscribe(gameUpdate => //chess move will be ignored
-        this.processGameUpdate(gameUpdate)
-      );
+      this.postChessMove(null).subscribe(gameUpdate =>
+        this.chessboardService.applyOpponentsMove(gameUpdate.chessMove)
+      ), error => this.handleError(error);
     }
   }
 
@@ -179,7 +135,7 @@ export class ChessService {
     if (typeof Worker !== 'undefined') {
       const worker = new Worker('./chess.worker', { type: 'module' });
       worker.onmessage = ({ data }) => {
-        this.chessboardService.validateOpponentsMove(data);
+        this.chessboardService.applyOpponentsMove(data);
       };
       worker.postMessage(this.chessboardService.getChessboard());
     } else {
@@ -187,12 +143,15 @@ export class ChessService {
     }
   }
 
-  processGameUpdate(gameUpdate: GameUpdate) {
-    if (gameUpdate.serverMessage) {
-      console.log("Server returned message: " + gameUpdate.serverMessage);
-    }
-    else {
-      this.chessboardService.validateOpponentsMove(gameUpdate.chessMove);
+  disconnectFromOnlineGame() {
+    clearInterval(this.updateInterval);
+  }
+
+  resign() {
+    if (this.isOnlineGame) {
+      this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.RESIGNED).subscribe();
+      this.disconnectFromOnlineGame();
     }
   }
+
 }
