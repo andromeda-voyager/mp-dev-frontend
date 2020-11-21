@@ -30,7 +30,11 @@ export class ChessGameComponent implements OnInit {
     })
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    if (this.isGameActive) {
+      this.chessService.resign();
+    }
+  }
 
   openResignDialog() {
     if (this.isGameActive) {

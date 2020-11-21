@@ -31,7 +31,7 @@ const httpOptions = {
 export class ChessService {
   private gameID: string;
   private playerID: string;
-  private isOnlineGame: boolean;
+  private isConnectedOnline: boolean;
   private updateInterval: any;
 
   constructor(private http: HttpClient, private chessboardService: ChessboardService) {
@@ -39,7 +39,7 @@ export class ChessService {
       this.disconnectFromOnlineGame();
     });
     this.chessboardService.playerMovedPiece$.subscribe(chessMove => {
-      if (this.isOnlineGame) {
+      if (this.isConnectedOnline) {
         this.postChessMove(chessMove).subscribe(gameUpdate => {
           this.chessboardService.applyOpponentsMove(gameUpdate.chessMove);
         });
@@ -95,6 +95,7 @@ export class ChessService {
   }
 
   startServerUpdateInterval(gameUpdate: GameUpdate) {
+    this.isConnectedOnline = true;
     this.gameID = gameUpdate.gameID;
     this.playerID = gameUpdate.playerID;
     this.updateInterval = setInterval(() => {
@@ -110,7 +111,6 @@ export class ChessService {
   }
 
   startOnlineGame(gameUpdate: GameUpdate) {
-    this.isOnlineGame = true;
     this.chessboardService.startGame(gameUpdate.playerColor);
     if (gameUpdate.playerColor == Color.BLACK) {
       this.postChessMove(null).subscribe(gameUpdate =>
@@ -120,7 +120,7 @@ export class ChessService {
   }
 
   startComputerGame(playerColor: Color) {
-    this.isOnlineGame = false;
+    this.isConnectedOnline = false;
     if (playerColor == Color.RANDOM) {
       playerColor = Math.floor(Math.random() * 2) == 0 ? Color.WHITE : Color.BLACK;
     }
@@ -145,10 +145,11 @@ export class ChessService {
 
   disconnectFromOnlineGame() {
     clearInterval(this.updateInterval);
+    this.isConnectedOnline = false;
   }
 
   resign() {
-    if (this.isOnlineGame) {
+    if (this.isConnectedOnline) {
       this.postPlayerUpdate(GameStatus.OVER, PlayerStatus.RESIGNED).subscribe();
       this.disconnectFromOnlineGame();
     }

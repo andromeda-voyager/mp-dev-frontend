@@ -4,7 +4,7 @@ import { ChessMove } from './models/chess-move.model';
 import { Subject } from 'rxjs';
 import { Chessboard } from './models/chessboard.model';
 import { ChessPiece } from './models/chess-piece.model';
-import { GameStatus, PlayerStatus } from './models/game-update.model';
+import { PlayerStatus } from './models/game-update.model';
 
 
 @Injectable({
@@ -30,7 +30,6 @@ export class ChessboardService {
     gameEnded$ = this.gameEndedSource.asObservable();
 
     private playerColor: Color;
-    private opponentColorStr: string;
     chessboard: Chessboard;
 
     constructor() {
@@ -99,7 +98,6 @@ export class ChessboardService {
         this.chessboard = new Chessboard();
         this.playerColor = color;
         this.gameStartedSource.next(color);
-        this.opponentColorStr = color == Color.BLACK ? "White" : "Black";
     }
 
     checkGameStatus() {
@@ -128,5 +126,3 @@ export class ChessboardService {
         else this.endGame("Opponent disconnected. You win by default.");
     }
 }
-
-
