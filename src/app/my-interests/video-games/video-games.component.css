@@ -37,6 +37,7 @@
     padding:.6em;  
     margin-left:2vw;
     margin-right:2vw;
+    margin-top: 2vh;
 }
 
 .detail {
@@ -59,9 +60,6 @@
     margin-bottom: calc(10px + 1vh);
 }
 
-.detail:hover {
-    color:rgb(0, 153, 255);
-}
 
 @media screen and (min-width: 1000px) {
    #video-games {
@@ -101,7 +99,7 @@ h1 {
     margin-bottom: 1vh;
 }
 
-#buttons-container button:hover {
+.flat:hover {
     color:rgb(0, 153, 255);
 }
 
@@ -109,4 +107,9 @@ h1 {
     box-shadow: 0px 3px 3px -3px rgba(0, 0, 0, 0.096), 
     0px 2px 2px 0px rgba(0, 0, 0, 0.096), 
     0px 2px 5px 0px rgba(0, 0, 0, 0.26);
+}
+
+.flat {
+    background-color:   rgba(0, 0, 0, 0.030);
+    color:grey
 }
