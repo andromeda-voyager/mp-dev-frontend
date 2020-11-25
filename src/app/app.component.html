@@ -6,16 +6,17 @@
     <a matRipple routerLink="/recommend-books">Recommed Books</a>
   </div>
   <nav id="top-nav">
-    <a id="resume"  routerLink="/home" routerLinkActive="active-link">Home</a>
+    <a id="resume" routerLink="/home" routerLinkActive="active-link">Home</a>
     <a routerLink="/hobbies-and-interests" routerLinkActive="active-link">Hobbies and Interests</a>
     <a routerLink="/chess" routerLinkActive="active-link">Chess</a>
     <a routerLink="/recommend-books" routerLinkActive="active-link">Recommed Books</a>
     <button class="menu-icon" (click)="toggleSideNavOnClick()">
-      <svg viewBox="0 0 100 80" >
+      <svg viewBox="0 0 100 80">
         <rect width="100" height="14"></rect>
         <rect y="35" width="100" height="14"></rect>
         <rect y="70" width="100" height="14"></rect>
-      </svg></button>
+      </svg>
+    </button>
   </nav>
   <div id="router-wrapper">
     <router-outlet></router-outlet>

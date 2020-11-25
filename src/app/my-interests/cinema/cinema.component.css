@@ -42,12 +42,12 @@ h1 {
 }
 
 .menu-button {
-    background-color:rgb(26, 77, 107);
-    font-size:2vw;
+    background-color:rgba(30, 70, 94, 0.493);
+    font-size: max(2vw,14px);
     height:fit-content;
     color:white;
-    margin: 2vh 3vw 2vh 3vw;
-    padding:.8em;
+    margin: 3vh 3.5vw 3vh 3.5vw;
+    padding: 1em .7em 1em .7em;
 }
 
 .selected-category-button {
@@ -76,7 +76,7 @@ h1 {
     border-radius: 8px;
     text-align: center;
     font-size:1.6vw;
-    font-size: max(1.6vw, 10px);
+    font-size: max(1.6vw, 13px);
     line-height:1;
     height:9em;
     width:7em;
