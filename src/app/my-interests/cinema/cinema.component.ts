@@ -18,21 +18,23 @@ export class CinemaComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
+  
   scroll(el: HTMLElement) {
-    el.scrollIntoView({behavior: 'smooth'});
-}
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   onMovieClick(movie: FilmData, target: HTMLElement) {
     this.selectedMovie = movie;
-    if(this.selectedMovie.name == "Annihilation") this.scroll(target)
+    if (this.selectedMovie.name == "Annihilation") this.scroll(target)
   }
-  viewFilmsOnClick(){
+
+  viewFilmsOnClick() {
     this.selectedCategory = this.movies;
   }
+
   viewDirectorsOnClick() {
-      this.selectedCategory =this.directors;
-      this.selectedMovie = null;
+    this.selectedCategory = this.directors;
+    this.selectedMovie = null;
   }
 }

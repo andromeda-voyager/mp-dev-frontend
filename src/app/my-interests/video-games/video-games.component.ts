@@ -12,10 +12,8 @@ import { animate, stagger, query, style, transition, trigger } from '@angular/an
           style({ opacity: 0 }),
           stagger(500, [animate('.5s', style({ opacity: 1 }))])
         ], { optional: true }
-        )
-      ])
-    ])
-  ]
+        )])
+    ])]
 })
 export class VideoGamesComponent implements OnInit {
 
@@ -37,14 +35,14 @@ export class VideoGamesComponent implements OnInit {
       "Age of Empires II",
       "Zelda (BotW, OoT, LttP)",
     ],
-    [ 
+    [
       "PC",
       "N64",
       "SNES",
       "Xbox 360",
       "GameCube",
       "Nintendo Switch",
-     
+
     ],
     [
       "Real-time Strategy",

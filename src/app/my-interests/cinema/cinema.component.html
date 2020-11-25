@@ -1,12 +1,14 @@
 <div #target id="movies">
     <h1>Cinema</h1>
-    <div id="menu" [ngClass]="{'large-menu': !selectedCategory, 'small-menu': selectedCategory}">
+    <div id="menu">
         <button [ngClass]="{'selected-category-button':selectedCategory==movies}" mat-raised-button color="white"
-            class="menu-button" (click)="viewFilmsOnClick()">My Favorite
-            Films</button>
+            class="menu-button" (click)="viewFilmsOnClick()">
+            My Favorite Films
+        </button>
         <button [ngClass]="{'selected-category-button':selectedCategory==directors}" mat-raised-button color="white"
-            class="menu-button" (click)="viewDirectorsOnClick()">My
-            Favorite Directors</button>
+            class="menu-button" (click)="viewDirectorsOnClick()">
+            My Favorite Directors
+        </button>
     </div>
     <div *ngIf="selectedCategory">
         <div id="movie-details-container">
@@ -20,10 +22,8 @@
                 <div class="movie" [ngClass]="{'selected-movie':selectedMovie==item}"
                     (click)="onMovieClick(item, target)">
                     <span class="movie-title">{{item.name}} </span>
-
                     <span class="movie-detail">{{item.secondaryInfo}}</span>
                     <a class="movie-detail" [href]="item.imdbLink">View on IMDB</a>
-
                 </div>
             </ng-container>
         </div>
