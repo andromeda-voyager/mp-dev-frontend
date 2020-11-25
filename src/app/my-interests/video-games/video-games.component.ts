@@ -10,7 +10,7 @@ import { animate, stagger, query, style, transition, trigger } from '@angular/an
       transition('* => *', [
         query(':enter', [
           style({ opacity: 0 }),
-          stagger(500, [animate('0.5s', style({ opacity: 1 }))])
+          stagger(500, [animate('.2s', style({ opacity: 1 }))])
         ], { optional: true }
         )
       ])

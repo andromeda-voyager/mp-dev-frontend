@@ -103,6 +103,10 @@ h1 {
     color:rgb(0, 153, 255);
 }
 
+.raised:hover{
+    cursor: default;
+}
+
 .raised {
     box-shadow: 0px 3px 3px -3px rgba(0, 0, 0, 0.096), 
     0px 2px 2px 0px rgba(0, 0, 0, 0.096), 
