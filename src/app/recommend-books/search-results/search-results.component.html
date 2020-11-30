@@ -3,7 +3,6 @@
         <div *ngFor="let book of books" class="book" [ngClass]="{'selected': book.Recommended}"
             (click)="onSelect(book)">
             <div class="recommended-tag"> Book Recommended</div>
-            <!-- <a routerLink="/detail/{{book.Title}}"> -->
             <img src={{book.imageURL}} width="50" height="50">
             <div class="book-info-container">
                 <span class="title">{{book.title}}</span>

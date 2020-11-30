@@ -1,4 +1,5 @@
 <div id="component">
+
     <mat-card *ngIf="!isNameSubmitted">
         <mat-form-field appearance="fill">
             <mat-label>Your Name</mat-label>
@@ -7,11 +8,10 @@
         <button mat-raised-button color="accent" id="submit-name-button" (click)="submitName()">Submit</button>
     </mat-card>
 
-
-
     <div *ngIf="isNameSubmitted" id="apps-container">
         <app-book-search id="search"></app-book-search>
-
         <app-recommended class="app" id="recommended" [recommender]="recommender"></app-recommended>
         <app-search-results></app-search-results>
     </div>
+    
+</div>

@@ -90,6 +90,11 @@ button:hover {
   background-color: rgb(36, 62, 82);
 }
 
+.blue-button:hover {
+  transform: none;
+  cursor: default;
+}
+
 .white-button{
   background-color: white;
 }
