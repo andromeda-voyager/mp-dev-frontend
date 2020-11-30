@@ -8,7 +8,7 @@
         <img *ngIf="i === currentCarouselItem" [src]="carouselItem" class="carousel-item" />
     </ng-container>
 
-    <div *ngIf="buttonsOn" id="buttons-container">
+    <div *ngIf="buttonsOn" id="image-buttons-container">
         <ng-container *ngFor="let carouselItem of carouselItems; let i = index">
             <button [ngClass]="(currentCarouselItem==i)?'blue-button':'white-button'" class="image-select-button"
                 (click)="changeImage(i)"></button>
