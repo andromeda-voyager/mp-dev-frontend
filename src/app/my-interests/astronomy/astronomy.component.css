@@ -14,7 +14,7 @@
 
 #pictures-container {
   display:flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   flex-wrap: wrap;
   justify-content: center;
   background-color: white;
@@ -42,10 +42,9 @@
 #title {
   z-index: 80;
   position: absolute;
-  font-size: max(2.5vw, 35px);
-  font-family: Roboto, Arial, sans-serif;
-  top:2.2vh;
-  right:1.5%;
+  font-size: max(2.5vw, 30px);
+  top:2vh;
+  right:calc(.5vw + 5px);
   text-align: right;
   color:white;
 }
@@ -60,6 +59,9 @@
 }
 
 @media screen and (min-width: 800px) {
+  #pictures-container {
+    flex-direction: row;
+  }
   #four-square-container {
     width: 35%;
     padding-right:0px;

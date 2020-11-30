@@ -9,11 +9,9 @@
 }
 
 h1 {
-    font-size:2.5vw;
-    font-size: max(2.5vw, 35px);
-    font-family: Roboto, Arial, sans-serif;
+    font-size: max(2.5vw, 30px);
     text-align: center;
-    margin-top:2.2vh;
+    margin-top:2vh;
 }
 
 #selected-movie {
@@ -43,7 +41,7 @@ h1 {
 
 .menu-button {
     background-color:rgba(30, 70, 94, 0.493);
-    font-size: max(2vw,14px);
+    font-size: max(1.8vw,13px);
     height:fit-content;
     color:white;
     margin: 3vh 3.5vw 3vh 3.5vw;
@@ -71,7 +69,7 @@ h1 {
     margin: .5em 1em .5em 1em;
     border-radius: 8px;
     text-align: center;
-    font-size: max(1.6vw, 13px);
+    font-size: max(1.5vw, 12px);
     line-height:1;
     height:9em;
     width:7em;
