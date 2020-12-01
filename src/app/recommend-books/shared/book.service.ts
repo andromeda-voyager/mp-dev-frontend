@@ -3,7 +3,7 @@ import { Book, BookRecommendation } from './book';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { Subject }    from 'rxjs';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const baseUrl = environment.BASE_API_URL;
@@ -17,37 +17,30 @@ export class BookService {
 
 
   private bookRecommendedSource = new Subject<Book>();
-  private bookUnrecommendedSource = new Subject<Book>();
   private searchQuerySource = new Subject<string>();
-  recommender:string;
+  recommender: string;
   bookRecommended$ = this.bookRecommendedSource.asObservable();
-  bookUnrecommended$ = this.bookUnrecommendedSource.asObservable();
   searchQuery$ = this.searchQuerySource.asObservable();
+
+  constructor(private http: HttpClient) { }
 
   recommendBook(book: Book) {
     this.bookRecommendedSource.next(book);
-    this.postRecommendedBook({book: book, recommendedBy: this.recommender}).subscribe();
+    this.postRecommendedBook({ book: book, recommendedBy: this.recommender }).subscribe();
   }
 
-  setRecommender(recommender: string){
+  setRecommender(recommender: string) {
     this.recommender = recommender;
   }
-  unrecommendBook(book: Book) {
-    this.bookUnrecommendedSource.next(book);
-  }
-  
+
   newBookSearch(query: string) {
     this.searchQuerySource.next(query);
   }
-
-  //private scienceFictionURL  = 'http://localhost:3000/science-fiction';
-
 
   postRecommendedBook(bookRecommendation: BookRecommendation): Observable<BookRecommendation> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // 'Authorization': 'my-auth-token'
       })
     };
     return this.http.post<BookRecommendation>(baseUrl + recommendPath, bookRecommendation, httpOptions)
@@ -63,10 +56,6 @@ export class BookService {
         catchError(this.handleError<Book[]>('searchBooks', []))
       );
   }
-
-  constructor(
-    private http: HttpClient){ }
-
 
   /**
 * Handle Http operation that failed.
@@ -87,16 +76,5 @@ export class BookService {
       return of(result as T);
     };
   }
-
-
-  // ------------------------currently unused --------------------------
-  // getScienceFictionBooks(): Observable<Book[]> {
-  //   return this.http.get<Book[]>(this.scienceFictionURL)
-  //     .pipe(
-  //       tap(_ => console.log('fetched books')),
-  //       catchError(this.handleError<Book[]>('getBooks', []))
-  //     );
-  // }
-  //--------------------------------------------------------------------
 }
 

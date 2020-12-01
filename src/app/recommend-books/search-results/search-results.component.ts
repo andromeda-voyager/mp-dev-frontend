@@ -15,28 +15,22 @@ export class SearchResultsComponent implements OnInit {
         this.bookService.searchBooks(searchQuery).subscribe(books => this.books = books);
 
       });
-
-    bookService.bookUnrecommended$.subscribe(
-      book => {
-        this.removeRecommendedTag(book);
-        // this.history.push(`${astronaut} confirmed the mission`);
-      });
   }
 
   ngOnInit(): void {
   }
 
-  unrecommendBook(book: Book) {
-    book.Recommended = false;
-    this.bookService.unrecommendBook(book);
-  }
+  // unrecommendBook(book: Book) {
+  //   book.Recommended = false;
+  //   this.bookService.unrecommendBook(book);
+  // }
 
-  removeRecommendedTag(book: Book) {
-    const index = this.books.indexOf(book, 0);
-    if (index > -1) {
-      this.books[index].Recommended = false;
-    }
-  }
+  // removeRecommendedTag(book: Book) {
+  //   const index = this.books.indexOf(book, 0);
+  //   if (index > -1) {
+  //     this.books[index].Recommended = false;
+  //   }
+  // }
 
   recommendBook(book: Book) {
     book.Recommended = true;
@@ -44,8 +38,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onSelect(book: Book): void {
-    if (book.Recommended) {
-      this.unrecommendBook(book);
-    } else this.recommendBook(book);
+    if (!book.Recommended) {
+      this.recommendBook(book);
+    }
   }
 }

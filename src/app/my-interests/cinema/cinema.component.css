@@ -40,13 +40,12 @@ h1 {
 }
 
 .menu-button {
-    background-color:rgba(30, 70, 94, 0.493);
-    font-size: max(1.8vw,13px);
+    background-color:rgba(30, 70, 94, 0.5);
+    font-size: max(1.7vw,13px);
     height:fit-content;
     color:white;
     margin: 3vh 3.5vw 3vh 3.5vw;
     padding: 1em .7em 1em .7em;
-    opacity: .5;
 }
 
 .selected-category-button {
@@ -78,7 +77,6 @@ h1 {
     align-items: center;
     justify-content: center;
     background-color: rgb(255, 44, 44);
-    /* position: relative; */
 }
 
 .movie:hover{

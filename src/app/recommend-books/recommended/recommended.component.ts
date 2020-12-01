@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Book } from 'src/app/recommend-books/shared/book';
 import { BookService } from 'src/app/recommend-books/shared/book.service';
 
@@ -9,14 +9,14 @@ import { BookService } from 'src/app/recommend-books/shared/book.service';
 })
 export class RecommendedComponent implements OnInit {
   @Input() book: Book;
-  @Input() recommender:string;
+  @Input() recommender: string;
   recommendedBooks: Book[];
   recommendationsSubmitted: boolean = false;
 
   constructor(private bookService: BookService) {
     this.recommendedBooks = new Array();
     this.recommendationsSubmitted = true;
-    bookService.bookRecommended$.subscribe(
+    this.bookService.bookRecommended$.subscribe(
       book => {
         this.recommendedBooks.push(book);
       });
@@ -30,5 +30,4 @@ export class RecommendedComponent implements OnInit {
   //     this.recommendedBooks.splice(index, 1);
   //   }
   // }
-
 }

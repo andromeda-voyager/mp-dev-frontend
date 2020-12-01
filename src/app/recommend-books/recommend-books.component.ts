@@ -12,12 +12,9 @@ export class RecommendBooksComponent implements OnInit {
   @Input() recommender: string;
   isNameSubmitted: boolean = false;
 
-  constructor(private bookService: BookService) {
-   }
+  constructor(private bookService: BookService) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
   submitName(): void {
     this.isNameSubmitted = true;
