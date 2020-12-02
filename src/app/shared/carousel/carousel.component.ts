@@ -9,11 +9,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CarouselComponent implements OnInit {
   @Input() carouselItems: string[];
   currentCarouselItem = 0;
+  nextCarouselItem = 1;
   interval: any;
   @Input() arrowsOn: boolean = false;
   @Input() buttonsOn: boolean = false;
   @Input() slideShowSpeed:number = 7000;
+  
   constructor() { }
+
+  ngOnInit() {
+    this.setCarouselInterval();
+  }
 
   setCarouselInterval() {
     this.interval = setInterval(() => {
@@ -22,8 +28,14 @@ export class CarouselComponent implements OnInit {
   }
 
   moveCarousel() {
+    this.currentCarouselItem = this.nextCarouselItem;
+    const next = this.nextCarouselItem + 1;
+    this.nextCarouselItem = next === this.carouselItems.length ? 0 : next;
+  }
+
+  getNextCarouselItem() {
     const next = this.currentCarouselItem + 1;
-    this.currentCarouselItem = next === this.carouselItems.length ? 0 : next;
+    return next === this.carouselItems.length ? 0 : next;
   }
 
   resetCarouselTimer() {
@@ -44,18 +56,6 @@ export class CarouselComponent implements OnInit {
   onNextClick() {
     this.resetCarouselTimer();
     this.moveCarousel(); 
-  }
-
-  ngOnInit() {
-    this.preloadImages();
-    this.setCarouselInterval();
-  }
-
-  preloadImages() {
-    for (let caourselItem of this.carouselItems) {
-      var img = new Image();
-      img.src = caourselItem;     
-    }
   }
 
   changeImage(imageIndex: number) {
