@@ -16,7 +16,7 @@ export class AstronomyComponent implements OnInit {
     "assets/images/astronomy/europa.jpg",
     "assets/images/astronomy/jupiter.jpg",
     "assets/images/astronomy/marsrover.jpg",
-    "assets/images/astronomy/saturn.jpg"
+    "assets/images/astronomy/saturn.jpg",
+    "assets/images/astronomy/nebula.jpg"
   ];
-
 }
