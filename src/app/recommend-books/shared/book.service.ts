@@ -7,14 +7,14 @@ import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const baseUrl = environment.BASE_API_URL;
-const bookSearchPath = '/book-search?'
-const recommendPath = '/recommend-book'
+const bookSearchPath = '/books/search?';
+const recommendPath = '/books/recommend';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BookService {
 
+export class BookService {
 
   private bookRecommendedSource = new Subject<Book>();
   private searchQuerySource = new Subject<string>();

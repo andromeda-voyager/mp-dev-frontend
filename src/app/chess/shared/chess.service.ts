@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ChessMove } from './models/chess-move.model';
-import { GameStatus, GameUpdate, PlayerStatus, ServerMessage } from './models/game-update.model';
-import { Observable, of, Subject, Subscription } from 'rxjs';
+import { GameStatus, GameUpdate, PlayerStatus } from './models/game-update.model';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GameSettings } from './models/game-settings.model';
 import { Color } from './models/color';
@@ -9,12 +9,12 @@ import { ChessboardService } from './chessboard.service';
 import { environment } from 'src/environments/environment';
 
 const baseUrl = environment.BASE_API_URL;
-const chessMovePath = '/chess-move';
-const playerStatusPath = '/update-player-status';
-const createGamePath = '/create-chess-game';
-const listGamePath = '/list-chess-game';
-const lobbyGamesPath = '/get-lobby-games';
-const joinChessGamePath = '/join-chess-game';
+const chessMovePath = '/chess/move';
+const playerStatusPath = '/chess/player-status';
+const createGamePath = '/chess/game';
+const listGamePath = '/chess/list-game';
+const lobbyGamesPath = '/chess/lobby-games';
+const joinChessGamePath = '/chess/join-game';
 
 const UPDATE_INTERVAL = 8000;
 

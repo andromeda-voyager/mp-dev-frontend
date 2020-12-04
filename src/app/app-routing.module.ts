@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MyInterestsComponent } from './my-interests/my-interests.component';
+import { MyInterestsComponent } from './interests/interests.component';
 import { HomeComponent } from './home/home.component';
 import { RecommendBooksComponent } from './recommend-books/recommend-books.component';
 

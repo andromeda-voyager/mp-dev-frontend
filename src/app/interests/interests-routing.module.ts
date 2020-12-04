@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MyInterestsComponent } from './my-interests.component';
+import { MyInterestsComponent } from './interests.component';
 
 
 const interestsoutes: Routes = [

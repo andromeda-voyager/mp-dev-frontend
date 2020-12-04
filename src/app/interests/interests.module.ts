@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyInterestsRoutingModule } from './my-interests-routing.module';
-import { MyInterestsComponent } from './my-interests.component';
+import { MyInterestsRoutingModule } from './interests-routing.module';
+import { MyInterestsComponent } from './interests.component';
 import { CarouselComponent } from 'src/app/shared/carousel/carousel.component';
 import { CinemaComponent } from './cinema/cinema.component';
 import { VideoGamesComponent } from './video-games/video-games.component';
