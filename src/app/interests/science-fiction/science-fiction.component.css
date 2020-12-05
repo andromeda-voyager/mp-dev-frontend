@@ -7,7 +7,7 @@
 }
 
 #books-container {
-    margin-top:5vh;
+    margin-top:calc(10px + 2vh);
     margin-bottom:5vh;
     display: flex;
     flex-direction: row;
@@ -24,7 +24,7 @@
     height: auto;
     width: 10vw;
     min-width: 125px;
-    margin: 1vw 2vw 1vw 2vw;
+    margin: 3vh 2vw 3vh 2vw;
     position:relative;
 }
 

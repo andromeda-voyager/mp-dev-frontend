@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChessService } from './shared/chess.service';
 import { ChessboardService } from './shared/chessboard.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-chess',
@@ -15,11 +16,12 @@ export class ChessComponent implements OnInit {
     { path: 'join-game', label: 'Join Game' },
   ];
 
-  constructor(private chessService: ChessService, private chessboardService: ChessboardService) { }
+  constructor(private location: Location, private chessService: ChessService, private chessboardService: ChessboardService) { }
 
   ngOnInit(): void {
     this.chessboardService.gameStarted$.subscribe(() => {
       this.showChessboard = true;
+      this.location.replaceState("/chess/game");
     });
   }
 
@@ -33,5 +35,7 @@ export class ChessComponent implements OnInit {
 
   onLeaveChessboard() {
     this.showChessboard = false;
+    this.location.replaceState("/chess/create-game");
+
   }
 }

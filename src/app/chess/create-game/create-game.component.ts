@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChessService } from '../shared/chess.service';
 import { GameSettings } from '../shared/models/game-settings.model';
 import { Color } from '../shared/models/color';
-import { Router } from '@angular/router';
 import { GameUpdate } from '../shared/models/game-update.model';
 
 @Component({
@@ -23,7 +22,7 @@ export class CreateGameComponent implements OnInit {
   waitingForOpponent = false;
   message: string;
 
-  constructor(private chessService: ChessService, private router: Router) { }
+  constructor(private chessService: ChessService) { }
 
   ngOnInit(): void { }
 
