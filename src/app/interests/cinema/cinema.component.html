@@ -3,11 +3,11 @@
     <div id="menu">
         <button [ngClass]="{'selected-category-button':selectedCategory==movies}" mat-raised-button color="white"
             class="menu-button" (click)="viewFilmsOnClick()">
-            My Favorite Films
+            Favorite Films
         </button>
         <button [ngClass]="{'selected-category-button':selectedCategory==directors}" mat-raised-button color="white"
             class="menu-button" (click)="viewDirectorsOnClick()">
-            My Favorite Directors
+            Favorite Directors
         </button>
     </div>
     <div *ngIf="selectedCategory">

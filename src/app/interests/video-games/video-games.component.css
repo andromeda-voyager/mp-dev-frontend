@@ -1,8 +1,22 @@
-#video-games {
+#component {
     background-color: rgb(255, 255, 255);
     display:flex;
     flex-wrap: wrap;
     width:100%;
+    height: fit-content;
+}
+
+#left-container {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+} 
+
+h1 {
+    font-size: max(2.5vw, 30px);
+    margin-top:2.5vh;
+    margin-left: calc(.5vw + 10px);
+    color:  rgb(21, 27, 32);
 }
 
 #favorites-container {
@@ -14,13 +28,6 @@
     align-items: center;
 }
 
-#content-container {
-    width:100%;
-    height:auto;
-    display: flex;
-    flex-direction: column;
-} 
-
 #carousel-wrapper {
     box-sizing: border-box;
     padding:.5vh;
@@ -31,7 +38,7 @@
     width: 100%;
 }
 
-#buttons-container button {
+button {
     font-size:1.5vw;
     font-size: max(1.5vw, 1.2em);
     padding:.6em;  
@@ -41,31 +48,25 @@
 }
 
 .detail {
-    font-size:.5vw;
-    font-size: max(1vw, 1.1em);
     text-align: center; 
     white-space: nowrap;
 }
 
 #details-container {
-    margin-top:15px;
+    margin-top:3vh;
     align-items: center;
     justify-items: center;
     display:grid;
     grid-template-columns: auto auto;
+    font-size: max(1.2vw, 17px);
     row-gap: 2em;
-    column-gap: 5vw; 
-    font-size: 1vw;
-    font-size: max(1.2vw, 1em);
+    column-gap: 3em; 
     margin-bottom: calc(10px + 1vh);
+    padding-bottom:2.5vh;
 }
 
-
 @media screen and (min-width: 1000px) {
-   #video-games {
-       height:33.75vw;
-   }
-    #content-container{
+    #left-container{
        width: 40%;
        box-sizing: border-box;
     }
@@ -73,19 +74,12 @@
         width:60%;
         height:auto;
     }
-    #buttons-container button {
+    button {
         font-size: max(1.5vw, .8em);
     }
     #details-container {
         margin-bottom: 0px;
     }
-}
-   
-h1 {
-    font-size: max(2.5vw, 30px);
-    margin-top:2vh;
-    margin-left: calc(.5vw + 5px);
-    color:  rgb(21, 27, 32);
 }
 
 #buttons-container {
