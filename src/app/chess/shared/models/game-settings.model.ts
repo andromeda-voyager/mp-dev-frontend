@@ -1,7 +1,6 @@
 import { Color } from './color';
 
 export interface GameSettings {
-
     description: string;
     gameID?: string;
     password: string;
