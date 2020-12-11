@@ -1,4 +1,3 @@
-import { Book, BookRecommendation } from 'src/app/recommend-books/shared/book';
 import { BookService } from 'src/app/recommend-books/shared/book.service';
 import { Component, OnInit, Input } from '@angular/core';
 
