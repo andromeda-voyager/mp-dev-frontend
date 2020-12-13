@@ -1,4 +1,4 @@
-NodeJS application that handles backend operations for website.
+# Website Backend
 
 # Install dependencies
 `npm install`
