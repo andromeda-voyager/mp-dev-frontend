@@ -3,7 +3,7 @@ const crypto = require("crypto"),
 
 
 function isAuthorized(signature, message) {
-    var publicKey = fs.readFileSync("../keys/serverKey.pub", "utf8");
+    var publicKey = fs.readFileSync("../keys/uploadKey.pub", "utf8");
     const verifier = crypto.createVerify("RSA-SHA256")
     verifier.update(message);
     const signatureBuf = Buffer.from(signature, 'base64');
