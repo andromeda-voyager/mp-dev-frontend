@@ -1,9 +1,10 @@
 const crypto = require("crypto"),
-    fs = require('fs');
-
-
+    fs = require('fs'),
+    path = require('path'),
+    keyLocation = path.join(__dirname,"../../keys/uploadKey.pub");
+    
 function isAuthorized(signature, message) {
-    var publicKey = fs.readFileSync("../keys/uploadKey.pub", "utf8");
+    var publicKey = fs.readFileSync(keyLocation, "utf8");
     const verifier = crypto.createVerify("RSA-SHA256")
     verifier.update(message);
     const signatureBuf = Buffer.from(signature, 'base64');
