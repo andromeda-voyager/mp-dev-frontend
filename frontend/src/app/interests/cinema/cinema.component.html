@@ -1,5 +1,6 @@
 <div #target id="movies">
     <h1>Cinema</h1>
+
     <div id="menu">
         <button [ngClass]="{'selected-category-button':selectedCategory==movies}" mat-raised-button color="white"
             class="menu-button" (click)="viewFilmsOnClick()">
@@ -10,6 +11,7 @@
             Favorite Directors
         </button>
     </div>
+
     <div *ngIf="selectedCategory">
         <div id="movie-details-container">
             <div *ngIf="selectedMovie" id="selected-movie">
@@ -17,6 +19,7 @@
                     src="https://www.youtube.com/embed/89OP78l9oF0" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
+
         <div class="movies-container">
             <ng-container *ngFor="let item of selectedCategory">
                 <div class="movie" [ngClass]="{'selected-movie':selectedMovie==item}"
@@ -27,5 +30,6 @@
                 </div>
             </ng-container>
         </div>
+        
     </div>
 </div>

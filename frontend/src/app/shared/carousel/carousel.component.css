@@ -92,14 +92,14 @@
   background-color: rgb(47, 93, 128);
 }
 
-.blue-button:hover {
+.paused:hover {
   cursor: default;
-}
-
-.white-button{
-  background-color: white;
 }
 
 .white-button:hover {
   transform: scale(1.2);
+}
+
+.red-button {
+  background-color: rgb(255, 44, 44);
 }

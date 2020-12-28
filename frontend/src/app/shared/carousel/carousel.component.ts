@@ -13,11 +13,22 @@ export class CarouselComponent implements OnInit {
   interval: any;
   @Input() arrowsOn: boolean = false;
   @Input() buttonsOn: boolean = false;
-  @Input() slideShowSpeed:number = 7000;
-  
+  @Input() slideShowSpeed: number = 7000;
+  isPaused = false;
+
   constructor() { }
 
   ngOnInit() {
+    this.setCarouselInterval();
+  }
+
+  pause() {
+    this.isPaused = true;
+    clearInterval(this.interval);
+  }
+
+  unpause() {
+    this.isPaused = false;
     this.setCarouselInterval();
   }
 
@@ -55,12 +66,19 @@ export class CarouselComponent implements OnInit {
 
   onNextClick() {
     this.resetCarouselTimer();
-    this.moveCarousel(); 
+    this.moveCarousel();
   }
 
   changeImage(imageIndex: number) {
-    this.resetCarouselTimer();
-    this.currentCarouselItem = imageIndex;
+    if (imageIndex == this.currentCarouselItem) {
+      if (this.isPaused) this.unpause();
+      else this.pause();
+    }
+    else {
+      this.isPaused = false;
+      this.resetCarouselTimer();
+      this.currentCarouselItem = imageIndex;
+    }
   }
 
 }

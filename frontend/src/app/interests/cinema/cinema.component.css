@@ -40,7 +40,7 @@ h1 {
 }
 
 .menu-button {
-    background-color:rgba(30, 70, 94, 0.5);
+    background-color:rgba(22, 59, 82, 0.5);
     font-size: max(1.7vw,13px);
     height:fit-content;
     color:white;
@@ -50,7 +50,6 @@ h1 {
 
 .selected-category-button {
     transform: scale(1.2);
-    opacity: 1;
     cursor: default;
 }
 
