@@ -6,10 +6,10 @@ const express = require('express'),
 server.use(cors());
 server.use(express.json());
 server.use(express.static('./public'));
-server.use('/api/chess', require('./src/chess/routes'));
-server.use('/api/books', require('./src/books/routes'));
-server.use('/api/cloud', require('./src/cloud/routes'));
-server.use('/api/sms', require('./src/sms/routes'));
+server.use('/chess', require('./src/chess/routes'));
+server.use('/books', require('./src/books/routes'));
+server.use('/cloud', require('./src/cloud/routes'));
+server.use('/sms', require('./src/sms/routes'));
 
 //Express error handling middleware
 server.use((request, response) => {
