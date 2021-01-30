@@ -28,14 +28,10 @@ h1 {
     align-items: center;
 }
 
-#carousel-wrapper {
+app-carousel {
     box-sizing: border-box;
     padding:.5vh;
     height: 56.25vw;
-}
-
-#carousel {
-    width: 100%;
 }
 
 button {
@@ -70,7 +66,7 @@ button {
        width: 40%;
        box-sizing: border-box;
     }
-    #carousel-wrapper {
+    app-carousel {
         width:60%;
         height:auto;
     }
