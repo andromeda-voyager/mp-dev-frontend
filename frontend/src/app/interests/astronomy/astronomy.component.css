@@ -49,7 +49,7 @@ h1 {
   color:white;
 }
 
-#carousel {
+app-carousel {
   height:50vw;
   width:100%;
   box-sizing: border-box;
@@ -66,7 +66,7 @@ h1 {
     width: 35%;
     padding-right:0px;
   }
-  #carousel {
+  app-carousel {
     height:auto;
     width:65%;
   }
