@@ -8,10 +8,30 @@
         <button mat-raised-button color="accent" id="submit-name-button" (click)="submitName()">Submit</button>
     </mat-card>
 
-    <div *ngIf="isNameSubmitted" id="apps-container">
-        <app-book-search id="search"></app-book-search>
-        <app-recommended class="app" id="recommended" [recommender]="recommender"></app-recommended>
-        <app-search-results></app-search-results>
+    <div *ngIf="isNameSubmitted" id="recommend-container">
+
+        <div id="search-container">
+            <input [(ngModel)]="title" placeholder="Title" />
+            <input [(ngModel)]="author" placeholder="Author" />
+            <button mat-raised-button color="accent" id="search-button" (click)="submitSearchQuery()">
+                Search
+            </button>
+        </div>
+
+        <div id="recommended-container">
+            <h4>Your Recommendations</h4>
+            <div *ngIf="recommendedBooks.length == 0">Use the search box to find books. Select a book from the results
+                to
+                add them to this list.
+            </div>
+            <ng-container *ngFor="let book of recommendedBooks">
+                <div class="recommended-book">
+                    {{book.title}}
+                </div>
+            </ng-container>
+        </div>
+
+        <app-search-results [books]="books" [recommender]="recommender"></app-search-results>
     </div>
-    
+
 </div>

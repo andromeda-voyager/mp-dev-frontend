@@ -6,9 +6,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-const baseUrl = environment.BASE_API_URL;
-const bookSearchPath = '/books/search?';
-const recommendPath = '/books/recommend';
+const getBooksURL= environment.BASE_API_URL + '/books/search?';
+const postRecommendationURL = environment.BASE_API_URL + '/books/recommend';
 
 @Injectable({
   providedIn: 'root'
@@ -17,40 +16,28 @@ const recommendPath = '/books/recommend';
 export class BookService {
 
   private bookRecommendedSource = new Subject<Book>();
-  private searchQuerySource = new Subject<string>();
   recommender: string;
   bookRecommended$ = this.bookRecommendedSource.asObservable();
-  searchQuery$ = this.searchQuerySource.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  recommendBook(book: Book) {
-    this.bookRecommendedSource.next(book);
-    this.postRecommendedBook({ book: book, recommendedBy: this.recommender }).subscribe();
-  }
 
-  setRecommender(recommender: string) {
-    this.recommender = recommender;
-  }
+  recommendedBook(bookRecommendation: BookRecommendation): Observable<BookRecommendation> {
+    this.bookRecommendedSource.next(bookRecommendation.book);
 
-  newBookSearch(query: string) {
-    this.searchQuerySource.next(query);
-  }
-
-  postRecommendedBook(bookRecommendation: BookRecommendation): Observable<BookRecommendation> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post<BookRecommendation>(baseUrl + recommendPath, bookRecommendation, httpOptions)
+    return this.http.post<BookRecommendation>(postRecommendationURL, bookRecommendation, httpOptions)
       .pipe(
         catchError(this.handleError('submit recommendations', bookRecommendation))
       );
   }
 
   searchBooks(searchQuery: string): Observable<Book[]> {
-    return this.http.get<Book[]>(baseUrl + bookSearchPath + searchQuery)
+    return this.http.get<Book[]>(getBooksURL + searchQuery)
       .pipe(
         tap(_ => console.log('search sent to the server')),
         catchError(this.handleError<Book[]>('searchBooks', []))

@@ -17,21 +17,62 @@ mat-card{
   align-items:center;
 }
 
-#apps-container {
+#recommend-container {
   width:100%;  
 }
 
-.app {   
-  min-width: 320px;
-}
-
-#recommended {
-  width:30%;
+#recommended-container {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
   align-self: flex-start;
+  min-height: 70px;
+  text-align: center;
+  background-color: white;
+  margin-bottom: 2.5vh;
+  box-shadow:
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 5.3px 5.9px rgba(0, 0, 0, 0.072),
+  0 8.8px 8.4px rgba(0, 0, 0, 0.086),
+  0 5px 5px rgba(0, 0, 0, 0.12);
 }
 
-#search{
+.recommended-book {
+  display: inline-block;
+  font-size: 1.1em;
+  white-space: nowrap;
+  margin: 5px 10px 5px 10px;
+  color:black;  
+}
+
+#search-container {
+  box-sizing: border-box;
+  background-color: rgb(27, 91, 128);
   width:100%;
+  height:125px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+}
+
+#search-container input {
+  max-width: 30%;
+  margin-right: 8px;
+  min-width: 100px;
+  height:35px; 
+}
+  
+#search-button {
+  max-width: 30%;
+  height:40px;
+  min-width: 200px; 
+  background-color: rgb(112, 112, 112);
+}
+
+#search-button:hover {
+  opacity: .85;
 }
 
 #submit-name-button {

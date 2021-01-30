@@ -1,5 +1,6 @@
 import { BookService } from 'src/app/recommend-books/shared/book.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { Book } from './shared/book';
 
 @Component({
   selector: 'app-recommend-books',
@@ -8,16 +9,36 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RecommendBooksComponent implements OnInit {
 
-  @Input() recommender: string;
   isNameSubmitted: boolean = false;
 
-  constructor(private bookService: BookService) { }
+  books: Book[] = [];
+  @Input() recommender: string;
+  @Input() title: string;
+  @Input() author: string;
+  recommendedBooks: Book[] = []
+
+  constructor(private bookService: BookService) {
+    this.bookService.bookRecommended$.subscribe(
+      book => {
+        this.recommendedBooks.push(book);
+      });
+  }
 
   ngOnInit() { }
 
+  
   submitName(): void {
     this.isNameSubmitted = true;
-    this.bookService.setRecommender(this.recommender);
   }
   
+  submitSearchQuery(): void {
+    let query = "";
+    if (this.title) query = "title=" + this.title;
+    if (this.author) {
+      if (this.title) query += "&";
+      query += "author=" + this.author;
+    }
+    this.bookService.searchBooks(query).subscribe(books => this.books = books);
+  }
+
 }

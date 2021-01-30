@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BookService } from 'src/app/recommend-books/shared/book.service';
 import { Book } from 'src/app/recommend-books/shared/book';
 
@@ -7,34 +7,18 @@ import { Book } from 'src/app/recommend-books/shared/book';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
+
 export class SearchResultsComponent implements OnInit {
-  books: Book[];
-  constructor(private bookService: BookService) {
-    bookService.searchQuery$.subscribe(
-      searchQuery => {
-        this.bookService.searchBooks(searchQuery).subscribe(books => this.books = books);
+  @Input() books: Book[] = [];
+  @Input() recommender: string;
 
-      });
-  }
+  constructor(private bookService: BookService) { }
 
-  ngOnInit(): void {
-  }
-
-  // unrecommendBook(book: Book) {
-  //   book.Recommended = false;
-  //   this.bookService.unrecommendBook(book);
-  // }
-
-  // removeRecommendedTag(book: Book) {
-  //   const index = this.books.indexOf(book, 0);
-  //   if (index > -1) {
-  //     this.books[index].Recommended = false;
-  //   }
-  // }
+  ngOnInit(): void { }
 
   recommendBook(book: Book) {
     book.Recommended = true;
-    this.bookService.recommendBook(book);
+    this.bookService.recommendedBook({ book: book, recommendedBy: this.recommender }).subscribe();
   }
 
   onSelect(book: Book): void {
