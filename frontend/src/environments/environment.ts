@@ -6,7 +6,7 @@ import { CHESSBOARD_TESTING } from 'src/app/chess/shared/models/starting-chessbo
 
 export const environment = {
   production: false,
-  BASE_API_URL: "http://localhost:3000/api",
+  BASE_API_URL: "http://localhost:3000",
   STARTING_CHESSBOARD: CHESSBOARD_TESTING
 };
 

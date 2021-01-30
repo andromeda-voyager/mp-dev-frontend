@@ -13,7 +13,7 @@ router.post('/recommend', async (request, response) => {
     }
 });
 
-router.get('/search', async (request, response, next) => {
+router.get('/search', async (request, response) => {
     try {
         var books = await search.searchGoogleBooks(request.query["title"], request.query["author"]);
         response.send(books);
