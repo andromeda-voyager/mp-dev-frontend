@@ -37,7 +37,6 @@
 
 #router-wrapper {
   overflow: auto;
-  margin-top: var(--nav-height);
   max-height: calc(100vh - var(--nav-height));
 }
 
@@ -50,8 +49,6 @@
 
 #top-nav {
   z-index: 99;
-  position:fixed;
-  top:0;
   width:100%;
   display: flex;
   justify-content: flex-end;
