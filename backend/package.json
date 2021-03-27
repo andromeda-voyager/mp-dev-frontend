@@ -1,7 +1,7 @@
 {
-  "name": "website-backend",
+  "name": "www-matthewpotts-dev/api",
   "version": "1.0.0",
-  "description": "Backend application for my website",
+  "description": "backend api for www.matthewpotts.dev",
   "main": "server.js",
   "scripts": {
     "test": "jest"
