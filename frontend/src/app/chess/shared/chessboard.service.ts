@@ -49,7 +49,7 @@ export class ChessboardService {
 
     getValidMovesForPieceAt(boardLocation: number) {
         if (this.isPlayersTurn()) {
-            return this.chessboard.getValidMovesForPieceAt(boardLocation);
+            return this.chessboard.getValidMovesForPiece(boardLocation);
         } else return [];
     }
 

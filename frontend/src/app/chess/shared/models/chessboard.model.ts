@@ -32,8 +32,8 @@ export class Chessboard {
         else {
             this.chessboard = JSON.parse(JSON.stringify(startingChessboard));
             this.chessboard.forEach((chessPiece, index) => {
-                if(chessPiece.pieceType == PieceType.KING) {
-                    if(chessPiece.color == Color.WHITE) this.whiteKingLocation = index;
+                if (chessPiece.pieceType == PieceType.KING) {
+                    if (chessPiece.color == Color.WHITE) this.whiteKingLocation = index;
                     else this.blackKingLocation = index;
                 }
             });
@@ -93,8 +93,7 @@ export class Chessboard {
 
     isLegalMove(chessMove: ChessMove): boolean {
         if (chessMove == null) return false;
-        let attackingPiece = this.chessboard[chessMove.from];
-        return (attackingPiece.color == this.turn &&
+        return (this.chessboard[chessMove.from].color == this.turn &&
             this.isValidMove(chessMove.from, chessMove.to) &&
             !this.isInCheckAfterMove(chessMove));
     }
@@ -143,13 +142,15 @@ export class Chessboard {
     movePiece(chessMove: ChessMove) {
         let target = this.chessboard[chessMove.to];
         let attackingPiece = this.chessboard[chessMove.from];
-        if (this.isCastleMove(chessMove)) { // castling if true  //target != ChessPiece.EMPTY && target.color == attackingPiece.color
+        if (this.isCastleMove(chessMove)) {
             this.applyCastleMove(chessMove);
-        } else {
+        } else if (this.isEnPassant(chessMove.from, chessMove.to)) {
+            this.applyEnPassantMove(chessMove);
+        }
+        else {
             this.updateKingLocation(attackingPiece, chessMove.to);
             this.incrementSquareHistory(chessMove.to);
             this.chessboard[chessMove.to] = attackingPiece;
-
             this.removedPieces.push(target);
             this.chessboard[chessMove.from] = EMPTY_SQUARE;
         }
@@ -172,7 +173,7 @@ export class Chessboard {
 
         let kingShift: number;
         let rookShift: number;
-        if (chessMove.from % 8 < chessMove.to % 8) { //TODO test this change used to be .column
+        if (chessMove.from % 8 < chessMove.to % 8) {
             kingShift = 2;
             rookShift = -2;
         } else {
@@ -186,10 +187,26 @@ export class Chessboard {
         this.incrementSquareHistory(chessMove.to + rookShift);
     }
 
+    applyEnPassantMove(chessMove: ChessMove) {
+        this.chessboard[0] = EMPTY_SQUARE;
+        let enemyPawnLocation = chessMove.from - chessMove.to > 0 ? chessMove.to + 8 : chessMove.to - 8;
+        this.chessboard[enemyPawnLocation] = EMPTY_SQUARE;
+        let attackingPawn = this.chessboard[chessMove.from];
+        this.chessboard[chessMove.from] = EMPTY_SQUARE;
+        this.chessboard[chessMove.to] = attackingPawn;
+        this.removedPieces.push(EMPTY_SQUARE);
+        // The removed piece is not added to the removedPieces array since the game logic determines 
+        // a move was an en passant from the fact a pawn moved diagonally and the removed piece 
+        // was an empty square.
+    }
+
 
     undoMove(chessMove: ChessMove) { // undo PROMOTIONS when implented TODO
         if (this.isCastleMove(chessMove)) {
-            this.undoCastleMove(chessMove);
+            this.undoCastle(chessMove);
+        }
+        else if (this.wasEnPassant(chessMove)) {
+            this.undoEnPassant(chessMove);
         }
         else {
             let attacker = this.chessboard[chessMove.to];
@@ -204,7 +221,7 @@ export class Chessboard {
         this.changeTurn();
     }
 
-    undoCastleMove(chessMove: ChessMove) {
+    undoCastle(chessMove: ChessMove) {
         let kingShift: number;
         let rookShift: number;
 
@@ -227,8 +244,17 @@ export class Chessboard {
         this.decrementSquareHistory(chessMove.to + rookShift);
     }
 
+    undoEnPassant(chessMove: ChessMove) {
+        let enemyPawnLocation = chessMove.from - chessMove.to > 0 ? chessMove.to + 8 : chessMove.to - 8;
+        this.chessboard[enemyPawnLocation] = this.chessboard[chessMove.to].color == Color.WHITE ? BLACK_PAWN: WHITE_PAWN;
+        this.chessboard[chessMove.from] = this.chessboard[chessMove.to];
+        this.chessboard[chessMove.to] = EMPTY_SQUARE;
+        this.removedPieces.pop();
+        // add increment decrement to apply and undo TODO
+    }
+
     incrementSquareHistory(boardLocation: number) {
-        if(!this.chessSquareHistory.has(boardLocation)) this.chessSquareHistory.set(boardLocation, 0);
+        if (!this.chessSquareHistory.has(boardLocation)) this.chessSquareHistory.set(boardLocation, 0);
         this.chessSquareHistory.set(boardLocation, this.chessSquareHistory.get(boardLocation) + 1);
     }
 
@@ -236,7 +262,7 @@ export class Chessboard {
         this.chessSquareHistory.set(boardLocation, this.chessSquareHistory.get(boardLocation) - 1);
     }
 
-    getMovesForPieceAt(boardLocation: number): ChessMove[] {
+    getMovesForPiece(boardLocation: number): ChessMove[] {
 
         switch (this.chessboard[boardLocation].pieceType) {
             case PieceType.PAWN: return this.getPawnMoves(boardLocation);
@@ -249,9 +275,9 @@ export class Chessboard {
         }
     }
 
-    getValidMovesForPieceAt(boardLocation: number): ChessMove[] {
+    getValidMovesForPiece(boardLocation: number): ChessMove[] {
         if (this.isPieceSameColorAsTurn(this.chessboard[boardLocation])) {
-            return this.removeIllegalMoves(this.getMovesForPieceAt(boardLocation));
+            return this.removeIllegalMoves(this.getMovesForPiece(boardLocation));
         }
         else return [];
     }
@@ -264,7 +290,7 @@ export class Chessboard {
         let moves: ChessMove[] = [];
         this.chessboard.forEach((chessPiece, boardLocation) => {
             if (this.isPieceSameColorAsTurn(chessPiece)) {
-                moves = moves.concat(this.getMovesForPieceAt(boardLocation));
+                moves = moves.concat(this.getMovesForPiece(boardLocation));
             }
         });
 
@@ -330,8 +356,8 @@ export class Chessboard {
         }
 
         if (!this.isInLeftMostColumn(from)) {
-            direction = pawnColor == Color.WHITE ? -9 : 7;
-            let moveToLeftDiagonal = from + direction;
+            // direction = pawnColor == Color.WHITE ? -9 : 7;
+            let moveToLeftDiagonal = from + direction - 1;
             if (this.isValidLocation(moveToLeftDiagonal)) {
                 if (this.isAttackingEnemy(from, moveToLeftDiagonal)) {
                     pawnMoves.push({ from: from, to: moveToLeftDiagonal });
@@ -340,8 +366,8 @@ export class Chessboard {
         }
 
         if (!this.isInRightMostColumn(from)) {
-            direction = pawnColor == Color.WHITE ? -7 : 9;
-            let moveToRightDiagonal = from + direction;
+            // direction = pawnColor == Color.WHITE ? -7 : 9;
+            let moveToRightDiagonal = from + direction + 1;
             if (this.isValidLocation(moveToRightDiagonal)) {
                 if (this.isAttackingEnemy(from, moveToRightDiagonal)) {
                     pawnMoves.push({ from: from, to: moveToRightDiagonal });
@@ -349,14 +375,33 @@ export class Chessboard {
             }
         }
         if (this.isPawnStartingLocation(from)) {
-            direction = pawnColor == Color.WHITE ? -16 : 16;
-            let locationForwardTwo = from + direction;
+            // direction = pawnColor == Color.WHITE ? -16 : 16;
+            let locationForwardTwo = from + direction * 2;
             if (this.isValidLocation(locationForwardTwo) && this.isEmptyAt(locationForwardTwo) && this.isEmptyAt(locationForwardOne)) { //TODO test removing location forwardone
                 pawnMoves.push({ from: from, to: locationForwardTwo });
             }
         }
-        return this.removeIllegalMoves(pawnMoves);
+
+        if (this.isMoveWithinSameRow(from, from + 1)) { // En Passant diagonal right
+            if (this.isEnemyPawnAt(from + 1, this.chessboard[from].color)) {
+                if (this.isEnPassant(from, from + direction + 1)) {
+                    pawnMoves.push({ from: from, to: from + direction + 1 });
+                }
+            }
+        }
+
+        if (this.isMoveWithinSameRow(from, from - 1)) { // En Passant diagonal left
+            if (this.isEnemyPawnAt(from - 1, this.chessboard[from].color)) {
+                if (this.isEnPassant(from, from + direction - 1)) {
+                    pawnMoves.push({ from: from, to: from + direction - 1 });
+                }
+            }
+        }
+
+        return pawnMoves; //this.removeIllegalMoves(pawnMoves);
     }
+
+
 
     getMovesInPath(startingLocation: number, rowDirection: number, columnDirection: number) {
         let moves = [];
@@ -390,7 +435,7 @@ export class Chessboard {
         moves = moves.concat(this.getMovesInPath(from, -1, 0));   // up
         moves = moves.concat(this.getMovesInPath(from, 1, 0));    // down
 
-        return this.removeIllegalMoves(moves);
+        return moves //this.removeIllegalMoves(moves);
     }
 
     isValidRow(row: number) {
@@ -413,7 +458,7 @@ export class Chessboard {
         if (this.isValidKnightMove(from, from - 6)) moves.push({ from: from, to: from - 6 });
         if (this.isValidKnightMove(from, from - 10)) moves.push({ from: from, to: from - 10 });
 
-        return this.removeIllegalMoves(moves);
+        return moves; //this.removeIllegalMoves(moves);
     }
 
     isAttackingEnemy(from: number, to: number): boolean {
@@ -430,7 +475,7 @@ export class Chessboard {
         moves = moves.concat(this.getMovesInPath(from, -1, -1));
         moves = moves.concat(this.getMovesInPath(from, 1, -1));
         moves = moves.concat(this.getMovesInPath(from, -1, 1));
-        return this.removeIllegalMoves(moves);
+        return moves; // this.removeIllegalMoves(moves);
     }
 
     getQueenMoves(from: number) {
@@ -464,7 +509,7 @@ export class Chessboard {
                 }
             }
         }
-        return this.removeIllegalMoves(moves);
+        return moves; // this.removeIllegalMoves(moves);
     }
 
 
@@ -601,16 +646,30 @@ export class Chessboard {
         return this.isValidPawnDiagonalMove(from, to) || this.isValidPawnForwardMove(from, to);
     }
 
-
     isValidPawnDiagonalMove(from: number, to: number): boolean {
-        if (this.isAttackingEnemy(from, to)) {
-            if (this.isOneColumnAway(from, to)) {
+        if (this.isOneColumnAway(from, to)) {
+            if (this.isAttackingEnemy(from, to)) {
                 if (this.isWhitePieceAt(from)) {
                     return ((from - 9 == to && !this.isInLeftMostColumn(from)) || (from - 7 == to && !this.isInRightMostColumn(from)));
                 }
                 else if (this.isBlackPieceAt(from)) {
                     return ((from + 7 == to && !this.isInLeftMostColumn(from)) || (from + 9 == to && !this.isInRightMostColumn(from)));
                 }
+            }
+            else { // is moving diagonally and is attacking empty square
+                return this.isEnPassant(from, to);
+            }
+        }
+        return false;
+    }
+
+    isEnPassant(from: number, to: number): boolean {
+        if (this.moves.length < 1 || this.chessboard[from].pieceType != PieceType.PAWN) return false;
+        let previousMove = this.moves[this.moves.length - 1];
+        if ((previousMove.to - previousMove.from) / 2 + previousMove.from == to) {
+            if (this.isEnemyPawnAt(previousMove.to, this.chessboard[from].color)) {
+                let rowDifference = Math.trunc(previousMove.from / 8) - Math.trunc(previousMove.to / 8);
+                return (Math.abs(rowDifference) == 2);
             }
         }
         return false;
@@ -694,12 +753,24 @@ export class Chessboard {
     isOneColumnAway(from: number, to: number): boolean {
         return Math.abs(to % 8 - from % 8) == 1;
     }
+
     isEmptyAt(boardLocation: number): boolean {
         return this.chessboard[boardLocation].pieceType == PieceType.EMPTY;
     }
 
+    isEnemyPawnAt(location: number, attackingColor: Color): boolean {
+        return this.chessboard[location].pieceType == PieceType.PAWN
+            && this.chessboard[location].color != attackingColor;
+    }
+
     isCastleMove(chessMove: ChessMove): boolean {
         return this.chessboard[chessMove.from].color == this.chessboard[chessMove.to].color; //TODO change function name or change higher up implementation
+    }
+
+    wasEnPassant(chessMove: ChessMove): boolean { // used by undoMove
+        return this.chessboard[chessMove.to].pieceType == PieceType.PAWN 
+        && !this.isMoveWithinSameColumn(chessMove.to, chessMove.from) 
+        && this.removedPieces[this.removedPieces.length -1] == EMPTY_SQUARE;
     }
 
     print() {

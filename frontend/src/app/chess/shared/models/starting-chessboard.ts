@@ -16,8 +16,8 @@ export const CHESSBOARD_TESTING: ChessPiece[] =
     ChessPieces.BLACK_PAWN, ChessPieces.BLACK_PAWN, ChessPieces.BLACK_PAWN, ChessPieces.BLACK_PAWN, ChessPieces.BLACK_PAWN, ChessPieces.BLACK_PAWN, ChessPieces.BLACK_PAWN, ChessPieces.BLACK_PAWN,
     ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE,
     ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE,
+    ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.BLACK_PAWN, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE,ChessPieces.EMPTY_SQUARE,
     ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE,ChessPieces.EMPTY_SQUARE,
-    ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE, ChessPieces.EMPTY_SQUARE,ChessPieces.EMPTY_SQUARE,
-    ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN,
+    ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.EMPTY_SQUARE, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN, ChessPieces.WHITE_PAWN,
     ChessPieces.WHITE_ROOK, ChessPieces.WHITE_KNIGHT, ChessPieces.WHITE_BISHOP, ChessPieces.WHITE_QUEEN, ChessPieces.WHITE_KING, ChessPieces.WHITE_BISHOP, ChessPieces.WHITE_KNIGHT, ChessPieces.WHITE_ROOK];
 
