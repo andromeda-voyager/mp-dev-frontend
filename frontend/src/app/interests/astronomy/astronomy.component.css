@@ -58,7 +58,7 @@ app-carousel {
   padding-right:5px;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1000px) {
   #pictures-container {
     flex-direction: row;
   }

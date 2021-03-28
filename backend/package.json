@@ -1,5 +1,5 @@
 {
-  "name": "www-matthewpotts-dev/api",
+  "name": "api-matthewpotts-dev",
   "version": "1.0.0",
   "description": "backend api for www.matthewpotts.dev",
   "main": "server.js",
