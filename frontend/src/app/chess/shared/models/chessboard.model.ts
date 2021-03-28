@@ -246,7 +246,7 @@ export class Chessboard {
 
     undoEnPassant(chessMove: ChessMove) {
         let enemyPawnLocation = chessMove.from - chessMove.to > 0 ? chessMove.to + 8 : chessMove.to - 8;
-        this.chessboard[enemyPawnLocation] = this.chessboard[chessMove.to].color == Color.WHITE ? BLACK_PAWN: WHITE_PAWN;
+        this.chessboard[enemyPawnLocation] = this.chessboard[chessMove.to].color == Color.WHITE ? BLACK_PAWN : WHITE_PAWN;
         this.chessboard[chessMove.from] = this.chessboard[chessMove.to];
         this.chessboard[chessMove.to] = EMPTY_SQUARE;
         this.removedPieces.pop();
@@ -356,7 +356,6 @@ export class Chessboard {
         }
 
         if (!this.isInLeftMostColumn(from)) {
-            // direction = pawnColor == Color.WHITE ? -9 : 7;
             let moveToLeftDiagonal = from + direction - 1;
             if (this.isValidLocation(moveToLeftDiagonal)) {
                 if (this.isAttackingEnemy(from, moveToLeftDiagonal)) {
@@ -366,7 +365,6 @@ export class Chessboard {
         }
 
         if (!this.isInRightMostColumn(from)) {
-            // direction = pawnColor == Color.WHITE ? -7 : 9;
             let moveToRightDiagonal = from + direction + 1;
             if (this.isValidLocation(moveToRightDiagonal)) {
                 if (this.isAttackingEnemy(from, moveToRightDiagonal)) {
@@ -375,7 +373,6 @@ export class Chessboard {
             }
         }
         if (this.isPawnStartingLocation(from)) {
-            // direction = pawnColor == Color.WHITE ? -16 : 16;
             let locationForwardTwo = from + direction * 2;
             if (this.isValidLocation(locationForwardTwo) && this.isEmptyAt(locationForwardTwo) && this.isEmptyAt(locationForwardOne)) { //TODO test removing location forwardone
                 pawnMoves.push({ from: from, to: locationForwardTwo });
@@ -398,7 +395,7 @@ export class Chessboard {
             }
         }
 
-        return pawnMoves; //this.removeIllegalMoves(pawnMoves);
+        return pawnMoves;
     }
 
 
@@ -435,7 +432,7 @@ export class Chessboard {
         moves = moves.concat(this.getMovesInPath(from, -1, 0));   // up
         moves = moves.concat(this.getMovesInPath(from, 1, 0));    // down
 
-        return moves //this.removeIllegalMoves(moves);
+        return moves;
     }
 
     isValidRow(row: number) {
@@ -458,7 +455,7 @@ export class Chessboard {
         if (this.isValidKnightMove(from, from - 6)) moves.push({ from: from, to: from - 6 });
         if (this.isValidKnightMove(from, from - 10)) moves.push({ from: from, to: from - 10 });
 
-        return moves; //this.removeIllegalMoves(moves);
+        return moves;
     }
 
     isAttackingEnemy(from: number, to: number): boolean {
@@ -475,7 +472,7 @@ export class Chessboard {
         moves = moves.concat(this.getMovesInPath(from, -1, -1));
         moves = moves.concat(this.getMovesInPath(from, 1, -1));
         moves = moves.concat(this.getMovesInPath(from, -1, 1));
-        return moves; // this.removeIllegalMoves(moves);
+        return moves;
     }
 
     getQueenMoves(from: number) {
@@ -509,23 +506,23 @@ export class Chessboard {
                 }
             }
         }
-        return moves; // this.removeIllegalMoves(moves);
+        return moves;
     }
 
 
 
     isInCheck(color: Color): boolean {
         let kingLocation = this.getKingLocation(color);
-        if (this.isEnemyKnightAroundKing(kingLocation)) return true;
-        if (this.isInCheckFrom(0, -1, kingLocation)) return true;
-        if (this.isInCheckFrom(0, 1, kingLocation)) return true;
-        if (this.isInCheckFrom(1, -1, kingLocation)) return true;
-        if (this.isInCheckFrom(1, 1, kingLocation)) return true;
-        if (this.isInCheckFrom(1, 0, kingLocation)) return true;
-        if (this.isInCheckFrom(-1, -1, kingLocation)) return true;
-        if (this.isInCheckFrom(-1, 1, kingLocation)) return true;
-        if (this.isInCheckFrom(-1, 0, kingLocation)) return true;
-        return false;
+        return (this.isEnemyKnightAroundKing(kingLocation)
+            || this.isInCheckFrom(0, -1, kingLocation)
+            || this.isInCheckFrom(0, 1, kingLocation)
+            || this.isInCheckFrom(1, -1, kingLocation)
+            || this.isInCheckFrom(1, 1, kingLocation)
+            || this.isInCheckFrom(1, 0, kingLocation)
+            || this.isInCheckFrom(-1, -1, kingLocation)
+            || this.isInCheckFrom(-1, 1, kingLocation)
+            || this.isInCheckFrom(-1, 0, kingLocation));
+
     }
 
     isInCheckFrom(rowDirection: number, columnDirection: number, kingLocation: number): boolean {
@@ -627,15 +624,21 @@ export class Chessboard {
     }
 
     isValidKnightMove(from: number, to: number): boolean {
-        let toRow = Math.trunc(to / 8);
-        let toColumn = to % 8;
-        let fromRow = Math.trunc(from / 8);
-        let fromColumn = from % 8;
-        if (this.isValidLocation(to)) {
-            return (this.isAttackingEnemyOrEmpty(from, to)
-                && ((Math.abs(toRow - fromRow) == 2 && Math.abs(toColumn - fromColumn) == 1)
-                    || (Math.abs(toRow - fromRow) == 1 && Math.abs(toColumn - fromColumn) == 2)));
-        } else return false;
+
+        if (this.isValidLocation(to) && this.isValidLocation(from)) {
+            if (this.chessboard[from].pieceType == PieceType.KNIGHT) {
+                let toRow = Math.trunc(to / 8);
+                let toColumn = to % 8;
+                let fromRow = Math.trunc(from / 8);
+                let fromColumn = from % 8;
+                // valid knight moves are either two rows and one column away or two columns and one row away
+                return (this.isAttackingEnemyOrEmpty(from, to)
+                    && ((Math.abs(toRow - fromRow) == 2 && Math.abs(toColumn - fromColumn) == 1)
+                        || (Math.abs(toRow - fromRow) == 1 && Math.abs(toColumn - fromColumn) == 2)));
+            }
+        }
+        return false;
+
     }
 
     isValidQueenMove(from: number, to: number): boolean {
@@ -731,20 +734,17 @@ export class Chessboard {
 
     isEnemyKnightAroundKing(kingLocation: number): boolean {
 
-        return (this.isKnightAt(kingLocation + 17) && this.isValidKnightMove(kingLocation + 17, kingLocation))
-            || (this.isKnightAt(kingLocation + 15) && this.isValidKnightMove(kingLocation + 15, kingLocation))
-            || (this.isKnightAt(kingLocation - 17) && this.isValidKnightMove(kingLocation - 17, kingLocation))
-            || (this.isKnightAt(kingLocation - 15) && this.isValidKnightMove(kingLocation - 15, kingLocation))
-            || (this.isKnightAt(kingLocation + 6) && this.isValidKnightMove(kingLocation + 6, kingLocation))
-            || (this.isKnightAt(kingLocation + 10) && this.isValidKnightMove(kingLocation + 10, kingLocation))
-            || (this.isKnightAt(kingLocation - 6) && this.isValidKnightMove(kingLocation - 6, kingLocation))
-            || (this.isKnightAt(kingLocation - 10) && this.isValidKnightMove(kingLocation - 10, kingLocation));
+        return (this.isValidKnightMove(kingLocation + 17, kingLocation))
+            || (this.isValidKnightMove(kingLocation + 15, kingLocation))
+            || (this.isValidKnightMove(kingLocation - 17, kingLocation))
+            || (this.isValidKnightMove(kingLocation - 15, kingLocation))
+            || (this.isValidKnightMove(kingLocation + 6, kingLocation))
+            || (this.isValidKnightMove(kingLocation + 10, kingLocation))
+            || (this.isValidKnightMove(kingLocation - 6, kingLocation))
+            || (this.isValidKnightMove(kingLocation - 10, kingLocation));
     }
 
-    isKnightAt(boardLocation: number): boolean {
-        let chessPiece = this.chessboard[boardLocation];
-        return this.isValidLocation(boardLocation) && chessPiece.pieceType == PieceType.KNIGHT;
-    }
+
 
     isValidRowAndColumn(row: number, column: number): boolean {
         return row > -1 && row < 8 && column > -1 && column < 8;
@@ -768,9 +768,9 @@ export class Chessboard {
     }
 
     wasEnPassant(chessMove: ChessMove): boolean { // used by undoMove
-        return this.chessboard[chessMove.to].pieceType == PieceType.PAWN 
-        && !this.isMoveWithinSameColumn(chessMove.to, chessMove.from) 
-        && this.removedPieces[this.removedPieces.length -1] == EMPTY_SQUARE;
+        return this.chessboard[chessMove.to].pieceType == PieceType.PAWN
+            && !this.isMoveWithinSameColumn(chessMove.to, chessMove.from)
+            && this.removedPieces[this.removedPieces.length - 1] == EMPTY_SQUARE;
     }
 
     print() {
