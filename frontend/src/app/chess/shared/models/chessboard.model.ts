@@ -40,8 +40,8 @@ export class Chessboard {
         }
     }
 
-    getBoardString() {
-        let boardStr: string = "";
+    getBoardString(): string {
+        let boardStr = "";
         let emptyCount = 0;
         for (const chessPiece of this.chessboard) {
             if (chessPiece.pieceType == PieceType.EMPTY) {
@@ -188,7 +188,6 @@ export class Chessboard {
     }
 
     applyEnPassantMove(chessMove: ChessMove) {
-        this.chessboard[0] = EMPTY_SQUARE;
         let enemyPawnLocation = chessMove.from - chessMove.to > 0 ? chessMove.to + 8 : chessMove.to - 8;
         this.chessboard[enemyPawnLocation] = EMPTY_SQUARE;
         let attackingPawn = this.chessboard[chessMove.from];
@@ -232,7 +231,6 @@ export class Chessboard {
             kingShift = -2;
             rookShift = +3;
         }
-
         this.chessboard[chessMove.from] = this.chessboard[chessMove.from + kingShift]; //move king back
         this.chessboard[chessMove.to] = this.chessboard[chessMove.to + rookShift]; // move rook back
         this.chessboard[chessMove.from + kingShift] = EMPTY_SQUARE;
@@ -293,23 +291,20 @@ export class Chessboard {
                 moves = moves.concat(this.getMovesForPiece(boardLocation));
             }
         });
-
-        moves = this.removeIllegalMoves(moves);
-        return moves;
+        return this.removeIllegalMoves(moves);
     }
 
     isPieceSameColorAsTurn(chessPiece: ChessPiece) {
         return chessPiece.color == this.turn;
     }
 
-    removeIllegalMoves(moves: ChessMove[]) {
-        let legalMoves = [];
+    removeIllegalMoves(moves: ChessMove[]): ChessMove[] {
+        let legalMoves: ChessMove[] = [];
         for (let move of moves) {
             if (!this.isInCheckAfterMove(move)) {
                 legalMoves.push(move);
             }
         }
-
         return legalMoves;
     }
 
@@ -346,9 +341,9 @@ export class Chessboard {
         return boardLocation > 55 && boardLocation < 64;
     }
 
-    getPawnMoves(from: number) {
+    getPawnMoves(from: number): ChessMove[] {
         let pawnColor = this.chessboard[from].color;
-        let pawnMoves = [];
+        let pawnMoves: ChessMove[] = [];
         let direction = pawnColor == Color.WHITE ? -8 : 8;
         let locationForwardOne = from + direction;
         if (this.isValidLocation(locationForwardOne) && this.isEmptyAt(locationForwardOne)) {
@@ -400,8 +395,8 @@ export class Chessboard {
 
 
 
-    getMovesInPath(startingLocation: number, rowDirection: number, columnDirection: number) {
-        let moves = [];
+    getMovesInPath(startingLocation: number, rowDirection: number, columnDirection: number): ChessMove[] {
+        let moves: ChessMove[] = [];
         let row = Math.trunc(startingLocation / 8) + rowDirection;
         let column = Math.trunc(startingLocation % 8) + columnDirection;
         while (this.isValidRow(row) && this.isValidColumn(column)) {
@@ -426,7 +421,7 @@ export class Chessboard {
     }
 
     getRookMoves(from: number) {
-        let moves = [];
+        let moves: ChessMove[] = [];
         moves = moves.concat(this.getMovesInPath(from, 0, -1));   //left
         moves = moves.concat(this.getMovesInPath(from, 0, 1));    //right
         moves = moves.concat(this.getMovesInPath(from, -1, 0));   // up
@@ -443,8 +438,8 @@ export class Chessboard {
         return column > -1 && column < 8;
     }
 
-    getKnightMoves(from: number) {
-        let moves = [];
+    getKnightMoves(from: number): ChessMove[] {
+        let moves: ChessMove[] = [];
 
         if (this.isValidKnightMove(from, from + 17)) moves.push({ from: from, to: from + 17 });
         if (this.isValidKnightMove(from, from + 15)) moves.push({ from: from, to: from + 15 });
@@ -466,8 +461,8 @@ export class Chessboard {
         return (this.chessboard[from].color != this.chessboard[to].color);
     }
 
-    getBishopMoves(from: number) {
-        let moves = [];
+    getBishopMoves(from: number): ChessMove[] {
+        let moves: ChessMove[] = [];
         moves = moves.concat(this.getMovesInPath(from, 1, 1));
         moves = moves.concat(this.getMovesInPath(from, -1, -1));
         moves = moves.concat(this.getMovesInPath(from, 1, -1));
@@ -475,15 +470,15 @@ export class Chessboard {
         return moves;
     }
 
-    getQueenMoves(from: number) {
-        let moves = [];
+    getQueenMoves(from: number): ChessMove[] {
+        let moves: ChessMove[] = [];
         moves = moves.concat(this.getBishopMoves(from));
         moves = moves.concat(this.getRookMoves(from));
         return moves;
     }
 
-    getKingMoves(from: number) {
-        let moves = [];
+    getKingMoves(from: number): ChessMove[] {
+        let moves: ChessMove[] = [];
         let potentialMoveLocations = [];
         // positions around king (starting above and moving clockwise)
         potentialMoveLocations.push(from - 8);

@@ -6,6 +6,8 @@ export enum PROMOTION { QUEEN = "QUEEN", ROOK = "ROOK", BISHOP = "BISHOP", KNIGH
 export interface ChessMove {
     readonly to: number;
     readonly from: number;
+    isCastle?: boolean;
+    isEnPassant?: boolean;
     promotion?: ChessPiece;
     value?:number;  
 }
