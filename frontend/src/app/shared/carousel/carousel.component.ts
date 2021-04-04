@@ -14,6 +14,7 @@ export class CarouselComponent implements OnInit {
   @Input() arrowsOn: boolean = false;
   @Input() buttonsOn: boolean = false;
   @Input() slideShowSpeed: number = 7000;
+  @Input() adjustImage: boolean = false;
   isPaused = false;
 
   constructor() { }

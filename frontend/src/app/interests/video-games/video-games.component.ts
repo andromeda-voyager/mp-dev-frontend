@@ -29,11 +29,11 @@ export class VideoGamesComponent implements OnInit {
   videoGameDetails: string[][] = [
     [
       "Starcraft",
-      "Gears of War",
-      "Super Smash Bros.",
-      "Ghost Recon Phantoms",
+      "Zelda",
       "Age of Empires II",
-      "Zelda (BotW, OoT, LttP)",
+      "Gears of War",
+      "Ghost Recon Phantoms",
+      "Super Smash Bros.",
     ],
     [
       "PC",

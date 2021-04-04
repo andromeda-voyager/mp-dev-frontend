@@ -35,7 +35,6 @@ app-carousel {
 }
 
 button {
-    font-size:1.5vw;
     font-size: max(1.5vw, 1.2em);
     padding:.6em;  
     margin-left:2vw;
@@ -49,7 +48,7 @@ button {
 }
 
 #details-container {
-    margin-top:2.5vh;
+    margin-top: 3vh;
     align-items: center;
     justify-items: center;
     display:grid;
@@ -101,6 +100,6 @@ button {
 }
 
 .flat {
-    background-color:   rgba(0, 0, 0, 0.030);
-    color:grey
+    background-color:   rgba(0, 0, 0, 0.055);
+    color:rgb(102, 102, 102)
 }

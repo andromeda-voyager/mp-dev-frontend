@@ -4,11 +4,11 @@
         <div id="favorites-container">
             <div id="buttons-container">
                 <button (click)="onDetailsBtnClick(0)" mat-button
-                    [ngClass]="(currentDetails==0)?'raised':'flat'">Favorite Games</button>
+                    [ngClass]="(currentDetails==0)?'raised':'flat'">Games</button>
                 <button (click)="onDetailsBtnClick(1)" mat-button
                     [ngClass]="(currentDetails==1)?'raised':'flat'">Platforms</button>
                 <button (click)="onDetailsBtnClick(2)" mat-button
-                    [ngClass]="(currentDetails==2)?'raised':'flat'">Favorite Genres</button>
+                    [ngClass]="(currentDetails==2)?'raised':'flat'">Genres</button>
             </div>
             <ng-container *ngFor="let details of videoGameDetails; let i = index">
                 <div [@stagger] *ngIf="i === currentDetails" id="details-container">
