@@ -11,7 +11,7 @@
 h1 {
     font-size: max(2.5vw, 30px);
     text-align: center;
-    margin-top:2.5vh;
+    margin-top: 2.5vh;
 }
 
 #selected-movie {
@@ -29,7 +29,6 @@ h1 {
 }
 
 #menu {
-    margin: 2vh auto 1vh auto;
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -40,11 +39,11 @@ h1 {
 }
 
 .menu-button {
-    background-color:rgba(26, 41, 51, 0.5);
+    background-color:rgba(14, 212, 96, 0.534);
     font-size: max(1.4vw,13px);
     height:fit-content;
-    color:white;
-    margin: 3vh 4vw 3vh 4vw;
+    color:rgb(0, 0, 0);
+    margin: 4vw;
     padding: 1em .7em 1em .7em;
 }
 
@@ -54,28 +53,29 @@ h1 {
 }
 
 .movies-container {
-    margin:1vh 5vw 1vh 5vw;
+    margin: 0 8vw;
     display:flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    row-gap: 1em;
+    column-gap: 1.4em;
+    font-size: max(1.4vw, 12px);
 }
 
 .movie {
     display:flex;
     flex-direction: column;
-    margin: .5em 1em .5em 1em;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
-    font-size: max(1.5vw, 12px);
     line-height:1;
-    height:9em;
-    width:7em;
-    color:black;
+    height:10em;
+    width:8em;
+    color:rgb(255, 255, 255);
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    background-color: rgb(255, 44, 44);
+    background-color: rgba(0, 0, 0, 0.39);
 }
 
 .movie:hover{

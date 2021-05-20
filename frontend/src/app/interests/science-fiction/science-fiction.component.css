@@ -7,11 +7,12 @@
 }
 
 #books-container {
-    margin-top:calc(10px + 2vh);
-    margin-bottom:5vh;
+    margin: 5vh 8vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    row-gap: 4vh;
+    column-gap: 4vw;
     justify-content: center;
 }
 
@@ -22,9 +23,9 @@
 
 .book-wrapper {
     height: auto;
-    width: 10vw;
-    min-width: 125px;
-    margin: 3vh 2vw 3vh 2vw;
+    width: 18vw;
+    min-width: 100px;
+    max-width:200px;
     position:relative;
 }
 
