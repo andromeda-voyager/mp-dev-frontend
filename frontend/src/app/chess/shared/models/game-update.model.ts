@@ -4,10 +4,10 @@ import { Color } from './color';
 export interface GameUpdate {
     gameID: string;
     playerID: string;
-    chessMove?: ChessMove;
-    playerColor?: Color;
-    playerStatus?: PlayerStatus;
-    opponentStatus?: PlayerStatus;
+    chessMove: ChessMove;
+    playerColor: Color;
+    playerStatus: PlayerStatus;
+    opponentStatus: PlayerStatus;
     gameStatus: GameStatus;
     serverMessage?: ServerMessage; 
 }

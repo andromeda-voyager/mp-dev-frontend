@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class CarouselComponent implements OnInit {
-  @Input() carouselItems: string[];
+  @Input() carouselItems: string[] = [];
   currentCarouselItem = 0;
   nextCarouselItem = 1;
   interval: any;

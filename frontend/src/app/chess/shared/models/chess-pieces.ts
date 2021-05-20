@@ -15,4 +15,4 @@ export const BLACK_BISHOP = { pieceType:  PieceType.BISHOP, imageUrl:"assets/che
 export const BLACK_KING = { pieceType: PieceType.KING, imageUrl:"assets/chess-pieces/black_king.svg", color: Color.BLACK, fenChar: FenChar.BLACK_KING };
 export const BLACK_QUEEN = { pieceType: PieceType.QUEEN, imageUrl:"assets/chess-pieces/black_queen.svg", color: Color.BLACK, fenChar: FenChar.BLACK_QUEEN };
 
-export const EMPTY_SQUARE = { pieceType: PieceType.EMPTY, imageUrl: null, color: Color.EMPTY, fenChar: FenChar.EMPTY};
+export const EMPTY_SQUARE = { pieceType: PieceType.EMPTY, imageUrl: "", color: Color.EMPTY, fenChar: FenChar.EMPTY};

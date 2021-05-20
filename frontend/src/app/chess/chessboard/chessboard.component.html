@@ -12,7 +12,7 @@
                     class="piece-image" />
                 <div *cdkDragPlaceholder></div>
             </div>
-            <div class="check" *ngIf="chessPiece == inCheckLocation"></div>
+            <div class="check" *ngIf="chessPiece === inCheckLocation"></div>
             <div class="valid-move" *ngIf="validMoves.has(chessPiece)"></div>
         </div>
     </div>

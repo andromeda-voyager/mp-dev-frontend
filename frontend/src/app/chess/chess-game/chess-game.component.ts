@@ -14,7 +14,7 @@ export class ChessGameComponent implements OnInit {
 
   leaveButtonText = "Resign";
   isGameActive = true;
-  gameMessage: string;
+  gameMessage: string = "";
   Color = Color;
   @Output() leaveChessboard = new EventEmitter();
 

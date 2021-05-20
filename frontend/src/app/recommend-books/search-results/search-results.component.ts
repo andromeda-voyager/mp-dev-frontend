@@ -10,7 +10,7 @@ import { Book } from 'src/app/recommend-books/shared/book';
 
 export class SearchResultsComponent implements OnInit {
   @Input() books: Book[] = [];
-  @Input() recommender: string;
+  @Input() recommender: string = "";
 
   constructor(private bookService: BookService) { }
 

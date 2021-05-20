@@ -12,9 +12,9 @@ export class RecommendBooksComponent implements OnInit {
   isNameSubmitted: boolean = false;
 
   books: Book[] = [];
-  @Input() recommender: string;
-  @Input() title: string;
-  @Input() author: string;
+  @Input() recommender: string = "";
+  @Input() title: string = "";
+  @Input() author: string = "";
   recommendedBooks: Book[] = []
 
   constructor(private bookService: BookService) {

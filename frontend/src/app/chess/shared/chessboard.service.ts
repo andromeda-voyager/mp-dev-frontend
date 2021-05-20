@@ -29,8 +29,8 @@ export class ChessboardService {
     gameStarted$ = this.gameStartedSource.asObservable();
     gameEnded$ = this.gameEndedSource.asObservable();
 
-    private playerColor: Color;
-    chessboard: Chessboard;
+    private playerColor: Color = Color.NONE;
+    chessboard: Chessboard = new Chessboard;
 
     constructor() {
     }
@@ -110,7 +110,7 @@ export class ChessboardService {
             }
         }
         else {
-            this.inCheckSource.next(null);
+            this.inCheckSource.next(-1);
             if (this.chessboard.isStalemate()) this.endGame("Stalemate. Tie game.");
         }
     }
@@ -118,7 +118,7 @@ export class ChessboardService {
     endGame(message: string) {
         this.gameMessageSource.next(message);
         this.gameEndedSource.next();
-        this.playerColor = null;
+        this.playerColor = Color.NONE;
     }
 
     opponentQuit(opponentStatus: PlayerStatus) {

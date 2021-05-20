@@ -13,8 +13,8 @@ import { BLACK_BISHOP, BLACK_KNIGHT, BLACK_QUEEN, BLACK_ROOK, WHITE_BISHOP, WHIT
 export class PawnPromotionComponent implements OnInit {
 
   isHidden: boolean = true;
-  @Input() color: Color;
-  promotionOptions: ChessPiece[];
+  @Input() color: Color = Color.NONE;
+  promotionOptions: ChessPiece[] = [];
 
   constructor(private chessboardService: ChessboardService) {
     chessboardService.pawnNeedsPromotion$.subscribe(

@@ -14,16 +14,16 @@
 
     <div *ngIf="selectedCategory">
         <div id="movie-details-container">
-            <div *ngIf="selectedMovie" id="selected-movie">
-                <iframe class="youtube-video" *ngIf="selectedMovie.name =='Annihilation'"
+            <div *ngIf="selectedIndex != -1" id="selected-movie">
+                <iframe class="youtube-video" *ngIf="selectedCategory[selectedIndex].name =='Annihilation'"
                     src="https://www.youtube.com/embed/89OP78l9oF0" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div class="movies-container">
-            <ng-container *ngFor="let item of selectedCategory">
-                <div class="movie" [ngClass]="{'selected-movie':selectedMovie==item}"
-                    (click)="onMovieClick(item, target)">
+            <ng-container *ngFor="let item of selectedCategory; let i = index">
+                <div class="movie" [ngClass]="{'selected-movie':selectedIndex==i}"
+                    (click)="onItemClick(i, target)">
                     <span class="movie-title">{{item.name}} </span>
                     <span class="movie-detail">{{item.secondaryInfo}}</span>
                     <a class="movie-detail" [href]="item.imdbLink">View on IMDB</a>

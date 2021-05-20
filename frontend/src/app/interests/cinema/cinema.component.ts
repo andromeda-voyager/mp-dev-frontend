@@ -11,7 +11,7 @@ import { DIRECTORS } from './director-data';
 
 export class CinemaComponent implements OnInit {
 
-  selectedMovie: FilmData;
+  selectedIndex:number = -1;
   movies = MOVIES;
   directors = DIRECTORS;
   selectedCategory: FilmData[] = this.movies;
@@ -24,9 +24,9 @@ export class CinemaComponent implements OnInit {
     el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  onMovieClick(movie: FilmData, target: HTMLElement) {
-    this.selectedMovie = movie;
-    if (this.selectedMovie.name == "Annihilation") this.scroll(target)
+  onItemClick(itemIndex: number, target: HTMLElement) {
+    this.selectedIndex = itemIndex;
+    if (this.selectedCategory[itemIndex].name == "Annihilation") this.scroll(target)
   }
 
   viewFilmsOnClick() {
@@ -35,6 +35,6 @@ export class CinemaComponent implements OnInit {
 
   viewDirectorsOnClick() {
     this.selectedCategory = this.directors;
-    this.selectedMovie = null;
+    this.selectedIndex = -1;
   }
 }

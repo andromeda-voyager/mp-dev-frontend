@@ -15,21 +15,23 @@ import { interval, Subscription } from 'rxjs';
 export class LobbyComponent implements OnInit {
 
   lobby: Map<string, GameSettings> = new Map();
-  selectedGame: GameSettings;
+  selectedGameID:string = "";
   @Input() password: string = "";
   isPasswordCorrect: boolean = true;
   readonly updateInterval = interval(10000);
   retryUpdate = true;
   subscription: Subscription;
-  message: string;
+  message: string = "";
   messageInterval: any;
 
 
-  constructor(private chessService: ChessService, private router: Router) { }
+  constructor(private chessService: ChessService, private router: Router) {
+    this.subscription = this.updateInterval.subscribe(() => this.updateLobby());
+   }
 
   ngOnInit(): void {
     this.updateLobby();
-    this.subscription = this.updateInterval.subscribe(() => this.updateLobby());
+    //this.subscription = this.updateInterval.subscribe(() => this.updateLobby());
   }
 
   ngOnDestroy() {
@@ -73,13 +75,14 @@ export class LobbyComponent implements OnInit {
       case Color.WHITE: return "/assets/chess-pieces/white_pawn.svg";
       case Color.BLACK: return "/assets/chess-pieces/black_pawn.svg";
       case Color.RANDOM: return "/assets/chess-pieces/random_pawn.png";
+      default: return "";
     }
   }
 
-  onChessGameClick(chessGame: GameSettings) {
+  onChessGameClick(gameID: string) {
     this.isPasswordCorrect = true;
-    this.selectedGame = chessGame;
-    this.message = null;
+    this.selectedGameID = gameID;
+    this.message = "";
   }
 
   joinGameOnClick(gameSettings: GameSettings) {

@@ -7,14 +7,14 @@
             <mat-card-title>Lobby</mat-card-title>
         </mat-card-header>
         <div id="empty-notification-div" *ngIf="lobby.size == 0">Lobby is empty.</div>
-        <div class="chess-game" [ngClass]="{'selected-game': chessGame.value == selectedGame}"
-            *ngFor="let chessGame of lobby | keyvalue" (click)="onChessGameClick(chessGame.value)">
+        <div class="chess-game" [ngClass]="{'selected-game': chessGame.value.gameID == selectedGameID}"
+            *ngFor="let chessGame of lobby | keyvalue" (click)="onChessGameClick(chessGame.value.gameID)">
             <div class="game-information">
                 <img class="pawn" [src]="getPawnImage(chessGame.value)">
                 <span class="description">{{chessGame.value.description}} </span>
                 <span class="lock" *ngIf="chessGame.value.isPasswordLocked" class="material-icons lock">lock</span>
             </div>
-            <div *ngIf="chessGame.value == selectedGame" class="join-game">
+            <div *ngIf="chessGame.value.gameID == selectedGameID" class="join-game">
                 <mat-form-field class="password-field" *ngIf="chessGame.value.isPasswordLocked" appearance="standard">
                     <mat-label>Password</mat-label>
                     <input matInput [(ngModel)]="password">

@@ -16,11 +16,12 @@ export class CreateGameComponent implements OnInit {
     isPasswordLocked: false,
     playerColor: Color.RANDOM,
     password: "",
-    description: ""
+    description: "",
+    gameID: "",
   };
   showRequired: boolean = false;
   waitingForOpponent = false;
-  message: string;
+  message: string = "";
 
   constructor(private chessService: ChessService) { }
 

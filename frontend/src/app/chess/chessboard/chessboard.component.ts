@@ -13,15 +13,15 @@ import { Color } from '../shared/models/color';
 
 export class ChessboardComponent implements OnInit {
   chessboardSpine: number[][] = [];
-  moveFromIndex: number;
-  moveToIndex: number;
-  validMoveHoverIndex: number;
+  moveFromIndex: number = -1;
+  moveToIndex: number = -1;
+  validMoveHoverIndex: number =-1;
   chessboard: ChessPiece[];
-  dragFrom: number;
-  selectedPiece: number;
-  lastMove: ChessMove;
+  dragFrom: number = -1;
+  selectedPiece: number = -1;
+  //lastMove: ChessMove;
   validMoves = new Set<number>();
-  inCheckLocation: number;
+  inCheckLocation: number = -1;
   playerColor: Color;
   Color = Color;
   readonly numColumns = 8;
@@ -52,14 +52,14 @@ export class ChessboardComponent implements OnInit {
 
   drop(event: CdkDragDrop<ChessPiece>, boardLocation: number) {
     this.validMoves.clear();
-    this.selectedPiece = null;
-    this.validMoveHoverIndex = null;
+    this.selectedPiece = -1;
+    this.validMoveHoverIndex = -1;
 
     if (event.previousContainer === event.container) {
 
     } else {
       let dragTo = boardLocation;
-      this.chessboardService.validatePlayersMove({ from: this.dragFrom, to: dragTo });
+      this.chessboardService.validatePlayersMove(new ChessMove(this.dragFrom, dragTo));
     }
   }
 
@@ -69,7 +69,7 @@ export class ChessboardComponent implements OnInit {
 
   hover(event: CdkDragEnter<ChessPiece>, dragTo: number) {
     if (this.chessboardService.isValidMove(this.dragFrom, dragTo)) this.validMoveHoverIndex = dragTo;
-    else this.validMoveHoverIndex = null;
+    else this.validMoveHoverIndex = -1;
   }
 
   showValidMoves(boardLocation: number) {

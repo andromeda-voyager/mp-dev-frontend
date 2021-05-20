@@ -14,11 +14,12 @@ export class Chessboard {
     private removedPieces: ChessPiece[] = [];
     private turn = Color.WHITE;
     private chessboard: ChessPiece[] = [];
-    private blackKingLocation: number;
-    private whiteKingLocation: number;
+    private blackKingLocation: number = 0;
+    private whiteKingLocation: number = 0;
     private moves: ChessMove[] = [];
 
     constructor(chessboard?: Chessboard) {
+        this.chessSquareHistory = new Map();
 
         if (chessboard) {
             this.chessSquareHistory = chessboard.chessSquareHistory;
@@ -209,9 +210,11 @@ export class Chessboard {
         }
         else {
             let attacker = this.chessboard[chessMove.to];
-            let target = this.removedPieces.pop();
             this.chessboard[chessMove.from] = attacker;
-            this.chessboard[chessMove.to] = target;
+            let target = this.removedPieces.pop();
+            if (target) {
+                this.chessboard[chessMove.to] = target;
+            }
             this.updateKingLocation(attacker, chessMove.from);
             this.decrementSquareHistory(chessMove.to);
             if (chessMove.promotion != null) this.undoPawnPromotion(chessMove);
@@ -252,12 +255,18 @@ export class Chessboard {
     }
 
     incrementSquareHistory(boardLocation: number) {
-        if (!this.chessSquareHistory.has(boardLocation)) this.chessSquareHistory.set(boardLocation, 0);
-        this.chessSquareHistory.set(boardLocation, this.chessSquareHistory.get(boardLocation) + 1);
+        let history = this.chessSquareHistory.get(boardLocation);
+        if (!history) {
+            history = 0;
+        }
+        this.chessSquareHistory.set(boardLocation, history + 1);
     }
 
     decrementSquareHistory(boardLocation: number) {
-        this.chessSquareHistory.set(boardLocation, this.chessSquareHistory.get(boardLocation) - 1);
+        let history = this.chessSquareHistory.get(boardLocation);
+        if (history) {
+            this.chessSquareHistory.set(boardLocation, history - 1);
+        }
     }
 
     getMovesForPiece(boardLocation: number): ChessMove[] {
@@ -347,14 +356,14 @@ export class Chessboard {
         let direction = pawnColor == Color.WHITE ? -8 : 8;
         let locationForwardOne = from + direction;
         if (this.isValidLocation(locationForwardOne) && this.isEmptyAt(locationForwardOne)) {
-            pawnMoves.push({ from: from, to: locationForwardOne });
+            pawnMoves.push(new ChessMove(from, locationForwardOne));
         }
 
         if (!this.isInLeftMostColumn(from)) {
             let moveToLeftDiagonal = from + direction - 1;
             if (this.isValidLocation(moveToLeftDiagonal)) {
                 if (this.isAttackingEnemy(from, moveToLeftDiagonal)) {
-                    pawnMoves.push({ from: from, to: moveToLeftDiagonal });
+                    pawnMoves.push(new ChessMove(from, moveToLeftDiagonal));
                 }
             }
         }
@@ -363,21 +372,21 @@ export class Chessboard {
             let moveToRightDiagonal = from + direction + 1;
             if (this.isValidLocation(moveToRightDiagonal)) {
                 if (this.isAttackingEnemy(from, moveToRightDiagonal)) {
-                    pawnMoves.push({ from: from, to: moveToRightDiagonal });
+                    pawnMoves.push(new ChessMove(from, moveToRightDiagonal));
                 }
             }
         }
         if (this.isPawnStartingLocation(from)) {
             let locationForwardTwo = from + direction * 2;
             if (this.isValidLocation(locationForwardTwo) && this.isEmptyAt(locationForwardTwo) && this.isEmptyAt(locationForwardOne)) { //TODO test removing location forwardone
-                pawnMoves.push({ from: from, to: locationForwardTwo });
+                pawnMoves.push(new ChessMove(from, locationForwardTwo));
             }
         }
 
         if (this.isMoveWithinSameRow(from, from + 1)) { // En Passant diagonal right
             if (this.isEnemyPawnAt(from + 1, this.chessboard[from].color)) {
                 if (this.isEnPassant(from, from + direction + 1)) {
-                    pawnMoves.push({ from: from, to: from + direction + 1 });
+                    pawnMoves.push(new ChessMove(from, from + direction + 1));
                 }
             }
         }
@@ -385,7 +394,7 @@ export class Chessboard {
         if (this.isMoveWithinSameRow(from, from - 1)) { // En Passant diagonal left
             if (this.isEnemyPawnAt(from - 1, this.chessboard[from].color)) {
                 if (this.isEnPassant(from, from + direction - 1)) {
-                    pawnMoves.push({ from: from, to: from + direction - 1 });
+                    pawnMoves.push(new ChessMove(from, from + direction - 1));
                 }
             }
         }
@@ -403,10 +412,10 @@ export class Chessboard {
             let locationInPath = (row * 8 + column);
             if (this.isAttackingEnemy(startingLocation, locationInPath)) {
                 // add move to enemy location and return since enemy blocking path
-                moves.push({ from: startingLocation, to: locationInPath });
+                moves.push(new ChessMove(startingLocation, locationInPath));
                 return moves;
             } else if (this.isEmptyAt(locationInPath)) {
-                moves.push({ from: startingLocation, to: locationInPath });
+                moves.push(new ChessMove(startingLocation, locationInPath));
             } else {
                 return moves; // friendly piece blocking path 
             }
@@ -441,14 +450,14 @@ export class Chessboard {
     getKnightMoves(from: number): ChessMove[] {
         let moves: ChessMove[] = [];
 
-        if (this.isValidKnightMove(from, from + 17)) moves.push({ from: from, to: from + 17 });
-        if (this.isValidKnightMove(from, from + 15)) moves.push({ from: from, to: from + 15 });
-        if (this.isValidKnightMove(from, from - 17)) moves.push({ from: from, to: from - 17 });
-        if (this.isValidKnightMove(from, from - 15)) moves.push({ from: from, to: from - 15 });
-        if (this.isValidKnightMove(from, from + 6)) moves.push({ from: from, to: from + 6 });
-        if (this.isValidKnightMove(from, from + 10)) moves.push({ from: from, to: from + 10 });
-        if (this.isValidKnightMove(from, from - 6)) moves.push({ from: from, to: from - 6 });
-        if (this.isValidKnightMove(from, from - 10)) moves.push({ from: from, to: from - 10 });
+        if (this.isValidKnightMove(from, from + 17)) moves.push(new ChessMove(from, from + 17));
+        if (this.isValidKnightMove(from, from + 15)) moves.push(new ChessMove(from, from + 15));
+        if (this.isValidKnightMove(from, from - 17)) moves.push(new ChessMove(from, from - 17));
+        if (this.isValidKnightMove(from, from - 15)) moves.push(new ChessMove(from, from - 15));
+        if (this.isValidKnightMove(from, from + 6)) moves.push(new ChessMove(from, from + 6));
+        if (this.isValidKnightMove(from, from + 10)) moves.push(new ChessMove(from, from + 10));
+        if (this.isValidKnightMove(from, from - 6)) moves.push(new ChessMove(from, from - 6));
+        if (this.isValidKnightMove(from, from - 10)) moves.push(new ChessMove(from, from - 10));
 
         return moves;
     }
@@ -497,7 +506,7 @@ export class Chessboard {
         for (let to of potentialMoveLocations) {
             if (this.isValidLocation(to)) {
                 if (this.isAttackingEnemy(from, to) || this.isEmptyAt(to)) {
-                    moves.push({ from: from, to: to });
+                    moves.push(new ChessMove(from, to));
                 }
             }
         }
@@ -532,6 +541,7 @@ export class Chessboard {
             row += rowDirection;
             column += columnDirection;
         }
+        return false;
     }
 
     needsPawnPromotion(chessMove: ChessMove): boolean {
@@ -592,7 +602,11 @@ export class Chessboard {
     }
 
     hasPieceAtMoved(boardLocation: number): boolean {
-        return this.chessSquareHistory.get(boardLocation) > 0;
+        let history = this.chessSquareHistory.get(boardLocation);
+        if (history) {
+            return history > 0;
+        }
+        return false;
     }
 
     isValidCastleMove(from: number, to: number): boolean {
@@ -610,7 +624,7 @@ export class Chessboard {
 
         while (locationInPath != to) { // king can't be in check along path to rook when castling (does not check final postion as that is checked before this is called)
             locationInPath += direction;
-            let chessMove: ChessMove = { from: from, to: locationInPath };
+            let chessMove: ChessMove = new ChessMove(from,  locationInPath);
             if (this.isInCheckAfterMove(chessMove)) {
                 return false;
             }

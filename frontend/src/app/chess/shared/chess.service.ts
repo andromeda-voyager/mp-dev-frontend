@@ -29,9 +29,9 @@ const httpOptions = {
 })
 
 export class ChessService {
-  private gameID: string;
-  private playerID: string;
-  private isConnectedOnline: boolean;
+  private gameID: string = "";
+  private playerID: string = "";
+  private isConnectedOnline: boolean = false;
   private updateInterval: any;
 
   constructor(private http: HttpClient, private chessboardService: ChessboardService) {
@@ -54,6 +54,9 @@ export class ChessService {
     let gameUpdate: GameUpdate = {
       gameID: this.gameID,
       playerID: this.playerID,
+      chessMove: new ChessMove(0,0),
+      playerColor: Color.WHITE,
+      opponentStatus: PlayerStatus.ACTIVE,
       gameStatus: gameStatus,
       playerStatus: playerStatus
     };
@@ -63,8 +66,10 @@ export class ChessService {
   postChessMove(chessMove: ChessMove) {
     let gameUpdate: GameUpdate = {
       gameID: this.gameID,
+      playerColor: Color.WHITE,
       playerID: this.playerID,
       gameStatus: GameStatus.ACTIVE,
+      opponentStatus: PlayerStatus.ACTIVE,
       playerStatus: PlayerStatus.ACTIVE,
       chessMove: chessMove
     };
@@ -113,9 +118,9 @@ export class ChessService {
   startOnlineGame(gameUpdate: GameUpdate) {
     this.chessboardService.startGame(gameUpdate.playerColor);
     if (gameUpdate.playerColor == Color.BLACK) {
-      this.postChessMove(null).subscribe(gameUpdate =>
+      this.postChessMove(new ChessMove(0,0)).subscribe(gameUpdate =>
         this.chessboardService.applyOpponentsMove(gameUpdate.chessMove)
-      ), error => this.handleError(error);
+      ), (error:Error) => this.handleError(error);
     }
   }
 
@@ -133,7 +138,7 @@ export class ChessService {
 
   applyComputersMove() {
     if (typeof Worker !== 'undefined') {
-      const worker = new Worker('./chess.worker', { type: 'module' });
+      const worker = new Worker(new URL('./chess.worker', import.meta.url));
       worker.onmessage = ({ data }) => {
         this.chessboardService.applyOpponentsMove(data);
       };

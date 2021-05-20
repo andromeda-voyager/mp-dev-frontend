@@ -16,7 +16,7 @@ const postRecommendationURL = environment.BASE_API_URL + '/books/recommend';
 export class BookService {
 
   private bookRecommendedSource = new Subject<Book>();
-  recommender: string;
+  recommender: string = "";
   bookRecommended$ = this.bookRecommendedSource.asObservable();
 
   constructor(private http: HttpClient) { }
