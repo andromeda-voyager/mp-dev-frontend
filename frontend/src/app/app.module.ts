@@ -8,7 +8,6 @@ import { MatRippleModule } from '@angular/material/core'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
-import { RecommendBooksModule } from 'src/app/recommend-books/recommend-books.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { ChessboardComponent } from './chess/chessboard/chessboard.component';
@@ -32,6 +31,8 @@ import { VideoGamesComponent } from './interests/video-games/video-games.compone
 import { RouterModule } from '@angular/router';
 import { AstronomyComponent } from './interests/astronomy/astronomy.component';
 import { ScienceFictionComponent } from './interests/science-fiction/science-fiction.component';
+import { SearchResultsComponent } from './recommend-books/search-results/search-results.component'
+import { RecommendBooksComponent } from './recommend-books/recommend-books.component';
 
 
 @NgModule({
@@ -50,7 +51,9 @@ import { ScienceFictionComponent } from './interests/science-fiction/science-fic
     VideoGamesComponent,
     AstronomyComponent,
     ScienceFictionComponent,
-    PawnPromotionComponent
+    PawnPromotionComponent,
+    RecommendBooksComponent,
+    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,6 @@ import { ScienceFictionComponent } from './interests/science-fiction/science-fic
     MatButtonModule,
     HttpClientModule,
     MatMenuModule,
-    RecommendBooksModule,
     DragDropModule,
     MatTabsModule,
     MatFormFieldModule,
@@ -71,7 +73,7 @@ import { ScienceFictionComponent } from './interests/science-fiction/science-fic
     MatRadioModule,
     MatInputModule,
     FormsModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

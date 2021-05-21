@@ -7,7 +7,7 @@
 }
 
 #books-container {
-    margin: 5vh 8vw;
+    margin: 3vw 8vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
