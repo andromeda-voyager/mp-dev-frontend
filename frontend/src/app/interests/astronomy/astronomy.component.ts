@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-astronomy',
   templateUrl: './astronomy.component.html',
-  styleUrls: ['./astronomy.component.css']
+  styleUrls: ['./astronomy.component.css', '../interests.component.css']
 })
 export class AstronomyComponent implements OnInit {
 

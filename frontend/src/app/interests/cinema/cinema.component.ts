@@ -6,7 +6,7 @@ import { DIRECTORS } from './director-data';
 @Component({
   selector: 'app-cinema',
   templateUrl: './cinema.component.html',
-  styleUrls: ['./cinema.component.css']
+  styleUrls: ['./cinema.component.css', '../interests.component.css']
 })
 
 export class CinemaComponent implements OnInit {

@@ -9,9 +9,8 @@
 }
 
 h1 {
-    font-size: max(2.5vw, 30px);
+    color: white;
     text-align: center;
-    margin-top: 2.5vh;
 }
 
 #selected-movie {
@@ -48,6 +47,7 @@ h1 {
     color:rgb(0, 0, 0);
     padding: 1em .7em 1em .7em;
     opacity: .6;
+    box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.65);
 }
 
 .selected-category-button {
@@ -79,7 +79,8 @@ h1 {
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.39);
+    background-color: rgba(0, 0, 0, 0.281);
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.65);
 }
 
 .movie:hover{

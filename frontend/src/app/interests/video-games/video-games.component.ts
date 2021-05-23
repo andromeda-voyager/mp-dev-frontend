@@ -4,7 +4,7 @@ import { animate, stagger, query, style, transition, trigger } from '@angular/an
 @Component({
   selector: 'app-video-games',
   templateUrl: './video-games.component.html',
-  styleUrls: ['./video-games.component.css'],
+  styleUrls: ['./video-games.component.css', '../interests.component.css'],
   animations: [
     trigger('stagger', [
       transition('* => *', [
@@ -31,9 +31,9 @@ export class VideoGamesComponent implements OnInit {
       "Starcraft",
       "Zelda",
       "Age of Empires II",
-      "Gears of War",
-      "Ghost Recon Phantoms",
       "Super Smash Bros.",
+      "Ghost Recon Phantoms",
+      "Mass Effect",
     ],
     [
       "PC",

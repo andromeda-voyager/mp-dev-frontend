@@ -1,11 +1,16 @@
 <div id="science-fiction">
     <h1>Science Fiction</h1>
     <div id="books-container">
-        <div class="book-wrapper" *ngFor="let book of books">
+        <div [@fadeIn]='book.state' class="book-wrapper" *ngFor="let book of books">
             <a target="_blank" rel="noopener noreferrer" [href]="book.link">
-                <span>Visit Publisher's Store Page</span>
+                Visit Publisher's Store Page
             </a>
-            <img [@fadeIn]='book.state' class="book" src={{book.imageURL}}>
+            <img class="book" src={{book.imageURL}}>
         </div>
     </div>
+    <span class="publisher-link-wrapper" >Find these books at
+        <a target="_blank" href="https://www.penguinrandomhouse.com/" rel="noopener noreferrer">
+            penguinrandomhouse.com
+        </a>
+    </span>
 </div>

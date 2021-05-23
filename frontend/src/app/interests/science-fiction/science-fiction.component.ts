@@ -7,7 +7,7 @@ import { BookCover } from '../science-fiction/book-cover';
 @Component({
   selector: 'app-science-fiction',
   templateUrl: './science-fiction.component.html',
-  styleUrls: ['./science-fiction.component.css'],
+  styleUrls: ['./science-fiction.component.css', '../interests.component.css'],
   animations: [
     trigger('fadeIn', [
       state('true', style({
