@@ -35,6 +35,10 @@ a {
     color: rgb(12, 80, 136);
 }
 
+a:visited {
+    color: rgb(66, 22, 117);
+}
+
 a:hover {
     text-decoration: underline;
 }
