@@ -22,10 +22,6 @@
    height:auto;
 }
 
-#page {
-    min-height:50vh;
-}
-
 #empty-notification-div {
     text-align:center;
 }

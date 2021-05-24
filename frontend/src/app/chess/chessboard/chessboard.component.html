@@ -3,8 +3,7 @@
         <div *ngFor="let chessPiece of rows; let column = index" class="square"
             [ngClass]="{'white': (row % 2 == column % 2)}" cdkDropList (cdkDropListDropped)="drop($event, chessPiece)"
             (cdkDropListEntered)="hover($event, chessPiece)">
-            <div *ngIf="isHighlighted(chessPiece)"
-                class="highlighted"></div>
+            <div *ngIf="isHighlighted(chessPiece)" class="highlighted"></div>
             <div class="chess-piece" [ngClass]="{'players-piece':chessboard[chessPiece].color === playerColor }" cdkDrag
                 [cdkDragDisabled]="chessboard[chessPiece].color != playerColor"
                 (cdkDragStarted)="pieceDragStarted($event, chessPiece)">

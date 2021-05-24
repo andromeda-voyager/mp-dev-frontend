@@ -9,7 +9,6 @@
     align-items: center;
     min-width:200px;
     width: 80vw;
-    max-width: calc(70vh - 75px);
     margin:auto;
     padding-top:15px;
 }

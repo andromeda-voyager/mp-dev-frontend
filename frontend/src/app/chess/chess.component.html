@@ -1,11 +1,10 @@
-<div id="component">
-    <div *ngIf="!showChessboard">
-        <nav mat-tab-nav-bar mat-align-tabs="center">
-            <a mat-tab-link *ngFor="let link of tabLinks" [routerLink]="link.path"  
-            routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"
-            (click)="disconnect()">{{link.label}}</a>            
-        </nav>
-        <router-outlet></router-outlet>
-    </div>
-    <app-chess-game *ngIf="showChessboard" (leaveChessboard)="onLeaveChessboard()"></app-chess-game>
+<div *ngIf="!showChessboard">
+    <nav mat-tab-nav-bar mat-align-tabs="center">
+        <a mat-tab-link *ngFor="let link of tabLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive" (click)="disconnect()">
+            {{link.label}}
+        </a>
+    </nav>
+    <router-outlet></router-outlet>
 </div>
+<app-chess-game *ngIf="showChessboard" (leaveChessboard)="onLeaveChessboard()"></app-chess-game>

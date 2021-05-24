@@ -2,7 +2,6 @@
     display:flex;
     flex-direction: column;
     position: relative;
-    min-height: calc(100vh - var(--nav-height));
 }
 
 #content {
