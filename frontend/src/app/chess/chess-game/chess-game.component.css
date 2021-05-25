@@ -11,6 +11,7 @@
     width: 80vw;
     margin:auto;
     padding-top:15px;
+    max-width: calc(70vh - 75px);
 }
 
 #button-message-container span {
