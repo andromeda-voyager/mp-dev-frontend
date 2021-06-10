@@ -59,7 +59,7 @@ h1 {
 }
 
 .publisher-link-wrapper {
-    font-size: large;
+    font-size: min(18px, 4vw);
     color:white;
     margin: 2vmin auto;
 }
