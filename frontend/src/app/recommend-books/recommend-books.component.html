@@ -1,12 +1,15 @@
 <div id="component">
 
-    <mat-card *ngIf="!isNameSubmitted">
-        <mat-form-field appearance="fill">
-            <mat-label>Your Name</mat-label>
-            <input matInput [(ngModel)]="recommender">
-        </mat-form-field>
-        <button mat-raised-button color="accent" id="submit-name-button" (click)="submitName()">Submit</button>
-    </mat-card>
+    <div *ngIf="!isNameSubmitted">
+        <mat-card>
+            <mat-form-field appearance="fill">
+                <mat-label>Your Name</mat-label>
+                <input matInput [(ngModel)]="recommender">
+            </mat-form-field>
+            <button mat-raised-button color="accent" id="submit-name-button" (click)="submitName()">Submit</button>
+        </mat-card>
+    </div>
+  
 
     <div *ngIf="isNameSubmitted" id="recommend-container">
 
@@ -20,9 +23,8 @@
 
         <div id="recommended-container">
             <h4>Your Recommendations</h4>
-            <div *ngIf="recommendedBooks.length == 0">Use the search box to find books. Select a book from the results
-                to
-                add them to this list.
+            <div id="instructions" *ngIf="recommendedBooks.length == 0">(Empty) 
+                <span>Select a book from the results to add it to this list.</span> 
             </div>
             <ng-container *ngFor="let book of recommendedBooks">
                 <div class="recommended-book">
