@@ -11,19 +11,18 @@
 }
 
 #lobby-card {
-   margin-left:auto;
-   margin-right:auto;
    width:fit-content;
    min-width: 320px;
+   min-height: 50vh;
    width:50%;
-   margin-top:15px;
+   margin:15px auto;
    max-width:450px;
-   margin-bottom:25px;
-   height:auto;
+   display:flex;
+   flex-direction: column;
 }
 
 #empty-notification-div {
-    text-align:center;
+    margin:auto;
 }
 
 mat-hint {

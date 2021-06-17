@@ -6,7 +6,7 @@
                 <mat-label>Your Name</mat-label>
                 <input matInput [(ngModel)]="recommender">
             </mat-form-field>
-            <button mat-raised-button color="accent" id="submit-name-button" (click)="submitName()">Submit</button>
+            <button mat-raised-button id="submit-name-button" (click)="submitName()">Submit</button>
         </mat-card>
     </div>
   
@@ -16,7 +16,7 @@
         <div id="search-container">
             <input [(ngModel)]="title" placeholder="Title" />
             <input [(ngModel)]="author" placeholder="Author" />
-            <button mat-raised-button color="accent" id="search-button" (click)="submitSearchQuery()">
+            <button mat-raised-button id="search-button" (click)="submitSearchQuery()">
                 Search
             </button>
         </div>

@@ -60,13 +60,13 @@ mat-card{
   padding:10px;
 }
 
-input:focus {
+#search-container input:focus {
   outline:none;
-  border:2px solid rgb(51, 131, 236);
+  border:2px solid rgb(24, 32, 37);
   border-radius: 2px;
 }
 
-input {
+#search-container input {
   max-width: 300px;
   width:30%;
   margin-right: 8px;
@@ -78,11 +78,15 @@ input {
   max-width: 30%;
   height:40px;
   min-width: 200px; 
-  color:white;
 }
 
 #search-button:hover {
   opacity: .85;
+}
+
+button {
+  background-color: rgb(24, 32, 37);
+  color:white;
 }
 
 #submit-name-button {
@@ -90,6 +94,7 @@ input {
   height: 2.7em;
   margin-top:1.5vh;
   width: 7em;
+  background-color:rgb(24, 32, 37);
 }
 
 #submit-name-button:hover {

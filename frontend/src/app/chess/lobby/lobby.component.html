@@ -5,7 +5,7 @@
     <mat-card-header>
         <mat-card-title>Lobby</mat-card-title>
     </mat-card-header>
-    <div id="empty-notification-div" *ngIf="lobby.size == 0">Lobby is empty.</div>
+    <span id="empty-notification-div" *ngIf="lobby.size == 0">Lobby is empty</span>
     <div class="chess-game" [ngClass]="{'selected-game': chessGame.value.gameID == selectedGameID}"
         *ngFor="let chessGame of lobby | keyvalue" (click)="onChessGameClick(chessGame.value.gameID)">
         <div class="game-information">

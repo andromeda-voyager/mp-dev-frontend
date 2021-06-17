@@ -29,6 +29,7 @@ mat-hint {
 mat-radio-group {
   margin-bottom: 25px;
 }
+
 mat-radio-button {
   margin-top:15px;
   margin-right:10px;
@@ -50,6 +51,11 @@ mat-form-field , mat-checkbox  {
 
 #exit-button:hover {
   opacity: .75;
+}
+
+button {
+  background-color: rgb(24, 32, 37);
+  color:white;
 }
 
 #exit-button {
