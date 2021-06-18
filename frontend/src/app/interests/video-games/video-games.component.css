@@ -85,7 +85,7 @@ button {
 }
 
 .flat:hover {
-    color:rgb(0, 153, 255);
+    color:var(--accent-light);
 }
 
 .raised:hover{

@@ -62,7 +62,7 @@ mat-card{
 
 #search-container input:focus {
   outline:none;
-  border:2px solid rgb(24, 32, 37);
+  border:2px solid  var(--accent-light);
   border-radius: 2px;
 }
 
@@ -85,7 +85,7 @@ mat-card{
 }
 
 button {
-  background-color: rgb(24, 32, 37);
+  background-color: var(--accent);
   color:white;
 }
 
@@ -94,7 +94,6 @@ button {
   height: 2.7em;
   margin-top:1.5vh;
   width: 7em;
-  background-color:rgb(24, 32, 37);
 }
 
 #submit-name-button:hover {

@@ -1,7 +1,3 @@
-:host {
-  --nav-height: 75px;
-}
-
 #top-nav .active-link {
   border-bottom: solid;
 }

@@ -31,7 +31,7 @@ p {
 
 a {
     text-decoration: none;
-    color: rgb(12, 80, 136);
+    color: var(--accent-dark);
 }
 
 a:visited {

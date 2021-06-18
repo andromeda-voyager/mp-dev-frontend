@@ -93,7 +93,7 @@
 }
 
 .blue-button{
-  background-color: rgb(47, 93, 128);
+  background-color: var(--accent);
 }
 
 .paused:hover {

@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --nav-height: 65px;
+  /* --accent: rgb(28, 114, 172);
+  --accent-light: rgb(34, 149, 226);
+  --accent-dark: rgb(10, 83, 133); */
+
+  --accent: rgb(28, 172, 124);
+  --accent-light: rgb(22, 206, 144);
+  --accent-dark: rgb(10, 134, 93);
+}
 
 body { 
   margin: 0; 
