@@ -1,12 +1,13 @@
-#component {
+#astronomy {
   width:100%;
+  background-color: white;
   position: relative;
 }
 
 #image-credit {
   z-index: 70;
   position: absolute;
-  font-size: max(.9vw, 12px);
+  font-size: min(30px, max(.9vw, 12px));
   color:white;
   bottom:8px;
   right:10px;

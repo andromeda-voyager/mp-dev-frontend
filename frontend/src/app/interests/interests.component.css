@@ -1,4 +1,28 @@
 h1 {
-    font-size: max(3.5vmin, 30px);
-    margin-top:2.5vmin;
+    font-size: min(50px, max(3.5vmin, 30px));
+    margin-top: min(2.5vmin, 50px);
+}
+
+#interests-container {
+    display:flex;
+    flex-direction: column;
+    max-width: 1500px;
+    margin:auto;
+}
+
+
+@media screen and (min-width: 1500px) {
+    #interests-container {
+        transition: row-gap 1s;
+        padding-bottom: 5vh;
+        max-width: 1300px;
+    }
+    #interests {
+        background-color: rgb(255, 255, 255);
+    }
+    .component-wrapper {
+        margin-top: 5vh;
+        box-shadow: 4px 4px 4px 4px rgb(139, 139, 139);
+        transition: margin-top 1s;
+    }
 }

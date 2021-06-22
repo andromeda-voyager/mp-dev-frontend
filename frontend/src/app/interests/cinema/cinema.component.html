@@ -1,14 +1,14 @@
-<div #target id="movies">
+<div #target id="cinema">
     <h1>Cinema</h1>
 
     <div id="menu">
-        <button [ngClass]="{'selected-category-button':selectedCategory==movies}" mat-raised-button color="white"
+        <button id="film-button" [ngClass]="{'selected-category-button':selectedCategory==movies}" mat-raised-button color="white"
             class="menu-button" (click)="viewFilmsOnClick()">
-            Favorite Films
+             Films
         </button>
         <button [ngClass]="{'selected-category-button':selectedCategory==directors}" mat-raised-button color="white"
             class="menu-button" (click)="viewDirectorsOnClick()">
-            Favorite Directors
+             Directors
         </button>
     </div>
 
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="movies-container">
+        <div id="movies-container">
             <ng-container *ngFor="let item of selectedCategory; let i = index">
                 <div class="movie" [ngClass]="{'selected-movie':selectedIndex==i}"
                     (click)="onItemClick(i, target)">
