@@ -27,7 +27,7 @@
 }
 
 #side-nav a:hover {
-  color:rgb(26, 110, 219);
+  color: var(--accent-dark);
   background-color: rgba(128, 128, 128, 0.233);
 } 
 
@@ -50,7 +50,7 @@
   justify-content: flex-end;
   align-items: center;
   height: var(--nav-height);
-  background-color:rgb(24, 32, 37);
+  background-color:rgb(23, 25, 26);
 }
 
 @media screen and (max-width: 600px) {
