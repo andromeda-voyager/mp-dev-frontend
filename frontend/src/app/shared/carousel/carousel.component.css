@@ -49,17 +49,16 @@
   opacity: .6;
   font-weight: bold;
   display: inline-block;
-  border-left: 0.1em solid white;
-  border-bottom: 0.1em solid white;
-  font-size: 3em;
-  width: 2.5vw;
-  height: 2.5vw;
+  border-left: 0.12em solid white;
+  border-bottom: 0.12em solid white;
+  font-size: min(50px, 5vmin);
+  width: 1em;
+  height: 1em;
 }
 
 .control:hover .arrow {
-  width: 3vw;
-  height: 3vw;
-  font-size:4em;
+  width: 1.3em;
+  height: 1.3em;
   opacity: 1;
 }
 
