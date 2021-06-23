@@ -2,8 +2,10 @@
   display:flex;
   flex-direction: column;
   width:100%;
-  margin-bottom:5px;
-  height:auto;
+  padding-bottom:10px;
+  background-color: rgb(67, 153, 96);
+  min-height: calc(100vh - var(--nav-height));
+  box-sizing: border-box;
 }
 
 mat-card{
@@ -22,8 +24,23 @@ mat-card{
   flex-direction: column;
 }
 
-#recommend-container {
-  width:100%;  
+#recommend-page {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#search-recommended-container {
+  width: 90%;
+  background-color: rgba(29, 34, 37, 0.952);
+  margin: 20px auto;
+  box-shadow: 
+    0 3px 2px -1px rgba(0, 0, 0, 0.281), 
+    0 3px 2px 1px rgba(0, 0, 0, 0.13), 
+    0 3px 1px 1px rgba(0, 0, 0, 0.082), 
+    -1px 0 4px 1px rgba(0, 0, 0, 0.137);
+  border-radius: 4px;
+  color:white;
 }
 
 #recommended-container {
@@ -33,12 +50,8 @@ mat-card{
   align-self: flex-start;
   min-height: 70px;
   text-align: center;
-  background-color: white;
   margin-bottom: 2.5vh;
   font-size:small;
-  box-shadow:
-  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-  0 5.3px 5.9px rgba(0, 0, 0, 0.072);
 }
 
 .recommended-book {
@@ -46,7 +59,6 @@ mat-card{
   font-size: 1.1em;
   white-space: nowrap;
   margin: 5px 10px 5px 10px;
-  color:black;  
 }
 
 #search-container {
@@ -62,16 +74,21 @@ mat-card{
 
 #search-container input:focus {
   outline:none;
-  border:2px solid  var(--accent-light);
+  border: 2px solid  var(--accent-light);
   border-radius: 2px;
 }
 
 #search-container input {
+  background-color: rgb(236, 236, 236);
+  box-sizing: border-box;
+  font-size: medium;
+  padding: 5px;
+  border: 1px solid black;
   max-width: 300px;
   width:30%;
   margin-right: 8px;
   min-width: 100px;
-  height:35px; 
+  height:40px; 
 }
   
 #search-button {
