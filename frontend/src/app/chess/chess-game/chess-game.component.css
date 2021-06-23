@@ -1,6 +1,9 @@
 #resign-button {
-    font-size:1.2em;
+    font-size: 1.2em;
     min-width: fit-content;
+    background-color: var(--accent);
+    color:white;
+    margin-bottom: 10px;
 }
 
 #button-message-container {
@@ -11,12 +14,7 @@
     width: 80vw;
     margin:auto;
     padding-top:15px;
-    max-width: calc(70vh - 75px);
-}
-
-#resign-button {
-    background-color: var(--accent);
-    color:white;
+    max-width: min(800px, calc(70vh - 75px));
 }
 
 #button-message-container span {

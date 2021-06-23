@@ -6,8 +6,8 @@
     min-width:200px;
     height:80vw;
     width: 80vw;
-    max-height: calc(70vh - 75px);
-    max-width: calc(70vh - 75px);
+    max-height: min(800px, calc(70vh - 75px));
+    max-width: min(800px, calc(70vh - 75px));
 }
 
 .square {

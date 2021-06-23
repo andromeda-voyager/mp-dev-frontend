@@ -1,9 +1,7 @@
 <div [ngClass]="{'hidden': isHidden}" id="promotion">
-    <span>Promote Pawn</span>
     <div id="buttonsContainer">
         <button *ngFor="let promotionOption of promotionOptions; let i = index" (click)="promotePawn(promotionOption)">
             <img src={{promotionOption.imageUrl}}>
         </button>
-
     </div>
 </div>
