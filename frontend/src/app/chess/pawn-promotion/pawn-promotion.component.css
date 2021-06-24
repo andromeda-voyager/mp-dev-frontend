@@ -24,10 +24,10 @@
 button {
     cursor: pointer;
     background-size: cover;
-    background-color: rgb(255, 255, 255);
     height:100%;
     width:25%;
     border-style: none;
+    background-color: transparent;
 }    
 
 img {

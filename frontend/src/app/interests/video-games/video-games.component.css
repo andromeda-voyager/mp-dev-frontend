@@ -1,5 +1,4 @@
 #video-games {
-    background-color: rgb(255, 255, 255);
     display:flex;
     flex-wrap: wrap;
     width:100%;
@@ -77,8 +76,8 @@ button {
 }
 
 .flat {
-    background-color: rgba(0, 0, 0, 0.055);
-    color:rgb(102, 102, 102)
+    background-color: rgba(0, 0, 0, 0.075);
+    color:rgb(92, 92, 92)
 }
 
 @media screen and (min-width: 1150px) {

@@ -1,15 +1,18 @@
-#component { 
+#home { 
+    min-height: calc(100vh - var(--nav-height));
     display:flex;
     flex-direction: column;
     position: relative;
 }
 
-#content {
+#info {
+    display:flex;
+    flex-direction: column;
+    row-gap: 15px;
     padding-left:7vw;
     padding-right:7vw;
-    margin:3vh auto 3vh auto;
+    margin: 20px auto;
     max-width: 900px;
-    margin-bottom: 65px;
 }
 
 #name-span {
@@ -17,14 +20,13 @@
 }
 
 h1{
-    margin-top:4vh;
-    font-size:1.8em;
+    margin-top: 30px;
+    font-size: 1.8em;
     text-align: center;    
 }
 
 p {
-    font-size:1.6em;  
-    margin-bottom: 3vh;
+    font-size: 1.6em;  
     line-height: 1.4;
     text-align: left;
 }
@@ -42,24 +44,15 @@ a:hover {
     text-decoration: underline;
 }
 
-footer {
-    height:auto;
-    position: absolute;;
-    bottom:0;
-    width:100%;
-    background-color: rgb(255, 255, 255);
-}
-
 #social-media-buttons {
-   margin:auto;
+   margin: 0 auto;
    width: fit-content;
-   margin-bottom:10px;
 }
 
 #social-media-buttons img {
-    width:40px;
-    margin-left:12.5px;
-    margin-right:12.5px;
+    width: 40px;
+    margin-left: 12.5px;
+    margin-right: 12.5px;
     cursor: pointer;
 }
 

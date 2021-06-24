@@ -6,12 +6,15 @@
   --accent-dark: rgb(10, 83, 133); */
 
   --accent: rgb(28, 172, 124);
-  --accent-light: rgb(22, 206, 144);
+  --accent-light: rgb(14, 184, 127);
   --accent-dark: rgb(10, 134, 93);
 }
 
 body { 
   margin: 0; 
+  min-width: 300px;
+  background-color: rgb(252, 252, 252);
+  /* background-color: rgb(26, 137, 165); */
   /* font-family: Roboto, "Helvetica Neue", sans-serif;  */
 }
 

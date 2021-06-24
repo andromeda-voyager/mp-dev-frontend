@@ -1,6 +1,5 @@
 #astronomy {
   width:100%;
-  background-color: white;
   position: relative;
 }
 
@@ -18,7 +17,6 @@
   flex-direction: column-reverse;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: white;
   width:100%;
   padding-bottom:5px;
 }
