@@ -1,6 +1,6 @@
 <div id="component">
 
-    <div *ngIf="isNameSubmitted">
+    <div *ngIf="!isNameSubmitted">
         <mat-card>
             <mat-form-field appearance="fill">
                 <mat-label>Your Name</mat-label>
@@ -11,7 +11,7 @@
     </div>
 
 
-    <div *ngIf="!isNameSubmitted" id="recommend-page">
+    <div *ngIf="isNameSubmitted" id="recommend-page">
         <div class="card" id="search-wrapper">
             <div id="search-container">
                 <input [(ngModel)]="title" placeholder="Title" />
