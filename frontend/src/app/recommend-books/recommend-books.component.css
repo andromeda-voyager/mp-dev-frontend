@@ -3,7 +3,6 @@
   flex-direction: column;
   width:100%;
   padding-bottom:10px;
-  background-color: rgb(67, 153, 96);
   min-height: calc(100vh - var(--nav-height));
   box-sizing: border-box;
 }
@@ -19,38 +18,36 @@ mat-card{
   align-items:center;
 }
 
-#instructions {
-  display: flex;
-  flex-direction: column;
-}
-
 #recommend-page {
-  width: 100%;
-  max-width: 800px;
+  width: 90%;
+  max-width: 850px;
   margin: 0 auto;
 }
 
-#search-recommended-container {
-  width: 90%;
-  background-color: rgba(29, 34, 37, 0.952);
-  margin: 20px auto;
+.card {
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
   box-shadow: 
-    0 3px 2px -1px rgba(0, 0, 0, 0.281), 
-    0 3px 2px 1px rgba(0, 0, 0, 0.13), 
-    0 3px 1px 1px rgba(0, 0, 0, 0.082), 
+    0 2px 1px -1px rgba(0, 0, 0, 0.281), 
+    0 1px 1px 0px rgba(0, 0, 0, 0.13), 
+    0 1px 3px 1px rgba(0, 0, 0, 0.082), 
     -1px 0 4px 1px rgba(0, 0, 0, 0.137);
   border-radius: 4px;
-  color:white;
+  box-sizing: border-box;
+  height: fit-content;
+}
+
+#search-wrapper {
+  width: 100%;
+  margin: 20px auto;
+  color:black;
 }
 
 #recommended-container {
-  box-sizing: border-box;
-  padding: 10px;
   width: 100%;
-  align-self: flex-start;
-  min-height: 70px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  margin-bottom: 2.5vh;
   font-size:small;
 }
 
@@ -64,40 +61,37 @@ mat-card{
 #search-container {
   box-sizing: border-box;
   width:100%;
-  height:125px;
   display: flex;
   flex-wrap: wrap;
+  column-gap: 15px;
+  row-gap: 10px;
   justify-content: center;
   align-items: center;
-  padding:10px;
+  font-size: medium;
 }
 
 #search-container input:focus {
   outline:none;
-  border: 2px solid  var(--accent-light);
-  border-radius: 2px;
+  border-color: var(--accent);
 }
 
 #search-container input {
-  background-color: rgb(236, 236, 236);
-  box-sizing: border-box;
-  font-size: medium;
-  padding: 5px;
-  border: 1px solid black;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(0, 0, 0);
   max-width: 300px;
-  width:30%;
-  margin-right: 8px;
-  min-width: 100px;
-  height:40px; 
-}
-  
-#search-button {
-  max-width: 30%;
-  height:40px;
-  min-width: 200px; 
+  width: 30%;
+  min-width: 150px;
+  padding: .8em .5em;
+  font-size: 1em;
+ 
 }
 
-#search-button:hover {
+#search-button {
+  font-size: 1.2em;
+  padding: .2em 3em;
+}
+
+button:hover {
   opacity: .85;
 }
 
@@ -107,12 +101,7 @@ button {
 }
 
 #submit-name-button {
-  font-size: 1.2em;
   height: 2.7em;
   margin-top:1.5vh;
   width: 7em;
-}
-
-#submit-name-button:hover {
-  opacity: .85;
 }

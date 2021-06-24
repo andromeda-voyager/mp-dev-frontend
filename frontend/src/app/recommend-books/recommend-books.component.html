@@ -1,6 +1,6 @@
 <div id="component">
 
-    <div *ngIf="!isNameSubmitted">
+    <div *ngIf="isNameSubmitted">
         <mat-card>
             <mat-form-field appearance="fill">
                 <mat-label>Your Name</mat-label>
@@ -11,8 +11,8 @@
     </div>
 
 
-    <div *ngIf="isNameSubmitted"  id="recommend-page" >
-        <div id="search-recommended-container">
+    <div *ngIf="!isNameSubmitted" id="recommend-page">
+        <div class="card" id="search-wrapper">
             <div id="search-container">
                 <input [(ngModel)]="title" placeholder="Title" />
                 <input [(ngModel)]="author" placeholder="Author" />
@@ -20,19 +20,19 @@
                     Search
                 </button>
             </div>
-
-            <div id="recommended-container">
-                <h4>Your Recommendations</h4>
-                <div id="instructions" *ngIf="recommendedBooks.length == 0">(Empty)
-                    <span>Select a book from the results to add it to this list.</span>
-                </div>
-                <ng-container *ngFor="let book of recommendedBooks">
-                    <div class="recommended-book">
-                        {{book.title}}
-                    </div>
-                </ng-container>
-            </div>
         </div>
+
+        <div class="card" id="recommended-container">
+            <h4>Your Recommendations</h4>
+            <span *ngIf="recommendedBooks.length == 0">(Empty)</span>
+            <span *ngIf="recommendedBooks.length == 0">Select a book from the search results to add it to this list.</span>
+            <ng-container *ngFor="let book of recommendedBooks">
+                <div class="recommended-book">
+                    {{book.title}}
+                </div>
+            </ng-container>
+        </div>
+
         <app-search-results [books]="books" [recommender]="recommender"></app-search-results>
     </div>
 </div>
