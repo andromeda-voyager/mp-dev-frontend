@@ -22,7 +22,7 @@ h1 {
     }
     .component-wrapper {
         margin-top: 5vh;
-        box-shadow: 4px 4px 4px 4px rgb(139, 139, 139);
+        box-shadow: 4px 4px 7px 3px rgb(139, 139, 139);
         transition: margin-top 1s;
     }
 }
