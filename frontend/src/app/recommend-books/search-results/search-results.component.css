@@ -10,8 +10,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  row-gap: 20px;
-  column-gap: 20px
+  row-gap: min(5vh, 40px);
+  column-gap: min(5vw, 40px);
 }
 
 .recommended-book {
@@ -45,7 +45,7 @@
   height: 210px;
   width: 125px;
   box-sizing: border-box;
-  background-color: rgb(238, 238, 238);
+  background-color: white;
 }
   
 .book img {
