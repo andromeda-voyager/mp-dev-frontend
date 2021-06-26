@@ -5,7 +5,7 @@
     width:100%;
     background-color: rgb(21, 27, 32);
     color:white;
-    padding-bottom: min(60px, 4vh);
+    padding-bottom: min(40px, 4vh);
 }
 
 h1 {
@@ -47,7 +47,7 @@ h1 {
     font-size: max(13px, 1.4vw);
     height:fit-content;
     color:rgb(0, 0, 0);
-    padding: 1em .7em;
+    padding: .9em .7em;
     opacity: .6;
     box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.65);
 }
@@ -59,12 +59,12 @@ h1 {
 }
 
 #film-button {
-    padding: 1em 1.4em;
+    padding: .9em 1.4em;
 }
 
 #movies-container {
-    margin: auto 8vw;
-    display:flex;
+    margin: auto 10vw;
+    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
@@ -74,15 +74,13 @@ h1 {
 }
 
 .movie {
-    display:flex;
+    display: flex;
     flex-direction: column;
     border-radius: 10px;
     text-align: center;
-    line-height:1;
-    height:10em;
-    width:8em;
-    max-width:158px;
-    max-height:198px;
+    line-height: 1;
+    height: 10em;
+    width: 8em;
     color:rgb(255, 255, 255);
     cursor: pointer;
     align-items: center;
@@ -104,19 +102,19 @@ button:hover {
 }
 
 .movie-detail {
-    width:90%;
-    margin-top:1em;
-    font-size:1vw;
+    width: 90%;
+    margin-top: 1em;
+    font-size: 1vw;
     font-size: max(9px, min(.9vw, 18px));
-    display:none;
+    display: none;
 }
 
 .selected-movie .movie-detail {
-    display:block;
+    display: block;
 }
 
 .selected-movie {
-    cursor:default;
+    cursor: default;
 }
 
 a {
@@ -136,6 +134,6 @@ a {
     margin: auto 150px;
   }
   .menu-button {
-    font-size: 22px;
+    font-size: 21px;
   }
 }
