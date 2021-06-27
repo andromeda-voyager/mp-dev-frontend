@@ -1,25 +1,25 @@
 #video-games {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
-    width:100%;
+    width: 100%;
     height: fit-content;
 }
 
 #left-container {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 } 
 
 h1 {
     margin-left: calc(.5vw + 10px);
-    color:  rgb(21, 27, 32);
+    color: rgb(21, 27, 32);
 }
 
 #favorites-container {
-    width:85%;   
-    display:flex;
-    margin:auto;
+    width: 85%;   
+    display: flex;
+    margin: auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -39,25 +39,26 @@ app-carousel {
 }
 
 #details-container {
-    width:100%;
+    width: 100%;
     align-items: center;
     justify-items: center;
     justify-content: space-evenly;
     display: grid;
     grid-template-columns: auto auto;
-    font-size: max(8px, min(3.5vw, 20px));
+    font-size: max(13px, min(3.5vw, 20px));
     grid-row-gap: 2.5em;
 }
+
 button {
-    font-size: max(1.5vw, 1.2em);
-    padding:.6em;  
+    font-size: max(1.9vw, 1.2em);
+    padding: .6em;  
 }
 
 #buttons-container {
-    width:100%;
+    width: 100%;
     column-gap: min(40px, 5vw);
     row-gap: min(25px, 2vw);
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -73,6 +74,8 @@ button {
 
 .raised {
     box-shadow: 0px 5px 6px 2px rgba(0, 0, 0, 0.295); 
+    background-color: white;
+    transition: all .5s;
 }
 
 .flat {
@@ -94,6 +97,6 @@ button {
     }
     #details-container {
         margin-bottom: 0px;
-        font-size: 18px;
+        font-size: 17px;
     }
 }
