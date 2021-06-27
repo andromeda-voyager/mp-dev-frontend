@@ -1,9 +1,9 @@
-#top-nav .active-link {
+.active-link {
   border-bottom: solid;
 }
 
-#top-nav .active-link:hover {
-  transform: none;
+.active-link:hover {
+  cursor: default;
 }
 
 #side-nav {
@@ -75,8 +75,8 @@
   color:white;
 }
 
-#top-nav a:hover {
-    transform: scale(1.1);
+#top-nav a:hover:not(.active-link) {
+    color: var(--accent);
 }
 
 button {
