@@ -1,66 +1,84 @@
 .carousel {
   position: relative;
   display: flex;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
 }
 
-.carousel-item {
-  width:100%;
-  height:100%;
-  object-fit: contain;
-  z-index: 25;
+button {
+  z-index: 50;
+  border: none;
+  outline: 0;
+  cursor: pointer;
 }
 
-.next-carousel-item {
-  position: absolute;
-  width:100%;
-  height:100%;
-  object-fit: contain;
-}
-
-.adjusted-image {
+img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+.next-carousel-item  {
+  display: none;
+}
+
+.arrow-button {
+  height: 100%;
+  width: 15%;
+  color: white;
+  opacity: .4;
 }
 
 .control {
   background-color: transparent;
   position: absolute;
-  border: none;
-  outline: 0; 
-  height: 100%;
-  width:15%;
-  cursor: pointer;
-  color: white;
-  z-index: 50;
 }
 
-.control.next{
-  right:0;
-}
-
-.control.prev{
-  left:0;
-}
-  
-.arrow {
-  opacity: .4;
-  font-weight: bold;
-  display: inline-block;
-  border-left: 0.12em solid white;
-  border-bottom: 0.12em solid white;
-  font-size: min(50px, 5vmin);
-  width: 1em;
-  height: 1em;
+.control:hover {
+  opacity: .75;
+  transition: opacity .8s;
 }
 
 .control:hover .arrow {
   width: 1.2em;
   height: 1.2em;
-  opacity: 1;
   transition: all .2s;
+}
+
+.control.next{
+  right: 0;
+}
+
+.control.prev{
+  left: 0;
+}
+
+.pause-play {
+  height: 100%;
+  width: 70%;
+  opacity: 0;
+}
+
+button:active {
+  transform: scale(.9);
+}
+
+.button-icon {
+  height: 25%;
+  width: 25%;
+  margin: auto;
+}
+
+.arrow {
+  font-weight: bold;
+  display: inline-block;
+  border-left: 0.13em solid white;
+  border-bottom: 0.13em solid white;
+  font-size: min(50px, 5vmin);
+  width: 1em;
+  height: 1em;
 }
 
 .arrow.left {
@@ -72,13 +90,12 @@
 }
 
 #image-buttons-container {
-  display:flex;
+  display: flex;
   flex-direction: row;
   position: absolute;
-  bottom:5%;
-  left:50%;
+  bottom: 5%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 50;
 }
 
 #image-buttons-container button:hover {
@@ -86,26 +103,16 @@
 }
 
 .image-select-button{
-  height:20px;
-  width:20px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   background-color: white;
-  margin-right:10px;
+  margin-right: 10px;
   margin-left: 10px;
-  border-color:transparent;
-  cursor: pointer; 
 }
 
 .blue-button{
   background-color: var(--accent);
-}
-
-.paused:hover {
-  cursor: default;
-}
-
-.white-button:hover {
-  transform: scale(1.2);
 }
 
 .red-button {

@@ -1,22 +1,33 @@
 <div class="carousel">
-    
-    <button *ngIf="arrowsOn" class="control prev" (click)="onPreviousClick()">
+
+    <button *ngIf="arrowsOn" class="arrow-button control prev" (click)="onPreviousClick()">
         <span class="arrow left"></span>
     </button>
 
-    <ng-container *ngFor="let carouselItem of carouselItems; let i = index">
-        <img *ngIf="i === currentCarouselItem" [src]="carouselItem" class="carousel-item" [ngClass]="{'adjusted-image': adjustImage}" />
-        <img *ngIf="i === nextCarouselItem" [src]="carouselItem" class="next-carousel-item" [ngClass]="{'adjusted-image': adjustImage}" />
-    </ng-container>
+    <img [src]="carouselItems[currentIndex]" class="carousel-item"/>
 
     <div *ngIf="buttonsOn" id="image-buttons-container">
         <ng-container *ngFor="let carouselItem of carouselItems; let i = index">
-            <button [ngClass]="{'blue-button':currentCarouselItem==i, 'red-button': isPaused && currentCarouselItem==i}" class="image-select-button"
-                (click)="changeImage(i)"></button>
+            <button [ngClass]="{'blue-button':currentIndex==i, 'red-button': isPaused && currentIndex==i}"
+                class="image-select-button" (click)="changeImage(i)"></button>
         </ng-container>
     </div>
 
-    <button *ngIf="arrowsOn" class="control next" (click)="onNextClick()">
+    <button *ngIf="arrowsOn && !isPaused" class="pause-play control" (click)="pause()">
+        <svg class="button-icon" viewBox="0 0 24 24" fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+        </svg>
+    </button>
+
+    <button *ngIf="arrowsOn && isPaused" class="pause-play control" (click)="unpause()">
+        <svg class="button-icon" viewBox="0 0 24 24" fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M10 8.64L15.27 12 10 15.36V8.64M8 5v14l11-7L8 5z" />
+        </svg>
+    </button>
+
+    <button *ngIf="arrowsOn" class="arrow-button control next" (click)="onNextClick()">
         <span class="arrow right"></span>
     </button>
 
