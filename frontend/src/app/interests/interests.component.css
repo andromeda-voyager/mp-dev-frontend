@@ -1,6 +1,10 @@
+#interests {
+    font-size: max(10px, min(4vw, 25px));
+}
+
 h1 {
-    font-size: min(50px, max(3.5vmin, 30px));
-    margin-top: min(2.5vmin, 35px);
+    font-size: 1.8em;
+    margin-top: .5em;
 }
 
 #interests-container {
