@@ -79,6 +79,10 @@
   z-index: 20;
   visibility: hidden;
 }
+
+.book.selected {
+  box-shadow: none;
+}
   
 .selected .recommended-tag {
   visibility: visible;
