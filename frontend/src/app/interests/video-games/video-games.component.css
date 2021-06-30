@@ -91,10 +91,17 @@ app-carousel {
     }
     app-carousel {
         width: 65%;
-        height: auto;
+        height: calc(.5625 *65vw);
     }
     #details-container {
         margin-bottom: 0px;
         width: min(100%, 22em);
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    app-carousel {
+        width: 65%;
+        height: calc(.65 * 1300px * .56);
     }
 }
