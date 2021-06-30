@@ -48,10 +48,17 @@ mat-card{
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-size:small;
+  font-size: small;
   row-gap: 1em;
   line-height: 1;
   font-size: medium;
+}
+
+#recommended-books {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: .8em;
 }
 
 .recommended-book {

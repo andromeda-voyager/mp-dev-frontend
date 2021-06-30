@@ -25,12 +25,14 @@
         <div class="card" id="recommended-container">
             <span>Your Recommendations</span>
             <span *ngIf="recommendedBooks.length == 0">(Empty)</span>
-            <span *ngIf="recommendedBooks.length == 0">Select a book from the search results to add it to this list.</span>
-            <ng-container *ngFor="let book of recommendedBooks">
-                <div class="recommended-book">
+            <span *ngIf="recommendedBooks.length == 0">
+                Select a book from the search results to add it to this list.
+            </span>
+            <div id="recommended-books">
+                <div class="recommended-book" *ngFor="let book of recommendedBooks">
                     {{book.title}}
                 </div>
-            </ng-container>
+            </div>
         </div>
 
         <app-search-results [books]="books" [recommender]="recommender"></app-search-results>
