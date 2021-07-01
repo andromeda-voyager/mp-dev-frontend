@@ -1,6 +1,6 @@
 <div class="carousel">
 
-    <button *ngIf="arrowsOn" class="arrow-button control prev" (click)="onPreviousClick()">
+    <button *ngIf="arrowsOn" class="arrow-button control prev" (click)="previousOnClick()">
         <span class="arrow left"></span>
     </button>
 
@@ -27,7 +27,7 @@
         </svg>
     </button>
 
-    <button *ngIf="arrowsOn" class="arrow-button control next" (click)="onNextClick()">
+    <button *ngIf="arrowsOn" class="arrow-button control next" (click)="nextOnClick()">
         <span class="arrow right"></span>
     </button>
 

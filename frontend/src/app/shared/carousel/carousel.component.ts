@@ -9,7 +9,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CarouselComponent implements OnInit {
   @Input() carouselItems: string[] = [];
   currentIndex = 0;
-  nextIndex = 1;
   interval: any;
   @Input() arrowsOn: boolean = false;
   @Input() buttonsOn: boolean = false;
@@ -38,19 +37,21 @@ export class CarouselComponent implements OnInit {
     }, this.slideShowSpeed);
   }
 
-  moveCarousel() {
-    this.currentIndex = this.nextIndex;
-    const next = this.nextIndex + 1;
-    this.nextIndex = next === this.carouselItems.length ? 0 : next;
+  nextIndex() {
+    return this.currentIndex === this.carouselItems.length - 1 ? 0 : this.currentIndex + 1;
   }
 
-  getNextCarouselItem() {
-    const next = this.currentIndex + 1;
-    return next === this.carouselItems.length ? 0 : next;
+  previousIndex() {
+    return this.currentIndex === 0 ? this.carouselItems.length -1: this.currentIndex - 1;
+  }
+
+  moveCarousel() {
+    this.currentIndex = this.nextIndex()
   }
 
   resetCarouselTimer() {
     clearInterval(this.interval);
+    this.isPaused = false;
     this.setCarouselInterval();
   }
 
@@ -58,19 +59,18 @@ export class CarouselComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  onPreviousClick() {
+  previousOnClick() {
     this.resetCarouselTimer();
-    const previous = this.currentIndex - 1;
-    this.currentIndex = previous < 0 ? this.carouselItems.length - 1 : previous;
+    this.currentIndex = this.previousIndex();
   }
 
-  onNextClick() {
+  nextOnClick() {
     this.resetCarouselTimer();
     this.moveCarousel();
   }
 
   changeImage(imageIndex: number) {
-    if (imageIndex == this.currentIndex) {
+    if (imageIndex === this.currentIndex) {
       if (this.isPaused) this.unpause();
       else this.pause();
     }
