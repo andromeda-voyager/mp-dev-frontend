@@ -40,6 +40,7 @@ h1 {
 
 .menu-button:hover {
     transform: scale(1.2);
+    transition: all .2s;
 }
 
 .menu-button {
@@ -91,6 +92,7 @@ h1 {
 
 .movie:hover{
     transform: scale(1.1);
+    transition: all .3s;
 }
 
 .movie-title {
