@@ -2,12 +2,30 @@
     <h1>Astronomy</h1>
     <div id="pictures-container">
         <div id="four-square-container">
-            <img class="square-image" src="assets/images/astronomy/disk.jpg" />
-            <img class="square-image" src="assets/images/astronomy/enc.jpg" />
-            <img class="square-image" src="assets/images/astronomy/voyager.jpg" />
-            <img class="square-image" src="assets/images/astronomy/perseverance.jpg" />
+            <div class="square-image-container">
+                <span class="image-title">Pluto</span>
+                <img class="square-image" src="assets/images/astronomy/pluto.jpg" />
+                <span class="image-credit">Courtesy of NASA/Johns Hopkins University Applied Physics Laboratory/Southwest Research Institute</span>
+            </div>
+            <div class="square-image-container">
+                <span class="image-title">Enceladus</span>
+                <img class="square-image" src="assets/images/astronomy/enceladus.jpg" />
+                <span class="image-credit">Courtesy of NASA/JPL/Space Science Institute</span>
+            </div>
+            <div class="square-image-container">
+                <span class="image-title">Voyager 1</span>
+                <img class="square-image" src="assets/images/astronomy/voyager1.jpg" />
+                <span class="image-credit">Courtesy of NASA/JPL-Caltech</span>
+            </div>
+            <div class="square-image-container">
+                <span class="image-title">Perserverance</span>
+                <img class="square-image" src="assets/images/astronomy/perseverance.jpg" />
+                <span class="image-credit">Courtesy of NASA/JPL-Caltech</span>
+            </div>
         </div>
-        <app-carousel [buttonsOn]="true" [carouselItems]="images"></app-carousel>
+        <div id="carousel-container">
+            <app-carousel [buttonsOn]="true" [carouselItems]="images"></app-carousel>
+            <span id="image-credit">Courtesy of NASA/JPL-Caltech</span>
+        </div>
     </div>
-    <span id="image-credit">Courtesy of NASA/JPL-Caltech</span>
 </div>
