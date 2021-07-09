@@ -41,7 +41,7 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.75);
-    visibility: hidden;
+    opacity: 0;
     text-align: center;
     font-size: min(50px, max(1.6vmin, 17px));
     line-height:1.3;
@@ -50,7 +50,8 @@
 }
 
 .book-wrapper:hover a {
-    visibility: visible;
+    opacity: 1;
+    transition: all .5s;
 }
 
 h1 {
