@@ -19,7 +19,6 @@ export class ChessboardComponent implements OnInit {
   chessboard: ChessPiece[];
   dragFrom: number = -1;
   selectedPiece: number = -1;
-  //lastMove: ChessMove;
   validMoves = new Set<number>();
   inCheckLocation: number = -1;
   playerColor: Color;
@@ -35,7 +34,7 @@ export class ChessboardComponent implements OnInit {
     return (this.moveToIndex === index ||
       this.moveFromIndex === index ||
       this.selectedPiece === index ||
-      this.validMoveHoverIndex === index)
+      this.validMoveHoverIndex === index);
   }
 
   constructor(private chessboardService: ChessboardService) {
@@ -47,7 +46,6 @@ export class ChessboardComponent implements OnInit {
     }
     this.chessboard = this.chessboardService.getChessboardArray();
     this.playerColor = this.chessboardService.getPlayerColor();
-
   }
 
   drop(event: CdkDragDrop<ChessPiece>, boardLocation: number) {
@@ -55,9 +53,7 @@ export class ChessboardComponent implements OnInit {
     this.selectedPiece = -1;
     this.validMoveHoverIndex = -1;
 
-    if (event.previousContainer === event.container) {
-
-    } else {
+    if (event.previousContainer !== event.container) {
       let dragTo = boardLocation;
       this.chessboardService.validatePlayersMove(new ChessMove(this.dragFrom, dragTo));
     }
