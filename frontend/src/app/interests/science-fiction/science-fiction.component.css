@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    row-gap: 4vh;
+    row-gap: 30px;
     column-gap: 7vw;
     justify-content: center;
 }
@@ -73,7 +73,6 @@ h1 {
     .book-wrapper {
         width: 13vw;
         max-width: 160px;
-        
     }
     #books-container {
         margin: 50px auto;

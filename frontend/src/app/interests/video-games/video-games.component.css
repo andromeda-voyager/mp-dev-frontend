@@ -91,7 +91,7 @@ app-carousel {
     }
     app-carousel {
         width: 65%;
-        height: calc(.5625 *65vw);
+        height: calc(.5625 * 65vw);
     }
     #details-container {
         margin-bottom: 0px;
