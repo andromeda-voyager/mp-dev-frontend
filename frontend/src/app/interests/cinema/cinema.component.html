@@ -23,7 +23,7 @@
         <div id="movies-container">
             <ng-container *ngFor="let item of selectedCategory; let i = index">
                 <div class="movie" [ngClass]="{'selected-movie':selectedIndex===i}" (click)="onItemClick(i, target)">
-                    <span class="movie-title">{{item.name}} </span>
+                    <span class="movie-title">{{item.name}}</span>
                     <span class="movie-detail">{{item.secondaryInfo}}</span>
                     <a class="movie-detail" [href]="item.imdbLink">View on IMDB</a>
                 </div>
